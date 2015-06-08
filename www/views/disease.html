@@ -1,0 +1,29 @@
+<ion-view view-title="病害列表">
+	<ion-nav-buttons side='right'>
+      <button class="button button-icon button-clear ion-search" menu-toggle="left" ng-click="change1()"></button>	
+		<button class="button button-icon button-clear ion-search" menu-toggle="left" ng-click="change2()"></button>	
+
+	</ion-nav-buttons>
+    <ion-content class="has-header">
+        <ion-refresher ng-if="maintains.length > 0 || loadError" pulling-text="下拉刷新..." on-refresh="doRefresh()" refreshing-icon="ion-loading-c">
+        </ion-refresher>
+        <ion-list>
+            <ion-item collection-repeat="disease in diseases"
+                      collection-item-width="'100%'"
+                      collection-item-height="51"
+                      href="#/disease/{{disease.id}}">
+                <p>{{disease.title}} {{disease.area}}平米</p>
+                <ion-option-button class="button-balanced" ng-click="maintain(maintain)">
+                    <i class='icon ion-wrench padding'></i>修改
+                </ion-option-button>
+            </ion-item>
+        </ion-list>
+        <!--
+          Loading icon of infinte-scroll not showing with collection-repeat
+          https://github.com/driftyco/ionic/issues/2376
+        -->
+        <ion-infinite-scroll on-infinite="loadMore()" distance="10%" icon="ion-loading-c" ng-if="hasNextPage && !loadError">
+        </ion-infinite-scroll>
+
+    </ion-content>
+</ion-view>

@@ -1,0 +1,14 @@
+<ion-side-menus>
+    <ion-side-menu-content>
+        <ng-include src="'views/check/tabs.html'"></ng-include>
+    </ion-side-menu-content>
+
+    <ion-side-menu expose-aside-when="large" side="right" width="400">
+        <ion-nav-bar class="bar-royal"></ion-nav-bar>
+        <ion-nav-view name="selector" class="slide-left-right"></ion-nav-view>
+    </ion-side-menu>
+</ion-side-menus>
+<button class="button-float button button-royal icon ion-ios-more"
+        ng-class="{true: 'button-aside', false: ''}[$exposeAside.active]"
+        ng-click="createNewTopic()"></button>
+
