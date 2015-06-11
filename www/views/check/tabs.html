@@ -1,41 +1,37 @@
 <ion-header-bar class="bar-positive">
-    <button class="button button-icon button-positive1 button-clear ion-ios-close-outline pull-left"
+    <button class="button button-icon  ion-ios-close-outline pull-left"
             ng-clic1k='goback()' ui-sref=tab.disease></button>
     <h1 class="title">{{title}}</h1>
-    <button class="button button-icon ion-navicon pull-right"
-            ng-click="toggleSide()" ng-hide="$exposeAside.active">
-    </button>
+
+    <div class="buttons" side="right">
+        <button class="button button-icon ion-ios-information-outline"
+                ng-hide="!current.bridge" ng-click="showBridgeDetail()">
+        </button>
+        <button class='button button-badge button-icon ion-ios-clock-outline'
+                style="padding-left:0"
+                ng-hide="historys.length==0" ng-click="showHistoryModal()">
+            <span class="badge badge-assertive">{{historys.length}}</span>
+        </button>
+        <button class="button button-icon ion-navicon pull-right"
+                ng-click="toggleSide()"
+                ng-hide="$exposeAside.active">
+        </button>
+    </div>
 </ion-header-bar>
 
 <ion-tabs class="tabs-icon-top tabs-light tabs-bottom">
 
-	<ion-tab title="检查信息" icon-off="ion-ios-list-outline" icon-on="ion-ios-list"
+    <ion-tab title="检查信息" icon-off="ion-ios-list-outline" icon-on="ion-ios-list"
              on-select="changeTab()">
         <ion-view>
             <ion-content>
-                <ion-list>
-                    <ion-item class="item-divider">当前检查值</ion-item>
-                    <ion-item class="item-toggle" ng-repeat="r in result" style="pointer-events:auto">
-                        {{r.item_name}}
-                        <span class="item-note">{{r.display || r.value || r.name}}</span>
-                        <label class="toggle toggle-positive">
-                            <input type="checkbox" checked>
-                            <div class="track">
-                                <div class="handle"></div>
-                            </div>
-                        </label>
-                        <ion-option-button class="button-balanced" ng-click="reSelect(r)">
-                            重新选择
-                        </ion-option-button>
-                    </ion-item>
-
-                    <div ng-class="{true: 'hide', false: ''}[!!result.length]" class='padding'>没有选择检查内容</div>
-                </ion-list>
+                <ng-include src="'views/check/result.html'"></ng-include>
             </ion-content>
         </ion-view>
     </ion-tab>
 
     <ion-tab title="现场照片" icon-off="ion-ios-camera-outline" icon-on="ion-ios-camera"
+             badge="medias.length" badge-style="badge-assertive"
              on-select="changeTab()">
         <ion-view>
             <ion-content>
@@ -43,21 +39,18 @@
                     <i class="icon ion-camera icon-rolay"></i>
                 </div>
                 <ul class="imageuploader">
-                    <li ng-repeat="image in images">
+                    <li>
                         <label>
-                            <img src="http://sta.ganjistatic1.com/src/image/mobile/touch/milan/pub/upimg.png"
-                                 alt=""
-                                 ng-click='showPicker();console.log(222222222)'>
-
+                            <img src="img/upimg.png">
+                            <input type='file' ng-model="currentImage"
+                                   onchange="angular.element(this).scope().addPicture(this)">
                         </label>
                     </li>
+                    <li ng-repeat = "media in medias" style='background-image:url({{media.result}});background-size:cover;background-position:center'>
+                        <img src="img/bit1.png">
+                    </li>
                 </ul>
-                <div ng-class="{true: 'hide', false: ''}[!!images.length]" class='padding'>没有图片</div>
             </ion-content>
         </ion-view>
     </ion-tab>
-
 </ion-tabs>
-<!--
-<button class="button-float button button-assertive icon ion-android-add" ng-click="createNewTopic()"></button>
--->

@@ -1,213 +1,163 @@
 'use strict';
 angular.module('bridge.services')
-    .factory('CheckService', function($log , BaseData) {
-        var current = {
-		};
+.factory(
+    'CheckService',
+    function ($log, $q, $timeout , UserService, StorageService, BaseData , CheckListService) {
+        var current = {};
         var result = [
             //{name:"xxx" , value:"xxx" , nextstep:"xxx"}
         ];
-        var images = [
-            {name:"ssss"}
-        ];
-        var currentStepCode;
+        var medias = [];
 
         var stepMaps = {};
-        _.forEach(BaseData.steps, function(n){
+        _.forEach(BaseData.steps, function (n) {
             stepMaps[n.code] = n;
         });
 
+        //获取nextstep
+        var getNextStepCode = function (step) {
+            var sc = step.nextstep;
+            if (_.isString(sc)) {
+                return sc;
+            } else if (_.isFunction(sc)) {
+                return sc(current, step);
+            }
+        }
+
         return {
-			current: current ,
-            result: result ,
-            stepInfo: null ,
-            currentStepCode: "bridge" ,
-            /***
-             * 根据result获取当前步骤信息
-             * @returns {
-             *      prevStepValue ,
-             *      currentStep ,
-             *      nextStepCode
-             * }
-             */
-            getStateSteps: function(){
-                var rs = {};
+            current: current,
+            result: result,
+            medias: medias,
+            currentStep: {},
+            getCurrentStep: function () {
                 var steps = BaseData.steps;
-                var prevStepValue , nextStepCode , currentStep;
-                //获取当前要操作的节点信息
-                if (result.length == 0){
-                    //如果result为空 , 则直接从step中选择bridge节点为当前节点
-                    currentStep = steps[0];
-                }else{
-                    //否则通过最后一个节点的nextstep来获取当前节点
+                var currentStep = steps[0];
+                //获取当前要操作的节点信息 , 通过检查结果的最后一个
+                if (result.length > 0) {
                     var lastResult = _.last(result);
-                    prevStepValue = lastResult.value;
-                    currentStep = _.find(steps , function(item){
-                        return item.code == lastResult.nextstep;
+                    var lastStep = _.find(steps, function (item) {
+                        return item.code == lastResult.code;
                     });
+                    var nextStepCode = getNextStepCode(lastStep);
+                    currentStep = _.find(steps, function (item) {
+                        return item.code == nextStepCode;
+                    })
                 }
-
-                //获取nextstep的代码 , 需要写到本步骤选中的内容到result
-                if (!currentStep.nextstep){
-                    var index = _.findIndex(steps, function(item) {
-                        return item.code == currentStep.code;
-                    });
-                    if (index+1 < steps.length) nextStepCode = steps[index+1].code;
-                }else{
-                    nextStepCode = currentStep.nextstep;
-                }
-
-                rs.currentStep = currentStep;
-                rs.nextStepCode = nextStepCode;
-                rs.prevStepValue = prevStepValue;
-
-                //获取连接的参数信息 , 需要获取当前节点的代码 , 以及模板url
+                currentStep = currentStep || {};
+                this.currentStep = currentStep;
+                return currentStep;
+            },
+            getCurrentStateParams: function (step) {
                 var stateParams = {} ,
-                    template = currentStep.template ,
+                    template = step.template ,
                     url;
-                if (template){
-                    if (_.isFunction(template)){
-                        url = template(current , currentStep , result);
-                    }else if (_.isString(template)){
+                if (template) {
+                    if (_.isFunction(template)) {
+                        url = template(current, step, result);
+                    } else if (_.isString(template)) {
                         url = template;
-                    }else if (_.isObject(template)){
+                    } else if (_.isObject(template)) {
 
                     }
                     stateParams = {
-                        url: url ,
-                        code: currentStep.code
+                        url: url,
+                        code: step.code
                     }
                 }
-
-                //获取controller
-                var ctrl = "" ,
-                    controller = currentStep.controller;
-                if (controller){
-
-                }
-
-
-                /*
-                //获取对应的的items,放到scope中
-                var nodes = currentStep.nodes ,
-                    nodeKey = currentStep.nodeKey ,
-                    nodeKeyValue = prevStepValue;
-                if (nodes){
-                    if (nodeKey){
-                        var nodeKeys = nodeKey.split(".");
-                        if (nodeKeys.length == 1) nodeKeys.push("value");
-                        var nodeKeyStep = _.find(CheckService.result , function(n){
-                            return n.code == nodeKeys[0];
-                        });
-                        if (nodeKeyStep) nodeKeyValue = nodeKeyStep[nodeKeys[1]];
-                    }
-                    console.log(nodeKeyValue)
-                    var currentNodes = nodes[nodeKeyValue];
-                    currentItems = _.clone(currentNodes.items);
-                }
-
-
-                //获取该step的列表信息
-                var currentItems = [] , items = currentStep.items;
-                if (items){
-                    var _items;
-                    //解析items
-                    if (_.isArray(items)){  //数组
-                        _items = items;
-                    }else if (_.isString(items)){ //字符串
-                        _items = BaseData[items];
-                    }else if (_.isObject(items)){ //object
-                        switch (items.type){
-                            case 'ranger':
-                                var rangers = [] ,
-                                    min = items.min || 1 ,
-                                    max = items.max ,
-                                    step = items.step || 1 ,
-                                    unit = items.unit || "" ,
-                                    template = _.template(items.template || "第 <%=index%> "+unit);
-                                //min , max , step , unit
-                                for(var ri = min ; ri<= max ; ri = ri+step){
-                                    rangers.push({name:template({
-                                        index:ri
-                                    }) , value:ri});
-                                }
-                                _items = rangers;
-                                break;
-                        }
-                    }
-                    currentItems =  _.clone(_items);
-
-                }
-
-                //写入nextstep
-                _.forEach(currentItems , function(n){
-                    n.nextstep = n.nextstep || currentStep.nextstep || stepInfo.nextStepCode;
-                });
-                */
-
-                rs.stateParams = stateParams;
-                this.stepInfo = rs;
-                return rs;
+                return stateParams;
+            },
+            getHistorys: function(){
+                var defer = $q.defer();
+                $timeout(function(){
+                    var allDiseases = StorageService.get("diseases") || [];
+                    var disease = _.filter(allDiseases , function(n){
+                        return _.every(result , function(m){
+                            return n[m.code] == m.value;
+                        })
+                    });
+                    defer.resolve(disease);
+                } , 100);
+                return defer.promise;
             } ,
-            getStateParams: function(){
-                var params = {};
-                var stepInfo = this.getStateSteps();
-                if (stepInfo.currentStep.template){
-                    params = {
-                        url: stepInfo.currentStep.template ,
-                        code: stepInfo.currentStep.code
-                    }
-                    return params;
-                }
-
-                var steps = BaseData.steps;
-                var _current = current;
-                var result = [];
-                var lastStepCode;
-                for(var i = 0 ; i<steps.length ; i++){
-                    var step = steps[i];
-                    var code = step.code;
-                    var currentItem = _current[code];
-                    if (currentItem && currentItem.value){
-                        //result.push({code:code , value:currentItem.value});
-                        result.push(step.nodes ? currentItem.value : code);
-                    }else{
-                        lastStepCode = code;
-                        //this.currentStepCode = code;
-                        break;
-                    }
-                }
-                console.log(result , lastStepCode)
-                var url = result.join("-") + (result.length == 0 ? '' : '-') + lastStepCode;
-                return {
-                    url: url ,
-                    code: lastStepCode
-                };
+            reset: function(data){
+                this.remove(0 , true);
+                if (!data) return;
+                _.forEach(BaseData.steps, function (n) {
+                    if (data[n.code]) this.add({
+                        code: n.code , value: data[n.code]
+                    } , true);
+                } , this);
+                this.update();
             } ,
-            update: function(){
-                var rs = _.clone(result);
-                _.forEach(rs , function(n){
+            update: function () {
+                _.forEach(result, function (n) {
+                    if (n.inited) return;
                     n.item_name = stepMaps[n.code].name;
-                });
-                return rs;
-            } ,
-            add: function(data){
+                    n.sourceData = CheckListService.getSourceData(n , current);
+                    n.inited = true;
+                } , this);
+            },
+            add: function (data , disableUpdate) {
                 current[data.code] = data;
-                var item = _.find(result, function(item) {return item.code == data.code});
-                if (item){
-                    item = _.extend(item , data);
-                }else{
+                var item = _.find(result, function (item) {
+                    return item.code == data.code
+                });
+                if (item) {
+                    item = _.extend(item, data);
+                } else {
                     result.push(data);
                 }
-            } ,
-            remove: function(item){
-                var index = _.indexOf(result , item);
-                _.remove(result , function(n , i){
-                    return i >= index;
+                if (true == !disableUpdate) this.update();
+            },
+            remove: function (item , disableUpdate) {
+                var index = -1;
+                if (_.isNumber(item)){
+                    index = item;
+                }else if (_.isObject(item)){
+                    index = _.indexOf(result, item)
+                }else if (_.isString(item)){
+                    index = _.findeIndex(result , {code:item});
+                }
+                if (index == -1) return;
+                _.remove(result, function (n, i) {
+                    var isChild = i >= index
+                    if (isChild) delete current[n.code];
+                    return isChild;
                 })
-            } ,
+                if (true == !disableUpdate) this.update();
+            },
+            getMedias: function () {
+                return medias;
+            },
+            addMedia: function (media) {
+                medias.push(media);
+            },
+            save: function (data) {
+                var defer = $q.defer();
+                //将result中value写入到data
+                var rs = {};
+                _.forEach(data.result, function (n) {
+                    rs[n.code] = n.value;
+                });
+                //生成sn
 
-            getImages: function(){
-                return images;
+                var lastDisease = _.last(diseases);
+                var lastSn = lastDisease ? lastDisease.sn + 1 : 1;
+                rs.sn = [
+                    rs.road ,
+                    rs.bridge+rs.direction ,
+                    moment().format('YYYYMMDD') ,
+                    _.padLeft(lastSn , 4 , "0")
+                ].join("-");
+                rs.username = UserService.info.name;
+                rs.createtime = moment();
+                rs.description = "";
+                var diseases = StorageService.get("diseases") || [];
+                diseases.push(rs);
+                StorageService.set("diseases", diseases);
+
+                defer.resolve();
+                return defer.promise;
             }
         };
-    });
+});

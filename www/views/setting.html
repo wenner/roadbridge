@@ -1,0 +1,37 @@
+<ion-view view-title="设置">
+    <ion-content class="has-header">
+        <ion-list>
+            <!--个人信息-->
+            <ion-item class="item-divider">个人信息</ion-item>
+            <ion-item>
+                当前用户
+                <span class="item-note">{{user.name || '还未登陆'}}</span>
+            </ion-item>
+            <ion-item ng-click="logout()" class='item-icon-right'>
+                退出登录
+                <i class="icon ion-log-out"></i>
+            </ion-item>
+
+            <!--个人设置-->
+            <ion-item class="item-divider">个人设置</ion-item>
+            <ion-toggle>仅在WiFi环境下上传数据</ion-toggle>
+            <label class='item item-input item-select'>
+                <span class="input-label">保存病害信息后返回界面</span>
+                    <select>
+                        <option value="road">线路</option>
+                        <option value="bridge">桥梁</option>
+                        <option value="buwei">部位</option>
+                        <option value="bujian">部件</option>
+                    </select>
+            </label>
+            <!--关于-->
+            <ion-item class="item-divider">关于</ion-item>
+            <ion-item>帮助</ion-item>
+            <ion-item>
+                检查更新<span class="item-note">当前版本: {{version}}</span>
+            </ion-item>
+            <ion-item>关于APP</ion-item>
+            <ion-item>关于天津容数</ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

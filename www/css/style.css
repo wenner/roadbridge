@@ -1,1 +1,154 @@
-/* Empty. Add your own CSS if you like */
+.welcome.slider {
+    height: 100%
+}
+.welcome .description{
+    text-align:center;
+    padding-top:50px;
+    font-family: '微软雅黑';
+}
+.welcome .slider-pager .slider-pager-page {
+    color:#fff
+}
+
+.button-badge {
+    position: relative;
+    padding-left:0
+}
+
+.button-badge .badge {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 1px 6px;
+    height: auto;
+    font-size: 12px;
+    line-height: 16px;
+}
+
+.button-badge .icon {
+    display: block;
+    margin: 0 auto;
+    height: 32px;
+    font-size: 32px;
+}
+
+
+.bar-header .title {
+    font-family: '微软雅黑'
+}
+
+.button-float {
+    position: fixed;
+    bottom: 64px;
+    right: 16px;
+    border: none;
+    border-radius: 50%;
+    min-width: 56px;
+    min-height: 56px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    z-index: 20;
+    -webkit-transition: 0.2s linear;
+    transition: 0.2s linear;
+    -webkit-transition-property: 'background-color, box-shadow';
+    transition-property: 'background-color, box-shadow';
+}
+
+.button-float.active, .button-float.activated {
+    box-shadow: 0 3px 7px 0 rgba(0, 0, 0, 0.36) !important;
+}
+
+.button-aside {
+    bottom: 16px;
+}
+
+.btn_check {
+    background: #ffc900;
+    opacity:1;
+}
+
+
+.imageuploader {
+    padding: 10px 10px 0 0;
+}
+
+.imageuploader li {
+    float: left;
+    margin: 0 0 10px 10px;
+    width: 25%;
+    box-size: border-box;
+    font-size:0;
+}
+
+.imageuploader label {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: inline-block
+
+}
+
+.imageuploader img {
+    display:block;
+    vertical-align:bottom;
+    width: 100%;
+    border: #ccc solid 1px;
+    box-size: border-box;
+
+}
+
+.imageuploader input[type='file'] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: .01;
+    z-index: 1;
+    cursor: pointer
+}
+
+.item-radio input:checked ~ .item-content {
+    background-color: #ffffcc
+}
+
+.single-select {
+    position:relative;
+    padding:0;
+}
+.single-select select {
+    background:none;
+    line-height:30px;
+    width:100%;
+    border:0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    box-size: border-box;
+    border-image:0
+}
+
+.single-select:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 7px;
+    width: 7px;
+    height: 7px;
+    border-top: solid 2px #c4c4c4;
+    border-right: solid 2px #c4c4c4;
+    -webkit-transform: rotate(135deg);
+    -ms-transform: rotate(135deg);
+    transform: rotate(135deg);
+    margin-top: -5px;
+}
+
+.bridgecard table {
+    width:100%;
+    border-collapse: collapse;
+    text-align:center;
+}
+.bridgecard table td {border:#ccc solid 1px;padding:5px;vertical-align:middle}
+.bridgecard table td.title {background:#eee;}
+.bridgecard table.innertbl td {border:0;border-right:#ccc solid 1px}
+.bridgecard table.innertbl td:last-child {border:0;}
+.bridgecard img {width:100%}

@@ -4,10 +4,50 @@
     </ion-header-bar>
     <ion-content>
         <ion-list>
-            <ion-item ng-repeat="item in currentItems" ng-click="commonSelect(item)">
-                {{$index+1}}. {{item.name}}
-                <span class="item-note">{{item.memo}}</span>
+            <ion-item ng-repeat="item in currentItems" ng-click="commonSelect(item)"
+                ng-switch="currentStep.code">
+                <div ng-switch-when="road">
+                    {{item.name}}
+                    <span class="item-note">{{item.id}}</span>
+                </div>
+                <div ng-switch-when="bridge">
+                    {{item.name}}
+                    <span class="item-note">{{item.sn}} / {{item.zhuanghao}}</span>
+                    <p style='color:#999;padding-top:10px'>
+                        {{item['上部主要承重构件']}} ,
+                        {{item['上部一般承重构件']}} ,
+                        {{item['支座']}} ,
+                        {{item['桥面铺装']}}
+                    </p>
+                </div>
+                <div ng-switch-when="kong">
+                    {{item.number}}# 孔
+                    <span class="item-note">
+                        {{item.type}} / {{item.liang}} 根主梁
+                    </span>
+                </div>
+                <div ng-switch-when="goujian">
+                    第 {{item.name}} 号梁
+                </div>
+                <div ng-switch-when="lian">
+                    第 {{item.name}} 联
+                </div>
+                <div ng-switch-default>
+                    <!--{{$index+1}}.-->
+                    {{item.name}}
+                    <span class="item-note">{{item.memo}}</span>
+                </div>
             </ion-item>
         </ion-list>
+
+        <!--
+        buwei
+        kong
+        lian
+        bujian
+        goujian
+        leibie
+        pingjia
+        -->
     </ion-content>
 </ion-view>

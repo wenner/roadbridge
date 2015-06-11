@@ -7,41 +7,63 @@
     <file path="/checkCtrl.js" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433214228153" ignored="false" />
     <file path="/bridgeselector.html" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433170318271" ignored="false" />
     <file path="/check.html" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433300507719" ignored="false" />
-    <file path="/index.html" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433350404363" ignored="false" />
-    <file path="/app.js" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433396350804" ignored="false" />
+    <file path="/index.html" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1434021452408" ignored="false" />
+    <file path="/app.js" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1434029265095" ignored="false" />
     <file path="/a1.html" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433212964477" ignored="false" />
     <file path="/a2.html" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433212994036" ignored="false" />
     <file path="/a3.html" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433213007235" ignored="false" />
     <file path="/a4.html" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433213023307" ignored="false" />
-    <file path="/tabs.html" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433392438091" ignored="false" />
-    <file path="/checkService.js" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433392340276" ignored="false" />
-    <file path="/checkSelectorCtrl.js" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433330039464" ignored="false" />
-    <file path="/checkMainCtrl.js" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433397562031" ignored="false" />
-    <file path="/bridge.html" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433298855088" ignored="false" />
+    <file path="/tabs.html" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1434041725809" ignored="false" />
+    <file path="/checkService.js" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1434045889794" ignored="false" />
+    <file path="/checkSelectorCtrl.js" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1434029633637" ignored="false" />
+    <file path="/checkMainCtrl.js" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1434043134585" ignored="false" />
+    <file path="/bridge.html" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433961002641" ignored="false" />
     <file path="/bridge-buwei.html" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433223931888" ignored="false" />
-    <file path="/config.js" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433396759325" ignored="false" />
+    <file path="/config.js" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1434032907030" ignored="false" />
     <file path="/bridge-buwei-bujian.html" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433291608210" ignored="false" />
-    <file path="/commonselector.html" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433336311578" ignored="false" />
+    <file path="/commonselector.html" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433952589902" ignored="false" />
     <file path="/goujian-预制板梁.html" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433310406731" ignored="false" />
     <file path="/goujian.html" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433311773995" ignored="false" />
-    <file path="/main.html" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433337827749" ignored="false" />
+    <file path="/main.html" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433911595224" ignored="false" />
     <file path="/mainside.html" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433316567326" ignored="false" />
     <file path="/预制板梁-上部主要承重构件-蜂窝,麻面.html" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433341128773" ignored="false" />
     <file path="/aaaaCtrl.js" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433339648844" ignored="false" />
     <file path="/binghaiCtrl.js" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433396899825" ignored="false" />
-    <file path="/binghai.html" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433344878101" ignored="false" />
+    <file path="/binghai.html" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1434036513351" ignored="false" />
     <file path="/上部主要承重构件-预制板梁-蜂窝,麻面.html" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433396865865" ignored="false" />
     <file path="/binghaiService.js" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433350368613" ignored="false" />
     <file path="/上部主要承重构件-预制板梁-剥落,掉角.html" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433396885770" ignored="false" />
-    <file path="/a.dummy" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433384193328" ignored="false" />
-    <file path="$PROJECT_DIR$/platforms/android/assets/www/lib/ionic/js/ionic.bundle.js" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433395902382" ignored="false" />
+    <file path="/a.dummy" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433945028087" ignored="false" />
     <file path="$PROJECT_DIR$/platforms/android/assets/www/lib/ionic/scss/_toggle.scss" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433395902382" ignored="false" />
     <file path="$PROJECT_DIR$/platforms/android/assets/www/lib/ionic/css/ionic.css" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433396107771" ignored="false" />
     <file path="$PROJECT_DIR$/platforms/android/assets/www/lib/ionic/css/ionic.min.css" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433395902382" ignored="false" />
-    <file path="$PROJECT_DIR$/platforms/android/assets/www/lib/ionic/js/angular/angular.js" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433395902382" ignored="false" />
     <file path="$PROJECT_DIR$/platforms/android/AndroidManifest.xml" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433396107770" ignored="false" />
     <file path="$PROJECT_DIR$/platforms/android/res/values/strings.xml" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433396107771" ignored="false" />
     <file path="$PROJECT_DIR$/platforms/android/res/xml/config.xml" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433396107771" ignored="false" />
+    <file path="/welcome.html" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433844477203" ignored="false" />
+    <file path="/style.css" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1434046808679" ignored="false" />
+    <file path="/userService.js" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433919940367" ignored="false" />
+    <file path="/login.html" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433843274046" ignored="false" />
+    <file path="/loginCtrl.js" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433844525902" ignored="false" />
+    <file path="/envService.js" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433841836257" ignored="false" />
+    <file path="/settingCtrl.js" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433920062339" ignored="false" />
+    <file path="/setting.html" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433955903537" ignored="false" />
+    <file path="/diseaseCtrl.js" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1434026344110" ignored="false" />
+    <file path="/diseaseService.js" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1434046361692" ignored="false" />
+    <file path="/disease.html" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1434047282447" ignored="false" />
+    <file path="/diseaseConditionModal.html" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1434040958078" ignored="false" />
+    <file path="/diseasedetail.html" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1434045357973" ignored="false" />
+    <file path="/checkListService.js" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1434047049329" ignored="false" />
+    <file path="/result.html" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1434046559690" ignored="false" />
+    <file path="/bridgeService.js" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433990664015" ignored="false" />
+    <file path="/bridgeCtrl.js" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433961024559" ignored="false" />
+    <file path="/bridgedetail.html" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433995393589" ignored="false" />
+    <file path="/bridgeDetailCtrl.js" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1433990910596" ignored="false" />
+    <file path="/diseaselistitem.html" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1434028597149" ignored="false" />
+    <file path="/leibie_bak.js" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1434033958420" ignored="false" />
+    <file path="/checkHistoryModal.html" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1434043087088" ignored="false" />
+    <file path="/diseaseDetailCtrl.js" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1434046211319" ignored="false" />
+    <file path="/result-item.html" changelist="9ae897ba-46a2-4e10-9900-155db0cce796" time="1434047100577" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,92 +83,58 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="main.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/views/check/main.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="65" selection-start="447" selection-end="447" vertical-scroll-proportion="-8.275862">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="tabs.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/views/check/tabs.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="14" selection-start="1646" selection-end="1646" vertical-scroll-proportion="-3.689655">
+            <state line="27" column="31" selection-start="1120" selection-end="1194" vertical-scroll-proportion="-7.448276">
               <folding>
-                <element signature="n#style#0;n#ion-item#1;n#ion-list#0;n#ion-content#0;n#ion-view#0;n#ion-tab#0;n#ion-tabs#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#button#1;n#div#0;n#ion-header-bar#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="config.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/js/config.js">
+      <file leaf-file-name="checkService.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/js/services/checkService.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="270" column="30" selection-start="12873" selection-end="12873" vertical-scroll-proportion="0.0">
+            <state line="11" column="0" selection-start="317" selection-end="438" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="checkListService.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/js/services/checkListService.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="101" column="30" selection-start="4260" selection-end="4260" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bridgedetail.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/views/bridgedetail.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="36" selection-start="294" selection-end="294" vertical-scroll-proportion="-7.448276">
               <folding>
-                <element signature="e#5022#12054#0" expanded="false" />
-                <element signature="e#8018#8224#0" expanded="false" />
-                <element signature="e#8279#8468#0" expanded="false" />
-                <element signature="e#8500#8689#0" expanded="false" />
-                <element signature="e#8718#9296#0" expanded="false" />
-                <element signature="e#9325#9814#0" expanded="false" />
-                <element signature="e#11990#12022#0" expanded="false" />
+                <element signature="n#style#0;n#td#2;n#tr#3;n#table#0;n#div#3;n#div#1;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#2;n#tr#4;n#table#0;n#div#3;n#div#1;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#2;n#tr#5;n#table#0;n#div#3;n#div#1;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#2;n#tr#6;n#table#0;n#div#3;n#div#1;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#2;n#tr#7;n#table#0;n#div#3;n#div#1;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#2;n#tr#9;n#table#0;n#div#3;n#div#1;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#2;n#tr#10;n#table#0;n#div#3;n#div#1;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#2;n#tr#11;n#table#0;n#div#3;n#div#1;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#2;n#tr#12;n#table#0;n#div#3;n#div#1;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="binghai.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/views/check/binghai.html">
+      <file leaf-file-name="diseaseDetailCtrl.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/js/controllers/diseaseDetailCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="11" selection-start="132" selection-end="132" vertical-scroll-proportion="-3.310345">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="binghaiCtrl.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/js/controllers/check/binghaiCtrl.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="40" selection-start="315" selection-end="315" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="0" selection-start="57" selection-end="57" vertical-scroll-proportion="-3.310345">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="上部主要承重构件-预制板梁-蜂窝,麻面.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/views/check/上部主要承重构件-预制板梁-蜂窝,麻面.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="47" column="56" selection-start="2145" selection-end="2145" vertical-scroll-proportion="-38.896553">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="上部主要承重构件-预制板梁-剥落,掉角.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/views/check/上部主要承重构件-预制板梁-剥落,掉角.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="47" column="56" selection-start="2033" selection-end="2051" vertical-scroll-proportion="-16.551723">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="a2.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/views/check/a2.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="29" selection-start="22" selection-end="29" vertical-scroll-proportion="-0.0">
+            <state line="11" column="26" selection-start="395" selection-end="395" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -155,49 +143,71 @@
       <file leaf-file-name="app.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="95" column="14" selection-start="3068" selection-end="3068" vertical-scroll-proportion="0.0">
+            <state line="76" column="32" selection-start="2909" selection-end="2909" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="a3.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/views/check/a3.html">
+      <file leaf-file-name="bridgeService.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/js/services/bridgeService.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="11" selection-start="93" selection-end="93" vertical-scroll-proportion="-3.310345">
+            <state line="18" column="0" selection-start="583" selection-end="958" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="a4.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/views/check/a4.html">
+      <file leaf-file-name="diseasedetail.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/views/diseasedetail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="11" selection-start="97" selection-end="97" vertical-scroll-proportion="-3.310345">
+            <state line="13" column="23" selection-start="575" selection-end="575" vertical-scroll-proportion="-10.75862">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ion-sticky.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/lib/ion-sticky.js">
+      <file leaf-file-name="style.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="26" selection-start="16" selection-end="26" vertical-scroll-proportion="0.0">
+            <state line="118" column="19" selection-start="1970" selection-end="1970" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="checkMainCtrl.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/www/js/controllers/check/checkMainCtrl.js">
+      <file leaf-file-name="diseaseCtrl.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/js/controllers/diseaseCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="38" selection-start="692" selection-end="692" vertical-scroll-proportion="0.6760563">
-              <folding>
-                <element signature="e#459#520#0" expanded="false" />
-                <element signature="e#574#613#0" expanded="false" />
-                <element signature="e#786#1032#0" expanded="false" />
-                <element signature="e#1074#1178#0" expanded="false" />
-              </folding>
+            <state line="20" column="0" selection-start="653" selection-end="653" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bridgeDetailCtrl.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/js/controllers/bridgeDetailCtrl.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="0" selection-start="218" selection-end="720" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="leibie_bak.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/js/leibie_bak.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="12" selection-start="1361" selection-end="1364" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="result.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/views/check/result.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2" column="0" selection-start="70" selection-end="398" vertical-scroll-proportion="-1.6551725">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -205,17 +215,24 @@
       <file leaf-file-name="checkSelectorCtrl.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/controllers/check/checkSelectorCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="128" column="0" selection-start="5257" selection-end="5490" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="32" column="31" selection-start="1323" selection-end="1404" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#1909#2679#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="empty.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/views/check/empty.html">
+      <file leaf-file-name="result-item.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/views/check/result-item.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
-              <folding />
+            <state line="24" column="68" selection-start="1168" selection-end="1168" vertical-scroll-proportion="-12.75862">
+              <folding>
+                <element signature="n#style#0;n#div#2;n#span#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#3;n#span#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#b#0;n#div#3;n#span#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#div#3;n#span#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -223,31 +240,43 @@
       <file leaf-file-name="commonselector.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/views/check/commonselector.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="43" selection-start="297" selection-end="297" vertical-scroll-proportion="-5.793103">
+            <state line="37" column="35" selection-start="1478" selection-end="1543" vertical-scroll-proportion="-13.24138">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="checkService.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/js/services/checkService.js">
+      <file leaf-file-name="diseaseService.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/js/services/diseaseService.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="23" selection-start="272" selection-end="272" vertical-scroll-proportion="-8.0">
-              <folding>
-                <element signature="e#822#5562#0" expanded="false" />
-                <element signature="e#5603#6992#0" expanded="false" />
-                <element signature="e#7025#7230#0" expanded="false" />
-                <element signature="e#7264#7570#0" expanded="false" />
-                <element signature="e#7607#7785#0" expanded="false" />
-              </folding>
+            <state line="56" column="0" selection-start="2330" selection-end="2330" vertical-scroll-proportion="-14.814815">
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="binghaiService.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/js/services/binghaiService.js">
+      <file leaf-file-name="loginCtrl.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/js/controllers/loginCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="19" selection-start="136" selection-end="143" vertical-scroll-proportion="0.0">
+            <state line="15" column="34" selection-start="452" selection-end="506" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="disease.html" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/www/views/disease.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="22" column="16" selection-start="1041" selection-end="1041" vertical-scroll-proportion="0.71375465">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="diseaseConditionModal.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/views/diseaseConditionModal.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="19" column="51" selection-start="892" selection-end="892" vertical-scroll-proportion="-10.75862">
               <folding />
             </state>
           </provider>
@@ -263,22 +292,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/www/views/check/main.html" />
-        <option value="$PROJECT_DIR$/www/js/controllers/check/form/aaaa.js" />
-        <option value="$PROJECT_DIR$/www/js/controllers/check/form/aaaaCtrl.js" />
-        <option value="$PROJECT_DIR$/www/views/check/预制板梁-上部主要承重构件-蜂窝,麻面.html" />
         <option value="$PROJECT_DIR$/www/views/check/binghai.html" />
-        <option value="$PROJECT_DIR$/www/js/services/binghaiService.js" />
-        <option value="$PROJECT_DIR$/www/js/services/checkService.js" />
-        <option value="$PROJECT_DIR$/www/js/controllers/check/checkSelectorCtrl.js" />
-        <option value="$PROJECT_DIR$/www/js/app.js" />
-        <option value="$PROJECT_DIR$/www/js/config.js" />
-        <option value="$PROJECT_DIR$/www/views/check/上部主要承重构件-预制板梁-剥落,掉角.html" />
-        <option value="$PROJECT_DIR$/www/js/controllers/check/binghaiCtrl.js" />
-        <option value="$PROJECT_DIR$/www/views/check/上部主要承重构件-预制板梁-蜂窝,麻面.html" />
-        <option value="$PROJECT_DIR$/www/index.html" />
+        <option value="$PROJECT_DIR$/www/views/diseaseConditionModal.html" />
         <option value="$PROJECT_DIR$/www/views/check/tabs.html" />
+        <option value="$PROJECT_DIR$/www/views/check/checkHistoryModal.html" />
         <option value="$PROJECT_DIR$/www/js/controllers/check/checkMainCtrl.js" />
+        <option value="$PROJECT_DIR$/www/views/bridgedetail.html" />
+        <option value="$PROJECT_DIR$/www/js/services/checkService.js" />
+        <option value="$PROJECT_DIR$/www/js/controllers/diseaseDetailCtrl.js" />
+        <option value="$PROJECT_DIR$/www/js/app.js" />
+        <option value="$PROJECT_DIR$/www/js/services/diseaseService.js" />
+        <option value="$PROJECT_DIR$/www/views/check/result.html" />
+        <option value="$PROJECT_DIR$/www/views/diseasedetail.html" />
+        <option value="$PROJECT_DIR$/www/css/style.css" />
+        <option value="$PROJECT_DIR$/www/js/services/checkListService.js" />
+        <option value="$PROJECT_DIR$/www/views/check/result-item.html" />
+        <option value="$PROJECT_DIR$/www/views/disease.html" />
       </list>
     </option>
   </component>
@@ -475,6 +504,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bridge" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bridge" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="www" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -485,11 +532,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\mobile\bridge\www\js\controllers" />
       <recent name="F:\mobile\bridge\www\views\check" />
+      <recent name="F:\mobile\bridge\www\views" />
       <recent name="F:\mobile\bridge\www\js\services" />
       <recent name="F:\mobile\bridge\www\js\controllers\check" />
-      <recent name="F:\mobile\bridge\www\lib" />
-      <recent name="F:\mobile\bridge\www\views" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="F:\mobile\bridge\www\js\controllers\check" />
@@ -530,14 +577,14 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298969" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39242685" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22131148" sideWeight="0.6701031" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1900149" sideWeight="0.6712565" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32874355" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -605,147 +652,133 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/www/js/config.js</url>
-          <line>212</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="2" />
+      <option name="time" value="4" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/www/views/check/goujian.html">
+    <entry file="file://$PROJECT_DIR$/www/js/controllers/diseaseCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="18" selection-start="452" selection-end="452" vertical-scroll-proportion="0.6086956">
+        <state line="20" column="0" selection-start="653" selection-end="653" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/views/check/binghai.html">
+    <entry file="file://$PROJECT_DIR$/www/js/controllers/diseaseDetailCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="11" selection-start="132" selection-end="132" vertical-scroll-proportion="-3.310345">
+        <state line="11" column="26" selection-start="395" selection-end="395" vertical-scroll-proportion="0.0">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/lib/lodash.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/views/check/main.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="65" selection-start="447" selection-end="447" vertical-scroll-proportion="-8.275862">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/views/tabs.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="41" selection-start="611" selection-end="611" vertical-scroll-proportion="0.57884973">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/services/checkService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="23" selection-start="272" selection-end="272" vertical-scroll-proportion="-8.0">
-          <folding>
-            <element signature="e#822#5562#0" expanded="false" />
-            <element signature="e#5603#6992#0" expanded="false" />
-            <element signature="e#7025#7230#0" expanded="false" />
-            <element signature="e#7264#7570#0" expanded="false" />
-            <element signature="e#7607#7785#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="95" column="14" selection-start="3068" selection-end="3068" vertical-scroll-proportion="0.0">
+        <state line="76" column="32" selection-start="2909" selection-end="2909" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/controllers/check/checkSelectorCtrl.js">
+    <entry file="file://$PROJECT_DIR$/www/js/services/diseaseService.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="128" column="0" selection-start="5257" selection-end="5490" vertical-scroll-proportion="0.0">
+        <state line="56" column="0" selection-start="2330" selection-end="2330" vertical-scroll-proportion="-14.814815">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/config.js">
+    <entry file="file://$PROJECT_DIR$/www/js/controllers/check/checkMainCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="270" column="30" selection-start="12873" selection-end="12873" vertical-scroll-proportion="0.0">
+        <state line="97" column="42" selection-start="3456" selection-end="3456" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="e#5022#12054#0" expanded="false" />
-            <element signature="e#8018#8224#0" expanded="false" />
-            <element signature="e#8279#8468#0" expanded="false" />
-            <element signature="e#8500#8689#0" expanded="false" />
-            <element signature="e#8718#9296#0" expanded="false" />
-            <element signature="e#9325#9814#0" expanded="false" />
-            <element signature="e#11990#12022#0" expanded="false" />
+            <element signature="e#1034#1095#0" expanded="false" />
+            <element signature="e#1149#1188#0" expanded="false" />
+            <element signature="e#1227#1319#0" expanded="false" />
+            <element signature="e#2334#3027#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/services/binghaiService.js">
+    <entry file="file://$PROJECT_DIR$/www/views/check/checkHistoryModal.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="19" selection-start="136" selection-end="143" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/controllers/check/binghaiCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="40" selection-start="315" selection-end="315" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/views/check/上部主要承重构件-预制板梁-剥落,掉角.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="56" selection-start="2033" selection-end="2051" vertical-scroll-proportion="-16.551723">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/views/check/上部主要承重构件-预制板梁-蜂窝,麻面.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="56" selection-start="2145" selection-end="2145" vertical-scroll-proportion="-38.896553">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="57" selection-end="57" vertical-scroll-proportion="-3.310345">
+        <state line="11" column="46" selection-start="417" selection-end="417" vertical-scroll-proportion="-9.103448">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/views/check/tabs.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="14" selection-start="1646" selection-end="1646" vertical-scroll-proportion="-3.689655">
+        <state line="27" column="31" selection-start="1120" selection-end="1194" vertical-scroll-proportion="-7.448276">
           <folding>
-            <element signature="n#style#0;n#ion-item#1;n#ion-list#0;n#ion-content#0;n#ion-view#0;n#ion-tab#0;n#ion-tabs#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#1;n#div#0;n#ion-header-bar#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/controllers/check/checkMainCtrl.js">
+    <entry file="file://$PROJECT_DIR$/www/views/check/result.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="38" selection-start="692" selection-end="692" vertical-scroll-proportion="0.6760563">
+        <state line="2" column="0" selection-start="70" selection-end="398" vertical-scroll-proportion="-1.6551725">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/views/diseasedetail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="23" selection-start="575" selection-end="575" vertical-scroll-proportion="-10.75862">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="118" column="19" selection-start="1970" selection-end="1970" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/services/checkService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="0" selection-start="317" selection-end="438" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/services/cacheService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/controllers/check/checkSelectorCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="31" selection-start="1323" selection-end="1404" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="e#459#520#0" expanded="false" />
-            <element signature="e#574#613#0" expanded="false" />
-            <element signature="e#786#1032#0" expanded="false" />
-            <element signature="e#1074#1178#0" expanded="false" />
+            <element signature="e#1909#2679#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/services/checkListService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="101" column="30" selection-start="4260" selection-end="4260" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/views/check/result-item.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="68" selection-start="1168" selection-end="1168" vertical-scroll-proportion="-12.75862">
+          <folding>
+            <element signature="n#style#0;n#div#2;n#span#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#3;n#span#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#b#0;n#div#3;n#span#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#div#3;n#span#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/views/disease.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="16" selection-start="1041" selection-end="1041" vertical-scroll-proportion="0.71375465">
+          <folding />
         </state>
       </provider>
     </entry>

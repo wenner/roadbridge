@@ -8,7 +8,12 @@
         <ion-nav-view name="selector" class="slide-left-right"></ion-nav-view>
     </ion-side-menu>
 </ion-side-menus>
-<button class="button-float button button-royal icon ion-ios-more"
+<button class="button-float button button-positive icon ion-checkmark-round"
+        style="left:16px"
+        ng-show="isEnd"
+        ng-click="save()"></button>
+
+<button class="button-float button button-energized icon ion-ios-more"
         ng-class="{true: 'button-aside', false: ''}[$exposeAside.active]"
-        ng-click="createNewTopic()"></button>
+        ng-click="showMediaMenu($event)"></button>
 

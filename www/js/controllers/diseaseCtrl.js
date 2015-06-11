@@ -1,23 +1,41 @@
 angular.module('bridge').controller(
     'DiseaseCtrl',
-    function ($scope, $rootScope, $stateParams, $ionicLoading, $ionicModal, $timeout, $state, $location, $log) {
+    function ($scope, $rootScope, $stateParams, $ionicLoading, $ionicModal,
+              $timeout, $state, $location, $log ,
+              DiseaseService , BaseData) {
 
         $log.debug('disease ctrl', $stateParams);
+        $scope.conditon = {};
 
-		$scope.diseases = [
-			{title:'1-1# 麻面' , area:40} , 
-			{title:'1-2# 麻面' , area:50}	
-		];
-		
-		$scope.change1 = function(){
-			$scope.t1 = $scope.t1 == 'a1' ? 'a2' : 'a1';
-		}
+        $ionicModal.fromTemplateUrl("views/diseaseConditionModal.html" , {
+            scope: $scope
+        }).then(function(modal) {
+            $scope.conditionModal = modal;
+        });
 
-		$scope.change2 = function(){
-			$scope.t2 = $scope.t2 == 'a3' ? 'a4' : 'a3';
-		}
-		
-		$scope.t1 = 'a1';
-		$scope.t2 = 'a3';
+        $scope.roads = BaseData.roads;
+        $scope.bridges = BaseData.bridges;
+
+        $scope.query = function () {
+            $scope.loading = true;
+            DiseaseService
+                .query($scope.condition)
+                .then(function (data) {
+                    $scope.diseases = data;
+                })
+                .finally(function () {
+                    $scope.loading = false;
+                    $scope.$broadcast('scroll.refreshComplete');
+                    return $scope.$broadcast('scroll.infiniteScrollComplete');
+                })
+        };
+        $scope.query();
+
+        $scope.showConditionModal = function(){
+            $scope.conditionModal.show();
+        }
+
+
+
     }
 );

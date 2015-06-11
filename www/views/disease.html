@@ -1,29 +1,52 @@
 <ion-view view-title="病害列表">
 	<ion-nav-buttons side='right'>
-      <button class="button button-icon button-clear ion-search" menu-toggle="left" ng-click="change1()"></button>	
-		<button class="button button-icon button-clear ion-search" menu-toggle="left" ng-click="change2()"></button>	
-
+        <!--
+      <button class="button button-icon button-clear ion-search" menu-toggle="left" ng-click="showConditionModal()"></button>
+      -->
 	</ion-nav-buttons>
-    <ion-content class="has-header">
-        <ion-refresher ng-if="maintains.length > 0 || loadError" pulling-text="下拉刷新..." on-refresh="doRefresh()" refreshing-icon="ion-loading-c">
+    <div class="bar bar-subheader bar-stable row">
+        <div class='col single-select'>
+            <select ng-model="condition.road"
+                    ng-options='x.id as x.id+" - "+x.name for x in roads'
+                    ng-change="query()">
+                <option value=''>所有线路</option>
+            </select>
+        </div>
+        <div class='col single-select'>
+            <select ng-model="condition.bridge"
+                    ng-options='x.sn as x.name+" "+x.sn+" "+x.zhuanghao for x in bridges | filter:{"road":condition.road}'
+                    ng-change="query()">
+                <option value=''>所有桥梁</option>
+            </select>
+        </div>
+        <button class="button button-icon button-outline ion-ios-more" menu-toggle="left" ng-click="showConditionModal()">
+            更多条件
+        </button>
+
+    </div>
+    <ion-content class="has-subheader">
+        <ion-refresher ng-if="!isLoading"
+                       pulling-text="下拉刷新..."
+                       on-refresh="query()">
         </ion-refresher>
         <ion-list>
-            <ion-item collection-repeat="disease in diseases"
-                      collection-item-width="'100%'"
-                      collection-item-height="51"
-                      href="#/disease/{{disease.id}}">
-                <p>{{disease.title}} {{disease.area}}平米</p>
+            <ion-item ng-repeat="disease in diseases"
+                      href="#/disease/{{disease.sn}}">
+                {{disease.kong}}-{{disease.goujian}}#梁
+                <p>
+                    {{disease.sn}}
+                    <span class="item-note">{{disease.username}} @ {{disease.createtime}}</span>
+                </p>
                 <ion-option-button class="button-balanced" ng-click="maintain(maintain)">
                     <i class='icon ion-wrench padding'></i>修改
                 </ion-option-button>
+                <ion-option-button class="button-assertive" ng-click="maintain(maintain)">
+                    <i class='icon ion-delete padding'></i>删除
+                </ion-option-button>
             </ion-item>
         </ion-list>
-        <!--
-          Loading icon of infinte-scroll not showing with collection-repeat
-          https://github.com/driftyco/ionic/issues/2376
-        -->
-        <ion-infinite-scroll on-infinite="loadMore()" distance="10%" icon="ion-loading-c" ng-if="hasNextPage && !loadError">
+        <ion-infinite-scroll on-infinite1="loadMore()" distance="10%" icon="ion-loading-c"
+                             ng-if="hasNextPage && !loadError">
         </ion-infinite-scroll>
-
     </ion-content>
 </ion-view>

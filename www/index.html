@@ -8,89 +8,14 @@
 
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-
-    <style>
-
-        .bar-header .title {
-            font-family:'微软雅黑'
-        }
-
-        .button-float {
-            position: fixed;
-            bottom: 64px;
-            right: 16px;
-            border: none;
-            border-radius: 50%;
-            min-width: 56px;
-            min-height: 56px;
-            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
-            z-index: 20;
-            -webkit-transition: 0.2s linear;
-            transition: 0.2s linear;
-            -webkit-transition-property: 'background-color, box-shadow';
-            transition-property: 'background-color, box-shadow';
-        }
-
-        .button-float.active, .button-float.activated {
-            box-shadow: 0 3px 7px 0 rgba(0, 0, 0, 0.36) !important;
-        }
-
-        .button-aside {
-            bottom: 16px;
-        }
-
-        .aaaa {
-            background: red
-        }
-
-        .imageuploader {
-            padding:10px 10px 0 0;
-        }
-        .imageuploader li {
-            float:left;
-            margin:0 0 10px 0;
-            padding-left:10px;
-            width:25%;
-            box-size:border-box;
-        }
-        .imageuploader label {
-            position:relative;
-            width:100%;
-            height:100%;
-            display:inline-block
-
-        }
-        .imageuploader img {
-            width:100%;
-            border:#ccc solid 1px;
-            box-size:border-box
-        }
-        .imageuploader input[type='file'] {
-            position:absolute;
-            top:0;
-            left:0;
-            width:100%;
-            height:100%;
-            opacity:.01;
-            z-index:1;
-            cursor:pointer
-        }
-
-
-
-        .item-radio input:checked ~ .item-content {background-color:#ffffcc}
-    </style>
-
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
     -->
 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
-    <script src="lib/ion-sticky.js"></script>
-    <script src="lib/ocLazyLoad.js"></script>
-
     <script src="lib/lodash.js"></script>
+    <script src="lib/moment.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
@@ -102,16 +27,28 @@
     <script src="js/config.js"></script>
 
     <!-- services -->
+    <script src="js/services/storageService.js"></script>
+    <script src="js/services/envService.js"></script>
+    <script src="js/services/cacheService.js"></script>
+    <script src="js/services/userService.js"></script>
+    <script src="js/services/diseaseService.js"></script>
+    <script src="js/services/bridgeService.js"></script>
+
     <script src="js/services/checkService.js"></script>
-    <script src="js/services/binghaiService.js"></script>
+    <script src="js/services/checkListService.js"></script>
 
 
     <!-- controllers -->
+    <script src="js/controllers/loginCtrl.js"></script>
+
     <script src="js/controllers/diseaseCtrl.js"></script>
+    <script src="js/controllers/diseaseDetailCtrl.js"></script>
+    <script src="js/controllers/bridgeCtrl.js"></script>
+    <script src="js/controllers/bridgeDetailCtrl.js"></script>
+    <script src="js/controllers/settingCtrl.js"></script>
     <script src="js/controllers/check/checkMainCtrl.js"></script>
     <script src="js/controllers/check/checkSelectorCtrl.js"></script>
     <!--formcontroller-->
-    <script src="js/controllers/check/binghaiCtrl.js"></script>
 
 </head>
 <body ng-app="bridge">

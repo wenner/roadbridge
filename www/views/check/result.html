@@ -1,0 +1,12 @@
+<ion-list>
+    <!--<ion-item class="item-divider">当前检查值</ion-item>-->
+    <ion-item class="item-toggle1" ng-repeat="item in result" style="pointer-events:auto">
+        {{item.item_name}}
+        <ng-include src="'views/check/result-item.html'"></ng-include>
+        <ion-option-button class="button-balanced" ng-click="reSelect(item)">
+            重新选择
+        </ion-option-button>
+    </ion-item>
+
+    <div ng-class="{true: 'hide', false: ''}[!!result.length]" class='padding'>没有选择检查内容</div>
+</ion-list>
