@@ -37,10 +37,10 @@
     font-family: '微软雅黑'
 }
 
+
 .button-float {
     position: fixed;
     bottom: 64px;
-    right: 16px;
     border: none;
     border-radius: 50%;
     min-width: 56px;
@@ -49,12 +49,19 @@
     z-index: 20;
     -webkit-transition: 0.2s linear;
     transition: 0.2s linear;
-    -webkit-transition-property: 'background-color, box-shadow';
-    transition-property: 'background-color, box-shadow';
+    -webkit-transition-property: 'background-color, box-shadow , opacity';
+    transition-property: 'background-color, box-shadow , opacity';
 }
 
 .button-float.active, .button-float.activated {
     box-shadow: 0 3px 7px 0 rgba(0, 0, 0, 0.36) !important;
+}
+
+.button-float-left {
+	left: 16px;
+}
+.button-float-right {
+	right:16px
 }
 
 .button-aside {

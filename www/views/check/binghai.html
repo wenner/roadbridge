@@ -6,7 +6,7 @@
         </ion-item>
         <div ng-switch-when="上部主要承重构件" ng-switch="current.kong.sourceData.type">
             <div ng-switch-when="预制板梁" ng-switch="current.leibie.value">
-                <div ng-switch-when="蜂窝,麻面">
+                <div ng-switch-when="蜂窝麻面">
                     <ion-list>
                         <label class="item item-input item-select">
                             <span class='input-label'>标志墩:</span>
@@ -15,15 +15,23 @@
                                     required>
                             </select>
                         </label>
-                        <label class="item item-input">
+                        <label class="item item-input ">
                             <span class='input-label'>距离标志墩(米):</span>
-                            <input type='number' ng-model="binghai.mi"
+                            <input type='number' ng-model="binghai.distance"
+                                   class="text-right"
                                    placeholder="请填写与标志墩的距离" required>
                         </label>
                         <label class="item item-input">
-                            <span class='input-label'>面积(平米):</span>
-                            <input type='number' ng-model="binghai.area"
-                                   placeholder="请填写面积" required>
+                            <span class='input-label'>长(米):</span>
+                            <input type='number' ng-model="binghai.length"
+                                   class="text-right"
+                                   placeholder="请填写长度" required>
+                        </label>
+                        <label class="item item-input">
+                            <span class='input-label'>宽(米):</span>
+                            <input type='number' ng-model="binghai.width"
+                                   class="text-right"
+                                   placeholder="请填写宽度" required>
                         </label>
                         <ion-item class='item-divider'>局部位置</ion-item>
                         <ion-radio ng-repeat="item in ['底板' , '腹板' , '翼板']"
@@ -43,7 +51,7 @@
                             {{ item }}
                         </ion-radio>
                         <input type="hidden"
-                               ng-init="binghai.template='距 {{dun}} 墩 {{mi}} 米 {{weizhi}} {{desc}} , 面积: {{area}} 平米'"
+                               ng-init="binghai.template='距 {{dun}} 墩 {{distance}} 米 {{weizhi}} {{desc}} , 面积: {{length}}x{{width}} 平米'"
                                ng-model="binghai.template">
 
                     </ion-list>

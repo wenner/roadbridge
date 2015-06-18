@@ -7,12 +7,22 @@
             <p>加载中...</p>
         </div>
         <ion-list ng-if="!isLoading">
+            <ion-item>
+                {{disease.description}}
+            </ion-item>
             <ion-item class="item-divider">病害信息</ion-item>
-            <ion-item class="item-toggle1" ng-repeat="item in result" style="pointer-events:auto">
+            <ion-item  ng-repeat="item in result" style="pointer-events:auto">
                 {{item.item_name}}
                 <ng-include src="'views/check/result-item.html'"></ng-include>
             </ion-item>
             <ion-item class="item-divider">媒体信息</ion-item>
+            <ion-slide-box class='welcome'>
+                <ion-slide ng-repeat="item in disease.medias">
+                    <div class="padding text-center">
+                        <img ng-src="{{item.result}}" style="width:100%">
+                    </div>
+                </ion-slide>
+            </ion-slide-box>
         </ion-list>
     </ion-content>
 </ion-view>

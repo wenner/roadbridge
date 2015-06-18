@@ -32,6 +32,7 @@ angular.module('bridge.services')
                     var disease = _.find(allDiseases , function(n){
                         return n.sn == sn;
                     });
+
                     var result = [] , current = {};
                     _.forEach(BaseData.steps, function (n) {
                         if (disease[n.code]) {

@@ -22,7 +22,14 @@
     "com.ionic.keyboard"
   ],
   "cordovaPlatforms": [
-    "android",
-    "ios"
+    {
+      "platform": "android",
+      "locator": "windows"
+    },
+    "ios",
+    {
+      "platform": "android",
+      "locator": "wp8"
+    }
   ]
 }

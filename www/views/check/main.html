@@ -5,15 +5,15 @@
 
     <ion-side-menu expose-aside-when="large" side="right" width="400">
         <ion-nav-bar class="bar-royal"></ion-nav-bar>
-        <ion-nav-view name="selector" class="slide-left-right"></ion-nav-view>
+        <ion-nav-view name="Content" class="slide-left-right"></ion-nav-view>
     </ion-side-menu>
 </ion-side-menus>
-<button class="button-float button button-positive icon ion-checkmark-round"
-        style="left:16px"
+<button class="button-float button-float-left button button-positive icon ion-checkmark-round"
+		style="width:72px;height:72px;border-radius:10%;"
         ng-show="isEnd"
         ng-click="save()"></button>
 
-<button class="button-float button button-energized icon ion-ios-more"
+<button class="button-float button-float-right button button-energized icon ion-ios-more"
         ng-class="{true: 'button-aside', false: ''}[$exposeAside.active]"
         ng-click="showMediaMenu($event)"></button>
 

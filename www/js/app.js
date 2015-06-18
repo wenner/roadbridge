@@ -5,11 +5,38 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('bridge', [
         'ionic' ,
-        'bridge.config' ,
-        'bridge.controllers' ,
-        'bridge.services'
+        'bridge.services' ,
+        'bridge.controllers'
     ])
-    .run(function ($state , $ionicPlatform , $rootScope , $ionicPopup , UserService) {
+    .run(function ($state , $ionicPlatform , $rootScope , $ionicPopup ,
+                   UserService , StorageService ,
+                   CheckListService , CheckDescriptionService , BaseData) {
+        //初始化disease
+        if (!StorageService.exists("diseases")){
+            var diseases = initDiseases;
+            _.forEach(diseases , function(disease){
+                var result = [] , current = {};
+                _.forEach(BaseData.steps, function (n) {
+                    if (disease[n.code]) {
+                        var item = {
+                            code: n.code ,
+                            value:disease[n.code] ,
+                            item_name: n.name
+                        };
+                        current[n.code] = item;
+                        result.push(item);
+                    }
+                });
+                _.forEach(result, function (n) {
+                    if (n.inited) return;
+                    n.sourceData = CheckListService.getSourceData(n , current);
+                    n.inited = true;
+                });
+                disease.description = CheckDescriptionService.getDescription(current , disease);
+            });
+            StorageService.set("diseases" , diseases);
+        }
+
         $ionicPlatform.ready(function () {
             // notify
             if (!navigator.notification) {
@@ -132,11 +159,14 @@ angular.module('bridge', [
                 authenticated:true ,
                 url: "/check?&{url:string}&{code:string}",
                 views: {
-                    'selector': {
+                    'Content': {
                         templateUrl: function ($stateParams) {
-                            var pa = $stateParams;
+							var pa = $stateParams;
+							var url = 'views/check/' + (pa.url || 'empty') + '.html';
+							//console.log( url)
+							//alert(url)
                             //if (pa && !pa.template) console.log("no step template:" , angular.toJson($stateParams));
-                            return 'views/check/' + (pa.url || 'empty') + '.html'
+                            return url;
                         },
                         controllerProvider: function ($stateParams, CheckService) {
                             var controller = "CheckSelectorCtrl";
@@ -149,14 +179,12 @@ angular.module('bridge', [
                     }
                 }
             })
-        $urlRouterProvider.otherwise('/disease');
+        $urlRouterProvider.otherwise('/welcome');
     });
 
 angular.module('bridge.controllers', [
-    'bridge.services' ,
-    'bridge.config'
+    'bridge.services'
 ]);
 angular.module('bridge.services', [
-    'bridge.config'
 ]);
 

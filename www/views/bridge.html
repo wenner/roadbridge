@@ -11,6 +11,12 @@
     </div>
 
     <ion-content class="has-header has-subheader">
+        <!-- 提示信息 -->
+        <div class="text-center padding"
+             ng-if="isLoading">
+            <ion-spinner></ion-spinner>
+            <p>加载中...</p>
+        </div>
         <ion-refresher ng-if="bridges.length > 0 || loading1"
                        pulling-text="下拉刷新..."
                        on-refresh="query()">

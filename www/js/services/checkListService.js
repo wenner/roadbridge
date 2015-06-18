@@ -103,7 +103,6 @@ angular.module('bridge.services')
                 }
                 return source;
             } ,
-
             getList: function (step, current) {
                 var stepCode = _.capitalize(step.code);
                 var fn = this["get" + stepCode];

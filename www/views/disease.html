@@ -25,6 +25,12 @@
 
     </div>
     <ion-content class="has-subheader">
+        <!-- 提示信息 -->
+        <div class="text-center padding"
+             ng-if="isLoading">
+            <ion-spinner></ion-spinner>
+            <p>加载中...</p>
+        </div>
         <ion-refresher ng-if="!isLoading"
                        pulling-text="下拉刷新..."
                        on-refresh="query()">
@@ -32,8 +38,8 @@
         <ion-list>
             <ion-item ng-repeat="disease in diseases"
                       href="#/disease/{{disease.sn}}">
-                {{disease.kong}}-{{disease.goujian}}#梁
-                <p>
+                {{disease.description}}
+                <p style="padding-top:5px">
                     {{disease.sn}}
                     <span class="item-note">{{disease.username}} @ {{disease.createtime}}</span>
                 </p>

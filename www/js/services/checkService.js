@@ -2,7 +2,9 @@
 angular.module('bridge.services')
 .factory(
     'CheckService',
-    function ($log, $q, $timeout , UserService, StorageService, BaseData , CheckListService) {
+    function ($log, $q, $timeout ,
+              UserService, StorageService, BaseData ,
+              CheckListService , CheckDescriptionService) {
         var current = {};
         var result = [
             //{name:"xxx" , value:"xxx" , nextstep:"xxx"}
@@ -116,7 +118,7 @@ angular.module('bridge.services')
                 }else if (_.isObject(item)){
                     index = _.indexOf(result, item)
                 }else if (_.isString(item)){
-                    index = _.findeIndex(result , {code:item});
+                    index = _.findIndex(result , {code:item});
                 }
                 if (index == -1) return;
                 _.remove(result, function (n, i) {
@@ -132,17 +134,19 @@ angular.module('bridge.services')
             addMedia: function (media) {
                 medias.push(media);
             },
-            save: function (data) {
+            save: function () {
                 var defer = $q.defer();
                 //将result中value写入到data
-                var rs = {};
-                _.forEach(data.result, function (n) {
+                var rs = {
+                    medias: medias
+                };
+                _.forEach(result, function (n) {
                     rs[n.code] = n.value;
                 });
                 //生成sn
-
-                var lastDisease = _.last(diseases);
-                var lastSn = lastDisease ? lastDisease.sn + 1 : 1;
+                var allDiseases = StorageService.get("diseases") || [];
+                var lastDisease = _.last(allDiseases);
+                var lastSn = lastDisease ? parseInt(_.last(lastDisease.sn.split("-"))) + 1 : 1;
                 rs.sn = [
                     rs.road ,
                     rs.bridge+rs.direction ,
@@ -150,8 +154,9 @@ angular.module('bridge.services')
                     _.padLeft(lastSn , 4 , "0")
                 ].join("-");
                 rs.username = UserService.info.name;
-                rs.createtime = moment();
-                rs.description = "";
+                rs.createtime = moment().format("YYYY-MM-DD HH:mm:ss");
+                //生成病害描述
+                rs.description = CheckDescriptionService.getDescription(current , rs);
                 var diseases = StorageService.get("diseases") || [];
                 diseases.push(rs);
                 StorageService.set("diseases", diseases);

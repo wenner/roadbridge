@@ -4,7 +4,7 @@ angular.module('bridge').controller(
               $ionicTabsDelegate , $ionicPopover , $ionicActionSheet ,
               $timeout, $state, $location, $log , $ionicSideMenuDelegate ,
 		BaseData , CheckService) {
-
+		console.log("checkmain ctrl")
         //history
         $ionicModal.fromTemplateUrl("views/check/checkHistoryModal.html" , {
             scope: $scope
@@ -93,7 +93,7 @@ angular.module('bridge').controller(
                 result: CheckService.result ,
                 medias: medias
             };
-            CheckService.save(data).then(function(){
+            CheckService.save().then(function(){
                 $scope.isEnd = false;
                 $scope.reSelect("bujian");
             });

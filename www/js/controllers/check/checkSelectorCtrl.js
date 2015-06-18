@@ -27,10 +27,11 @@ angular.module('bridge').controller(
                 }
             } ,
             saveBinghai: function(){
+                var bhData = $scope.binghai;
                 var data = {
                     code: $scope.currentStep.code ,
-                    value: $scope.binghai ,
-                    display: _.template($scope.binghai.template)($scope.binghai)
+                    value: bhData ,
+                    display: _.template(bhData.template)(bhData)
                 }
                 CheckService.add(data);
                 $scope.$emit('change');
