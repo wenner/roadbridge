@@ -7,7 +7,11 @@ angular
                 return !!window.localStorage.getItem(key);
             } ,
             set: function (key, data) {
+                try{
                 return window.localStorage.setItem(key, window.JSON.stringify(data));
+                }catch(e){
+                    console.log(e.message);
+                }
             },
             get: function (key) {
                 return window.JSON.parse(window.localStorage.getItem(key));

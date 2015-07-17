@@ -1,0 +1,76 @@
+<ion-view>
+    <ion-header-bar class="bar-positive">
+        <button class="button button-icon  ion-ios-close-outline pull-left"
+                ng-clic1k='goback()' ui-sref=tab.disease></button>
+        <h1 class="title">S1 K100+100 桥上检测</h1>
+        <div class="buttons" side="right">
+            <button class='button button-badge button-icon ion-ios-clock-outline'
+                    style="padding-left:0"
+                    ng-hide="historys.length==0" ng-click="showHistoryModal()">
+                <span class="badge badge-assertive">{{historys.length}}1</span>
+            </button>
+        </div>
+    </ion-header-bar>
+    <ion-content scroll="false" class="has-header">
+        <div class="picker-container">
+            <div class="hpicker-container hpicker-container-borderbottom" on-dragend="showdrag()" ng-click="testWatch()">
+                <div class="hpicker-row">
+                    <div class="hpicker-row-header">桥下检测</div>
+                    <div class="hpicker-row-items">
+                        <div class="hpicker-row-items-wrapper">
+                            <div class="hpicker-row-item">aaaaaaa</div>
+                            <div class="hpicker-row-item">aaaaaaa</div>
+                            <div class="hpicker-row-item">aaaaaaa</div>
+                            <div class="hpicker-row-item">aaaaaaa</div>
+                            <div class="hpicker-row-item">aaaaaaa</div>
+                            <div class="hpicker-row-item">aaaaaaa</div>
+                            <div class="hpicker-row-item">aaaaaaa</div>
+                            <div class="hpicker-row-item">aaaaaaa</div>
+                            <div class="hpicker-row-item">aaaaaaa</div>
+                            <div class="hpicker-row-item">aaaaaaa</div>
+                        </div>
+                    </div>
+                    <div class="hpicker-highlight"></div>
+                </div>
+            </div>
+            <div class="hpicker-container hpicker-container-borderbottom">
+                <div class="hpicker-row">
+                    <div class="hpicker-row-header">部件</div>
+                    <div class="hpicker-row-items">
+                        <div class="hpicker-row-items-wrapper">
+                            <div class="hpicker-row-item">主要承重</div>
+                            <div class="hpicker-row-item">一般承重</div>
+                            <div class="hpicker-row-item">支座</div>
+                        </div>
+                    </div>
+                    <div class="hpicker-highlight"></div>
+
+                </div>
+            </div>
+			<div class="picker-columns">
+				<div class="picker-column" ng-repeat="col in s">
+					<div class="picker-column-header">{{col.name}}</div>
+					<div swipepicker
+                         momentumRatio="10"
+                         coldata="col"
+                         class="picker-column-items">
+					</div>
+				</div>
+                <div class="picker-highlight"></div>
+            </div>
+
+			<div style="height:36px;background:#eee;border-top:#ccc solid 1px">病害分布</div>
+			<div style="height:36px;background:#eee;border-top:#ccc solid 1px">功能按钮</div>
+
+        </div>
+    </ion-content>
+</ion-view>
+<button class="button-float button-float-left button button-positive icon ion-checkmark-round"
+		style="width:72px;height:72px;border-radius:10%;"
+        ng-show="isEnd"
+        ng-click="save()"></button>
+
+<button class="button-float button-float-right button button-energized icon ion-ios-more"
+        ng-class="{true: 'button-aside', false: ''}[$exposeAside.active]"
+        ng-click="showMediaMenu($event)"></button>
+

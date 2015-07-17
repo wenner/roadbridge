@@ -3,7 +3,8 @@ angular.module('bridge').controller(
     function ($scope, $rootScope, $stateParams, $ionicLoading, $ionicModal,
               $ionicTabsDelegate , $ionicPopover , $ionicActionSheet ,
               $timeout, $state, $location, $log , $ionicSideMenuDelegate ,
-		BaseData , CheckService) {
+			  $cordovaCapture , $cordovaCamera , $cordovaGeolocation ,
+			  BaseData , CheckService) {
 		console.log("checkmain ctrl")
         //history
         $ionicModal.fromTemplateUrl("views/check/checkHistoryModal.html" , {
@@ -68,10 +69,10 @@ angular.module('bridge').controller(
             //$scope.popover.show(event)
             var hideSheet = $ionicActionSheet.show({
                 buttons: [
-                    {text: '<i class="icon ion-ios-camera"></i>拍摄照片' , code:"aaa" },
-                    {text: '<i class="icon ion-ios-albums"></i>从相册获取照片' } ,
-                    {text: '<i class="icon ion-ios-videocam"></i>拍摄视频'} ,
-                    {text: '<i class="icon ion-ios-recording"></i>录音'}
+                    {text: '<i class="icon ion-ios-camera"></i>拍摄照片' , code:"camera"},
+                    {text: '<i class="icon ion-ios-albums"></i>从相册获取照片' , code:"album"} ,
+                    {text: '<i class="icon ion-ios-videocam"></i>拍摄视频' , code:"video"} ,
+                    {text: '<i class="icon ion-ios-recording"></i>录音' , code:"audio"}
                 ],
                 //destructiveText: '删除',
                 //titleText: '添加媒体信息',
@@ -80,10 +81,83 @@ angular.module('bridge').controller(
                     // add cancel code..
                 },
                 buttonClicked: function(index , btn) {
-                    console.log(btn.text)
+					var fn = $scope["get"+_.capitalize(btn.code)];
+                    if (fn && _.isFunction(fn)){
+						fn();
+                    }
+					return true;
                 }
             });
         }
+		$scope.getCamera = function(){
+
+			var options = { limit: 3, duration: 10 };
+			$cordovaCapture.captureImage(options).then(function(imageData) {
+				console.log(imageData)
+			  // Success! Audio data is here
+			}, function(err) {
+			  // An error occurred. Show a message to the user
+			});
+		}
+
+		$scope.getAlbum = function(){
+		  var posOptions = {timeout: 10000, enableHighAccuracy: false};
+		  console.log(posOptions)
+		  $cordovaGeolocation
+			.getCurrentPosition(posOptions)
+			.then(function (position) {
+			  var lat  = position.coords.latitude
+			  var long = position.coords.longitude
+				  console.log(position)
+			}, function(err) {
+			  // error
+			});
+
+		    var options = {
+			  destinationType: Camera.DestinationType.FILE_URI,
+			  sourceType: Camera.PictureSourceType.CAMERA,
+				  allowEdit: true
+			};
+
+			$cordovaCamera.getPicture(options).then(function(imageURI) {
+				console.log(arguments)
+                var img = {
+                    //name: file.name ,
+                    //code:"bridge" ,
+                    //type: file.type ,
+                    //size: file.size ,
+                    result: imageURI
+                }
+                CheckService.addMedia(img);
+                $scope.medias = CheckService.medias;
+			  
+			  //image.src = imageURI;
+			}, function(err) {
+			  // error
+			});
+		}
+
+		$scope.getAudio = function(){
+		    var options = { limit: 3, duration: 10 };
+			$cordovaCapture.captureAudio(options).then(function(audioData) {
+				console.log(audioData)
+			  // Success! Audio data is here
+			}, function(err) {
+			  // An error occurred. Show a message to the user
+			});
+		}
+		$scope.getVideo = function(){
+			var options = { limit: 3, duration: 15 };
+
+			$cordovaCapture.captureVideo(options).then(function(videoData) {
+				console.log(videoData)
+			}, function(err) {
+			  // An error occurred. Show a message to the user
+			});
+		}
+
+
+
         $scope.save = function(){
             var medias = CheckService.medias;
             if (medias.length == 0){
@@ -98,6 +172,8 @@ angular.module('bridge').controller(
                 $scope.reSelect("bujian");
             });
         }
+
+
 
         $scope.showHistoryModal = function(){
             $scope.historyModal.show();

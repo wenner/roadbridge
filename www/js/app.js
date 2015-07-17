@@ -5,6 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('bridge', [
         'ionic' ,
+		'ngCordova' ,
         'bridge.services' ,
         'bridge.controllers'
     ])
@@ -87,7 +88,8 @@ angular.module('bridge', [
             .state('tab', {
                 url: "",
                 abstract: true,
-                templateUrl: "views/tabs.html"
+                templateUrl: "views/tabs.html" ,
+                controller: "TabCtrl"
             })
             //disease
             .state('tab.disease', {
@@ -179,10 +181,17 @@ angular.module('bridge', [
                     }
                 }
             })
+            //滑动版检查
+            .state("checkswipe" , {
+                url: "/checkswipe" ,
+                templateUrl: 'views/checkswipe/main.html' ,
+                controller: "CheckSwipeCtrl"
+            })
         $urlRouterProvider.otherwise('/welcome');
     });
 
 angular.module('bridge.controllers', [
+	'ngCordova' ,
     'bridge.services'
 ]);
 angular.module('bridge.services', [
