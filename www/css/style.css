@@ -213,6 +213,7 @@
     -webkit-flex-flow:column;
     -webkit-flex-dircetion:column;
 }
+
 .picker-column:first-child{
     border-left:#ccc solid 1px
 }
@@ -234,6 +235,9 @@
     -webkit-mask-box-image: -webkit-linear-gradient(bottom, transparent, transparent 5%, white 20%, white 80%, transparent 95%, transparent);
     -webkit-mask-box-image: linear-gradient(to top, transparent, transparent 5%, white 20%, white 80%, transparent 95%, transparent);
 }
+.picker-column-items.activated {
+     background-color:#ffffee
+ }
 .picker-column-items-wrapper {
     overflow: hidden;
     -webkit-transition-duration: 300ms;
@@ -273,8 +277,8 @@
     width: 100%;
     top: 50%;
     margin-top: 0px;
-    background1:#e8f4ff;
-    opacity1:0.5;
+    background:#e8f4ff;
+    opacity:0.2;
     pointer-events: none;
 }
 .picker-highlight:before {
@@ -322,17 +326,20 @@
     display: -webkit-flex;
     display: flex;
 }
-.hpicker-row-header , .hpicker-row-item {
+.hpicker-header , .hpicker-item , .hpicker-highlight {
     height:36px;
     line-height:36px;
 }
+.hpicker-item , .hpicker-highlight {
+    width:160px;
+}
 
-.hpicker-row-header {
+.hpicker-header {
     width:150px;
     border-right1:#ccc solid 1px;
     text-align:center;
 }
-.hpicker-row-items {
+.hpicker-items {
     background:#fff;
     flex:1;
     -webkit-flex:1;
@@ -343,7 +350,12 @@
     -webkit-mask-box-image1: linear-gradient(to right, transparent, transparent 2%, white 20%, white 80%, transparent 98%, transparent);
 
 }
-.hpicker-row-items-wrapper {
+
+.hpicker-items.activated {
+    background-color:#ffffee
+}
+
+.hpicker-items-wrapper {
     height:36px;
     -webkit-transition-duration: 300ms;
     transition-duration: 300ms;
@@ -352,26 +364,31 @@
     white-spacing:nowrap;
     overflow: hidden;
 }
-.hpicker-row-item {
+
+.hpicker-item {
     float:left;
     border-left1:#ccc solid 1px;
-    width:200px;
     text-align:center;
 }
-.hpicker-row-item:first-child{
+.hpicker-item:first-child{
     border-left:0px
 }
-
+.hpicker-item.picker-selected {
+    color: blue;
+    font-size:22px;
+    font-weight:bold;
+    -webkit-transform: translate3d(0, 0, 0) rotateX(0deg);
+    transform: translate3d(0, 0, 0) rotateX(0deg);
+}
 .hpicker-highlight {
-    height: 36px;
-    width:200px;
     box-sizing: border-box;
     position: absolute;
     left: 50%;
-    margin-left: 0px;
+    margin-left: -5px;
+
     pointer-events: none;
-    border-left:#ccc solid 1px;
-    border-right:#ccc solid 1px;
+    border-left1:#ccc solid 1px;
+    border-right1:#ccc solid 1px;
 }
 .hpicker-highlight1:before {
     content: '';

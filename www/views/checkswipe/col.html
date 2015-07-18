@@ -4,5 +4,8 @@
         transition-duration:{{coldata.trans.duration}}ms;
         -webkit-transition-duration:{{coldata.trans.duration}}ms"
         >
-    <div class="picker-item" ng-repeat="item in coldata.items" ng-click="aaa()">{{item}}</div>
+    <div ng-repeat="item in pickerdata.items" class="picker-item"
+         ng-click="selectItem(item)">
+        {{item.name}}
+    </div>
  </div>

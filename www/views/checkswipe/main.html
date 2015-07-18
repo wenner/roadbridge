@@ -13,53 +13,51 @@
     </ion-header-bar>
     <ion-content scroll="false" class="has-header">
         <div class="picker-container">
-            <div class="hpicker-container hpicker-container-borderbottom" on-dragend="showdrag()" ng-click="testWatch()">
+            <div class="hpicker-container hpicker-container-borderbottom">
                 <div class="hpicker-row">
-                    <div class="hpicker-row-header">桥下检测</div>
-                    <div class="hpicker-row-items">
-                        <div class="hpicker-row-items-wrapper">
-                            <div class="hpicker-row-item">aaaaaaa</div>
-                            <div class="hpicker-row-item">aaaaaaa</div>
-                            <div class="hpicker-row-item">aaaaaaa</div>
-                            <div class="hpicker-row-item">aaaaaaa</div>
-                            <div class="hpicker-row-item">aaaaaaa</div>
-                            <div class="hpicker-row-item">aaaaaaa</div>
-                            <div class="hpicker-row-item">aaaaaaa</div>
-                            <div class="hpicker-row-item">aaaaaaa</div>
-                            <div class="hpicker-row-item">aaaaaaa</div>
-                            <div class="hpicker-row-item">aaaaaaa</div>
-                        </div>
+                    <div class="hpicker-header">桥下检测</div>
+                    <div hswipepicker
+                         pickerdata="result.bujiannum"
+                         momentumRatio="10"
+                         changecol = "changeCol(result.bujiannum)"
+                         ng-class= "{'activated':result.bujiannum.isActivsted}"
+                         class="hpicker-items">
                     </div>
                     <div class="hpicker-highlight"></div>
                 </div>
             </div>
             <div class="hpicker-container hpicker-container-borderbottom">
                 <div class="hpicker-row">
-                    <div class="hpicker-row-header">部件</div>
-                    <div class="hpicker-row-items">
-                        <div class="hpicker-row-items-wrapper">
-                            <div class="hpicker-row-item">主要承重</div>
-                            <div class="hpicker-row-item">一般承重</div>
-                            <div class="hpicker-row-item">支座</div>
-                        </div>
+                    <div class="hpicker-header">部件</div>
+                    <div hswipepicker
+                         pickerdata="result.bujian"
+                         momentumRatio="10"
+                         changecol = "changeCol(result.bujian)"
+                         ng-class= "{'activated':result.bujian.isActivsted}"
+                         class="hpicker-items">
                     </div>
                     <div class="hpicker-highlight"></div>
 
                 </div>
             </div>
 			<div class="picker-columns">
-				<div class="picker-column" ng-repeat="col in s" style="{{col.width ? 'width:'+col.width+'px' : 'flex:1;-webkit-flex:1'}}">
+				<div ng-repeat="col in s"
+                     class="picker-column text-{{col.align || 'center'}}"
+                     style="{{col.width ? 'width:'+col.width+'px' : 'flex:1;-webkit-flex:1'}}">
 					<div class="picker-column-header">{{col.name}}</div>
 					<div swipepicker
                          momentumRatio="10"
-                         coldata="col"
-                         class="picker-column-items">
+                         pickerdata="col"
+                         changecol = "changeCol(col)"
+                         ng-class= "{'activated':col.isActivsted}"
+                         class="picker-column-items {{col.activated}}">
 					</div>
 				</div>
                 <div class="picker-highlight"></div>
             </div>
 
-			<div style="height:36px;background:#eee;border-top:#ccc solid 1px">病害分布 {{s[0].trans}} {{s[0].items}}</div>
+			<div style="height:36px;background:#eee;border-top:#ccc solid 1px">
+                病害分布 {{result.values}}11</div>
 			<div style="height:36px;background:#eee;border-top:#ccc solid 1px">功能按钮</div>
 
         </div>

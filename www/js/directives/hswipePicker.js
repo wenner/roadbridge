@@ -1,14 +1,14 @@
 'use strict';
 angular.module('bridge')
-    .directive('swipepicker', function ($ionicGesture) {
+    .directive('hswipepicker', function ($ionicGesture) {
         return {
             restrict: 'A',
 			scope: {
 				pickerdata:"=" ,
                 changecol:"&"
 			} ,
-            templateUrl:"views/checkswipe/col.html" ,
-            controller: function ($scope, $element) {
+            templateUrl:"views/checkswipe/row.html" ,
+            controller: function ($scope, $element , $ionicSlideBoxDelegate) {
                 var scope = $scope , elem = $element;
                 $scope.pickerdata.trans = {};
                 var pickerdata = $scope.pickerdata ,
@@ -24,10 +24,13 @@ angular.module('bridge')
 
                 $scope.$watch("pickerdata.items", function() {
                     scope.calcSize();
+                    setValue("" , 0)
+                    /*
                     trans.form = maxTranslate;
                     trans.duration = 300;
-                    transform(col.wrapper , 'translate3d(0,' + maxTranslate + 'px,0)');
+                    transform(col.wrapper , 'translate3d(' + maxTranslate + 'px,0,0)');
                     transition(col.wrapper , 0);
+                    */
                 });
                 var transform = function (el , transform) {
                     var el = angular.element(el);
@@ -103,19 +106,19 @@ angular.module('bridge')
 
                     return curTransform || 0;
                 };
-                var wrapperHeight, itemHeight, itemsHeight, minTranslate, maxTranslate;
+                var wrapperWidth, itemWidth, itemsWidth, minTranslate, maxTranslate;
                 var activeIndex = 0;
                 var animationFrameId;
                 var allowItemClick = true;
-                var isTouched, isMoved, touchStartY, touchCurrentY,
+                var isTouched, isMoved, touchStartX, touchCurrentX,
                     touchStartTime, touchEndTime, startTranslate, returnTo,
                     currentTranslate, prevTranslate, velocityTranslate, velocityTime;
 
                 var updateItems = function (activeIndex, translate, mytransition, valueCallbacks) {
                     if (typeof translate === 'undefined') {
-                        translate = getTranslate(col.wrapper, 'y');
+                        translate = getTranslate(col.wrapper, 'x');
                     }
-                    if(typeof activeIndex === 'undefined') activeIndex = -Math.round((translate - maxTranslate)/itemHeight);
+                    if(typeof activeIndex === 'undefined') activeIndex = -Math.round((translate - maxTranslate)/itemWidth);
                     if (activeIndex < 0) activeIndex = 0;
                     if (activeIndex >= scope.pickerdata.items.length) activeIndex = scope.pickerdata.items.length - 1;
                     var previousActiveIndex = col.activeIndex;
@@ -151,7 +154,7 @@ angular.module('bridge')
                             if (Math.abs(percentage) > itemsFit) item.addClass('picker-item-far');
                             else item.removeClass('picker-item-far');
                             // Set transform
-                            item.transform('translate3d(0, ' + (-translate + maxTranslate) + 'px, ' + (originBug ? -110 : 0) + 'px) rotateX(' + angle + 'deg)');
+                            item.transform('translate3d( ' + (-translate + maxTranslate) + 'px, 0,' + (originBug ? -110 : 0) + 'px) rotateX(' + angle + 'deg)');
                         });
                     }
 
@@ -162,7 +165,7 @@ angular.module('bridge')
                         // On change callback
                         if (previousActiveIndex !== activeIndex) {
                             if ($scope.changecol){
-                                $scope.changecol(pickerdata , itemData);
+                                $scope.changecol(pickerdata);
                             }
                             //p.updateValue();
                         }
@@ -170,16 +173,18 @@ angular.module('bridge')
                 };
                 var setValue = function (newValue, mytransition, valueCallbacks) {
                     if (typeof transition === 'undefined') transition = '';
+
+                    //todo: 修改
                     var newActiveIndex = _.findIndex(pickerdata.items , function(n){
                         return n.value == newValue;
                     });
                     if(typeof newActiveIndex === 'undefined' || newActiveIndex === -1) {
                         newActiveIndex = 0;
                     }
-                    var newTranslate = -newActiveIndex * itemHeight + maxTranslate;
+                    var newTranslate = -newActiveIndex * itemWidth + maxTranslate;
                     // Update wrapper
                     transition(col.wrapper , mytransition);
-                    transform(col.wrapper , 'translate3d(0,' + (newTranslate) + 'px,0)');
+                    transform(col.wrapper , 'translate3d(' + (newTranslate) + 'px,0,0)');
 
                     // Update items
                     updateItems(newActiveIndex, newTranslate, transition, true);
@@ -190,16 +195,15 @@ angular.module('bridge')
                             //col.container.removeClass('picker-items-col-absolute');
                             //if (!col.width) col.container.css({width:''});
                         }
-                        var colWidth, colHeight;
-                        colWidth = 0;
-                        colHeight = col.container.offsetHeight;
-                        wrapperHeight = col.wrapper.offsetHeight;
-                        itemHeight = 36; //col.items[0].offsetHeight;
-                        itemsHeight = itemHeight * scope.pickerdata.items.length;
-                        wrapperHeight = itemsHeight;
-                        minTranslate = colHeight / 2 - itemsHeight + itemHeight / 2;
-                        maxTranslate = colHeight / 2 - itemHeight / 2;
-                        //console.log(colHeight , wrapperHeight , itemHeight , itemsHeight , minTranslate , maxTranslate)
+                        var colWidth;
+                        colWidth = col.container.offsetWidth;
+                        itemWidth = 160;
+                        itemsWidth = itemWidth * scope.pickerdata.items.length;
+                        wrapperWidth = itemsWidth;
+                        minTranslate = colWidth / 2 - itemsWidth + itemWidth / 2;
+                        maxTranslate = colWidth / 2 - itemWidth / 2;
+                        $(col.wrapper).css({width:wrapperWidth});
+                        console.log(colWidth , wrapperWidth , itemWidth , itemsWidth , minTranslate , maxTranslate)
                         /*
                          if (col.attrs.rotateEffect) {
                          if (!col.width) {
@@ -216,18 +220,19 @@ angular.module('bridge')
                          */
                     } ,
                     handleDragStart: function(e) {
+                        //$ionicSlideBoxDelegate.enableSlide(false);
+
                         if (isMoved || isTouched) return;
                         e.gesture.preventDefault();
                         e.stopPropagation();
                         e.preventDefault();
                         isTouched = true;
-                        touchStartY = touchCurrentY = e.gesture.center.pageY;
+                        touchStartX = touchCurrentX = e.gesture.center.pageX;
                         touchStartTime = (new Date()).getTime();
                         allowItemClick = true;
-                        startTranslate = currentTranslate = getTranslate(col.wrapper, 'y');
-
+                        startTranslate = currentTranslate = getTranslate(col.wrapper, 'x');
                         scope.$apply(function(){
-                            $scope.pickerdata.isActivsted = true;
+                            pickerdata.isActivsted = true;
                         });                    } ,
                     handleDrag: function(e){
                         if (!isTouched) return;
@@ -236,12 +241,12 @@ angular.module('bridge')
                         e.stopPropagation();
                         e.preventDefault();
                         allowItemClick = false;
-                        touchCurrentY = e.gesture.center.pageY;
+                        touchCurrentX = e.gesture.center.pageX;
                         if (!isMoved) {
                             // First move
                             //cancelAnimationFrame(animationFrameId);
                             isMoved = true;
-                            startTranslate = currentTranslate = getTranslate(wraper , 'y');
+                            startTranslate = currentTranslate = getTranslate(wraper , 'x');
                             transition(col.wrapper , 0);
                             scope.$apply(function() {
                                 trans.duration = 0;
@@ -251,7 +256,7 @@ angular.module('bridge')
                         e.stopPropagation();
                         e.preventDefault();
                         //计算当前拖拽的距离
-                        var diff = touchCurrentY - touchStartY;
+                        var diff = touchCurrentX- touchStartX;
                         currentTranslate = startTranslate + diff;
                         returnTo = undefined;
                         //判断是否超过了最大,最小距离,如果超过,则返回最大,最小的translate
@@ -265,7 +270,7 @@ angular.module('bridge')
                         }
 
                         //修改wrapper transform
-                        transform(wraper , 'translate3d(0,' + currentTranslate + 'px,0)');
+                        transform(wraper , 'translate3d(' + currentTranslate + 'px ,0,0)');
                         scope.$apply(function() {
                             trans.form = currentTranslate;
                         });
@@ -305,11 +310,11 @@ angular.module('bridge')
                             endTransform = Math.max(Math.min(endTransform, maxTranslate), minTranslate);
                         }
                         //当前到第几个Item
-                        var activeIndex = -Math.round((endTransform - maxTranslate)/itemHeight);
+                        var activeIndex = -Math.round((endTransform - maxTranslate)/itemWidth);
                         //如果不是freemode , 则跳到对应activeIndex的值
-                        if (!col.attrs.freemode) endTransform = -activeIndex * itemHeight + maxTranslate;
+                        if (!col.attrs.freemode) endTransform = -activeIndex * itemWidth + maxTranslate;
 
-                        transform(wraper , 'translate3d(0,' + (parseInt(endTransform,10)) + 'px,0)');
+                        transform(wraper , 'translate3d(' + (parseInt(endTransform,10)) + 'px,0,0)');
                         transition(wraper , '');
                         scope.$apply(function() {
                             trans.form = parseInt(endTransform,10);
@@ -326,13 +331,16 @@ angular.module('bridge')
                             });
                         }
                         scope.$apply(function(){
-                            $scope.pickerdata.isActivsted = false;
+                            pickerdata.isActivsted = false;
                         });
 
                         // Allow click
                         setTimeout(function () {
                             allowItemClick = true;
                         }, 100);
+
+                        //$ionicSlideBoxDelegate.enableSlide(true);
+
 
                     } ,
                     selectItem: function(item){
