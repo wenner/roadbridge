@@ -8,25 +8,27 @@ angular.module('bridge')
 			} ,
             templateUrl:"views/checkswipe/col.html" ,
             controller: function ($scope, $element) {
-                $scope.trans = {
-                    form: 0 ,
-                    duration: 300
+                $scope.aaa = function(){
+
                 }
             },
             link: function (scope, elem, attrs) {
+                var trans = scope.coldata.trans;
                 var container = elem[0];
                 var col = {
                     container: container ,
                     wrapper: container.children[0] ,
-                    item: container.children[0].children
+                    items: container.children[0].children
                 };
-                scope.$watch("col.items", function() {
+
+                scope.$watch("coldata.items", function() {
                     calcSize();
-                    scope.trans.form = maxTranslate;
-                    scope.trans.duration = 0;
+                    trans.form = maxTranslate;
+                    trans.duration = 300;
                     transform(col.wrapper , 'translate3d(0,' + maxTranslate + 'px,0)');
                     transition(col.wrapper , 0);
                 });
+
 				var transform = function (el , transform) {
                     var el = angular.element(el);
                     for (var i = 0; i < el.length; i++) {
@@ -63,16 +65,12 @@ angular.module('bridge')
                 };
                 var getTranslate = function (el, axis) {
                     var matrix, curTransform, curStyle, transformMatrix;
-
                     // automatic axis detection
                     if (typeof axis === 'undefined') {
                         axis = 'x';
                     }
-
                     curStyle = window.getComputedStyle(el, null);
                     if (window.WebKitCSSMatrix) {
-                        // Some old versions of Webkit choke when 'none' is passed; pass
-                        // empty string instead in this case
                         transformMatrix = new WebKitCSSMatrix(curStyle.webkitTransform === 'none' ? '' : curStyle.webkitTransform);
                     }
                     else {
@@ -119,16 +117,10 @@ angular.module('bridge')
                     itemHeight = 36; //col.items[0].offsetHeight;
                     itemsHeight = itemHeight * scope.coldata.items.length;
 					wrapperHeight = itemsHeight;
-
                     minTranslate = colHeight / 2 - itemsHeight + itemHeight / 2;
                     maxTranslate = colHeight / 2 - itemHeight / 2;
-
                     console.log(colHeight , wrapperHeight , itemHeight , itemsHeight , minTranslate , maxTranslate)
-                    if (col.width) {
-                        colWidth = col.width;
-                        if (parseInt(colWidth, 10) === colWidth) colWidth = colWidth + 'px';
-                        col.container.css({width: colWidth});
-                    }
+                    /*
                     if (attrs.rotateEffect) {
                         if (!col.width) {
                             col.items.each(function () {
@@ -141,30 +133,31 @@ angular.module('bridge')
                         }
                         col.container.addClass('picker-items-col-absolute');
                     }
+                    */
                 };
-
-
-
                 var activeIndex = 0;
                 var animationFrameId;
 
-                col.updateItems = function (activeIndex, translate, transition1, valueCallbacks) {
-                    return;
+                col.updateItems = function (activeIndex, translate, mytransition, valueCallbacks) {
                     if (typeof translate === 'undefined') {
                         translate = getTranslate(col.wrapper, 'y');
                     }
                     if(typeof activeIndex === 'undefined') activeIndex = -Math.round((translate - maxTranslate)/itemHeight);
                     if (activeIndex < 0) activeIndex = 0;
-                    if (activeIndex >= col.items.length) activeIndex = col.items.length - 1;
+                    if (activeIndex >= scope.coldata.items.length) activeIndex = scope.coldata.items.length - 1;
                     var previousActiveIndex = col.activeIndex;
                     col.activeIndex = activeIndex;
-                    //col.wrapper.find('.picker-selected, .picker-after-selected, .picker-before-selected')
-                     //   .removeClass('picker-selected picker-after-selected picker-before-selected');
+                    var wrapper = $(col.wrapper);
+                    var items = $(col.items);
+                    wrapper.children('.picker-selected, .picker-after-selected, .picker-before-selected')
+                        .removeClass('picker-selected picker-after-selected picker-before-selected');
 
-                    transition(col.items , transition1);
-                    //var selectedItem = col.items.eq(activeIndex).addClass('picker-selected').transform('');
-                    //var prevItems = selectedItem.prevAll().addClass('picker-before-selected');
-                    //var nextItems = selectedItem.nextAll().addClass('picker-after-selected');
+                    transition(col.items , mytransition);
+                    var selectedItem = items.eq(activeIndex).addClass('picker-selected');
+                    console.log(col.items)
+                    transform(selectedItem , "");
+                    var prevItems = selectedItem.prevAll().addClass('picker-before-selected');
+                    var nextItems = selectedItem.nextAll().addClass('picker-after-selected');
 
                     // Set 3D rotate effect
                     if (attrs.rotateEffect) {
@@ -204,23 +197,20 @@ angular.module('bridge')
                     }
                 };
 
-
-
                 var allowItemClick = true;
                 var isTouched, isMoved, touchStartY, touchCurrentY,
                     touchStartTime, touchEndTime, startTranslate, returnTo,
                     currentTranslate, prevTranslate, velocityTranslate, velocityTime;
 
-
+                //下面是dranstart , drag , dragend时间
                 function handleDragStart (e) {
                     if (isMoved || isTouched) return;
-                    //console.log(e.gesture.preventDefault)
                     e.gesture.preventDefault();
                     e.stopPropagation();
                     e.preventDefault();
                     isTouched = true;
                     touchStartY = touchCurrentY = e.gesture.center.pageY;
-                    touchStartTime = (new Date()).getTime()//e.timeStamp;
+                    touchStartTime = (new Date()).getTime();
                     allowItemClick = true;
                     startTranslate = currentTranslate = getTranslate(col.wrapper, 'y');
                 }
@@ -238,16 +228,18 @@ angular.module('bridge')
                         isMoved = true;
                         startTranslate = currentTranslate = getTranslate(wraper , 'y');
                         transition(col.wrapper , 0);
+                        scope.$apply(function() {
+                            trans.duration = 0;
+                        });
                     }
-
                     e.gesture.preventDefault();
                     e.stopPropagation();
-                    e.preventDefault();                    var diff = touchCurrentY - touchStartY;
+                    e.preventDefault();
+                    //计算当前拖拽的距离
+                    var diff = touchCurrentY - touchStartY;
                     currentTranslate = startTranslate + diff;
                     returnTo = undefined;
-
-                    // Normalize translate
-
+                    //判断是否超过了最大,最小距离,如果超过,则返回最大,最小的translate
                     if (currentTranslate < minTranslate) {
                         currentTranslate = minTranslate - Math.pow(minTranslate - currentTranslate, 0.8);
                         returnTo = 'min';
@@ -257,12 +249,16 @@ angular.module('bridge')
                         returnTo = 'max';
                     }
 
-                    // Transform wrapper
+                    //修改wrapper transform
                     transform(wraper , 'translate3d(0,' + currentTranslate + 'px,0)');
+                    scope.$apply(function() {
+                        trans.form = currentTranslate;
+                    });
+
                     // Update items
                     col.updateItems(undefined, currentTranslate, 0, attrs.updateValuesOnTouchmove);
 
-                    // Calc velocity
+                    //计算加速度
                     velocityTranslate = currentTranslate - prevTranslate || currentTranslate;
                     velocityTime = (new Date()).getTime();
                     prevTranslate = currentTranslate;
@@ -274,38 +270,38 @@ angular.module('bridge')
                     }
                     var wraper = col.wrapper;
                     isTouched = isMoved = false;
-                    transition(wraper , '');
+                    var endTransform = 0;
                     if (returnTo) {
-                        if (returnTo === 'min') {
-                            transform(wraper , 'translate3d(0,' + minTranslate + 'px,0)');
+                        //如果drag translate超过了min , max , 则返回到min , max
+                        endTransform = returnTo == "min" ? minTranslate : maxTranslate;
+                        scope.$apply(function(){
+                            trans.form = endTransform;
+                        });
+                    }else{
+                        //根据加速度计算距离
+                        touchEndTime = new Date().getTime();
+                        var velocity, newTranslate;
+                        if (touchEndTime - touchStartTime > 300) {
+                            endTransform = currentTranslate;
+                        }else {
+                            velocity = Math.abs(velocityTranslate / (touchEndTime - velocityTime));
+                            endTransform = currentTranslate + velocityTranslate * attrs.momentumratio;
                         }
-                        else transform(wraper , 'translate3d(0,' + maxTranslate + 'px,0)');
+                        endTransform = Math.max(Math.min(endTransform, maxTranslate), minTranslate);
                     }
-                    touchEndTime = new Date().getTime();
-                    var velocity, newTranslate;
-                    if (touchEndTime - touchStartTime > 300) {
-                        newTranslate = currentTranslate;
-                    }
-                    else {
-                        velocity = Math.abs(velocityTranslate / (touchEndTime - velocityTime));
-						//console.log("v:" , velocity , attrs.momentumratio)
+                    //当前到第几个Item
+                    var activeIndex = -Math.round((endTransform - maxTranslate)/itemHeight);
+                    //如果不是freemode , 则跳到对应activeIndex的值
+                    if (!attrs.freemode) endTransform = -activeIndex * itemHeight + maxTranslate;
 
-                        newTranslate = currentTranslate + velocityTranslate * attrs.momentumratio;
-                    }
-
-                    newTranslate = Math.max(Math.min(newTranslate, maxTranslate), minTranslate);
-
-                    // Active Index
-                    var activeIndex = -Math.round((newTranslate - maxTranslate)/itemHeight);
-
-                    // Normalize translate
-                    if (!attrs.freeMode) newTranslate = -activeIndex * itemHeight + maxTranslate;
-
-                    // Transform wrapper
-                    transform(wraper , 'translate3d(0,' + (parseInt(newTranslate,10)) + 'px,0)');
-
+                    transform(wraper , 'translate3d(0,' + (parseInt(endTransform,10)) + 'px,0)');
+                    transition(wraper , '');
+                    scope.$apply(function() {
+                        trans.form = parseInt(endTransform,10);
+                        trans.duration = 300;
+                    });
                     // Update items
-                    //col.updateItems(activeIndex, newTranslate, '', true);
+                    col.updateItems(activeIndex, endTransform, '', true);
 
                     // Watch items
                     if (attrs.updateValuesOnMomentum) {
@@ -321,9 +317,18 @@ angular.module('bridge')
                     }, 100);
                 }
 
+
+                function handleClick(e) {
+                    if (!allowItemClick) return;
+                    //$.cancelAnimationFrame(animationFrameId);
+                    /*jshint validthis:true */
+                    var value = $(this).attr('data-picker-value');
+                    col.setValue(value);
+                }
                 $ionicGesture.on('dragstart', handleDragStart , elem);
                 $ionicGesture.on('drag', handleDrag , elem);
                 $ionicGesture.on('dragend', handleDragEnd , elem);
+
             }
         }
     });

@@ -48,7 +48,7 @@
                 </div>
             </div>
 			<div class="picker-columns">
-				<div class="picker-column" ng-repeat="col in s">
+				<div class="picker-column" ng-repeat="col in s" style="{{col.width ? 'width:'+col.width+'px' : 'flex:1;-webkit-flex:1'}}">
 					<div class="picker-column-header">{{col.name}}</div>
 					<div swipepicker
                          momentumRatio="10"
@@ -59,7 +59,7 @@
                 <div class="picker-highlight"></div>
             </div>
 
-			<div style="height:36px;background:#eee;border-top:#ccc solid 1px">病害分布</div>
+			<div style="height:36px;background:#eee;border-top:#ccc solid 1px">病害分布 {{s[0].trans}} {{s[0].items}}</div>
 			<div style="height:36px;background:#eee;border-top:#ccc solid 1px">功能按钮</div>
 
         </div>

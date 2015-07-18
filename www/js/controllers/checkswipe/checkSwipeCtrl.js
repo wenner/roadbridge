@@ -13,8 +13,10 @@ angular.module('bridge').controller(
         //$scope.medias = CheckService.medias;
 		
 		var s = [
-			{name:"编号" , code:"1" , value:"333" , 
-				items:["整梁" , "1#梁" , "2#梁" , "3#梁" , "4#梁" , "5#梁" , "6#梁" , "7#梁" , "8#梁" , "9#梁" , "10#梁"]} , 
+			{name:"梁号" , code:"1" , value:"333" , width:80 ,
+				items:["整梁" , "1#梁" , "2#梁" , "3#梁" , "4#梁" , "5#梁" , "6#梁" , "7#梁" , "8#梁" , "9#梁" , "10#梁"]
+
+            } ,
 			{name:"形式" , code:"2" , value:"333" , 
 				items:["挂梁" , "悬臂梁" , "板梁" , "箱梁" , "T梁" , "小箱梁" , "钢箱梁" , "组合梁"]} , 
 			{name:"板梁" , code:"3" , value:"333" , 
@@ -28,13 +30,13 @@ angular.module('bridge').controller(
 					return rs;
 				})()
 			} , 
-			{name:"位置" , code:"5" , value:"333" , 
+			{name:"位置" , code:"5" , value:"333" ,
 				items:["内测腹板" , "外侧腹板" , "底板" , "外侧翼板" , "内测翼板"]} , 
 			{name:"分类" , code:"6" , value:"333" , 
 				items:["砼缺陷" , "裂缝" , "钢筋锈蚀"]} , 
 			{name:"类型" , code:"7" , value:"333" , 
 				items:["网状龟裂" , "蜂窝" , "麻面" , "砼剥落" , "露筋" , "掉角" , "空洞" , "刮蹭"]} , 
-			{name:"长" , code:"8" , value:"333" , 
+			{name:"长" , code:"8" , value:"333" ,  width:60 ,
 				items:(function(){
 					var step = 0.1 , 
 						rs = [];
@@ -45,7 +47,7 @@ angular.module('bridge').controller(
 					return rs;
 				})()
 			} , 
-			{name:"宽" , code:"9" , value:"333" , 
+			{name:"宽" , code:"9" , value:"333" , width:60 ,
 				items:(function(){
 					var step = 0.1 , 
 						rs = [];
@@ -56,9 +58,13 @@ angular.module('bridge').controller(
 					return rs;
 				})()
 			} , 
-			{name:"评价" , code:"10" , value:"333" , 
+			{name:"评价" , code:"10" , value:"333" , width:60 ,
 				items:[1,2,3,4]}
 		]
+
+        _.each(s , function(n){
+            n.trans = {form:0 , duration:0};
+        })
 
 		$scope.s  = s;
 

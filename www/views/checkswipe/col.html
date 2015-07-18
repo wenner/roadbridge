@@ -1,8 +1,8 @@
 <div class="picker-column-items-wrapper"
-     style="transform: translate3d(0px, {{trans.form}}px, 0px);
-        -webkit-transform: translate3d(0px, {{trans.form}}px, 0px);
-        transition-duration:{{trans.duration}}ms;
-        -webkit-transition-duration:{{trans.duration}}ms"
+     style1="transform: translate3d(0px, {{coldata.trans.form}}px, 0px);
+        -webkit-transform: translate3d(0px, {{coldata.trans.form}}px, 0px);
+        transition-duration:{{coldata.trans.duration}}ms;
+        -webkit-transition-duration:{{coldata.trans.duration}}ms"
         >
-    <div class="picker-item" ng-repeat="item in coldata.items">{{item}}</div>
+    <div class="picker-item" ng-repeat="item in coldata.items" ng-click="aaa()">{{item}}</div>
  </div>
