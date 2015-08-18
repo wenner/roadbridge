@@ -220,7 +220,7 @@ angular.module('bridge')
                          */
                     } ,
                     handleDragStart: function(e) {
-                        //$ionicSlideBoxDelegate.enableSlide(false);
+                        $ionicSlideBoxDelegate.enableSlide(false);
 
                         if (isMoved || isTouched) return;
                         e.gesture.preventDefault();
@@ -235,6 +235,7 @@ angular.module('bridge')
                             pickerdata.isActivsted = true;
                         });                    } ,
                     handleDrag: function(e){
+                        $ionicSlideBoxDelegate.enableSlide(false);
                         if (!isTouched) return;
                         var wraper = col.wrapper;
                         e.gesture.preventDefault();
@@ -338,10 +339,7 @@ angular.module('bridge')
                         setTimeout(function () {
                             allowItemClick = true;
                         }, 100);
-
-                        //$ionicSlideBoxDelegate.enableSlide(true);
-
-
+                        $ionicSlideBoxDelegate.enableSlide(true);
                     } ,
                     selectItem: function(item){
                         setValue(item.value , 300);

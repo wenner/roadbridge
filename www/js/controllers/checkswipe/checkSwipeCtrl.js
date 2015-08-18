@@ -4,14 +4,36 @@ angular.module('bridge').controller(
               $ionicTabsDelegate , $ionicPopover , $ionicActionSheet ,
               $timeout, $state, $location, $log , $ionicSideMenuDelegate ,
 			  $cordovaCapture , $cordovaCamera , $cordovaGeolocation ,
-			  BaseData , CheckService , $ionicSlideBoxDelegate) {
+			  SwipeBaseData , CheckSwipeService , $ionicSlideBoxDelegate) {
+
+        var srv = CheckSwipeService;
+        var db = SwipeBaseData;
 
         //$ionicSlideBoxDelegate.enableSlide(false);
-
         //$scope.current = CheckService.current;
         //$scope.currentStep = CheckService.getCurrentStep();
         //$scope.result = CheckService.update();
         //$scope.medias = CheckService.medias;
+
+        $scope.current = srv.current;
+
+        $scope.roads = srv.getRoads();
+        $scope.bridges = srv.getBridges();
+        $scope.directions = [];
+        $scope.buweis = srv.getBuweis();
+        $scope.weathers = srv.getWeathers();
+        $scope.info = {
+            road:1 ,
+            bridge:1 ,
+            direction: "L" ,
+            bujianGroup: "桥下检测" ,
+            weather: "晴" ,
+            checkdept: "天津交通科学研究院" ,
+            checkuser: "张文涛" ,
+            checkday: new Date()
+        };
+
+
 
         $scope.result = {
             bujiannum: {
@@ -108,35 +130,106 @@ angular.module('bridge').controller(
             history.back();
         }
 
-		$scope.showdrag = function(){
-			console.log("drag")
-		}
+        _.extend($scope , {
+            initInfo: function(){
+                var road = srv.getRoadById($scope.info.road);
+                if (road){
+                    $scope.info.roadRecord = road;
+                }
+                var bridge = srv.getBridgeById($scope.info.bridge);
+                if (bridge){
+                    $scope.info.bridgeRecord = bridge;
+                    if (bridge.wayType == "double"){
+                        $scope.info.hasDirection = bridge.wayType == "double";
+                        $scope.directions = srv.getDirections($scope.info.roadRecord , $scope.info.bridgeRecord);
+                    }else{
+                        $scope.info.direction = "S";
+                    }
+                }
+            } ,
+            showInfoModal: function(){
+                if (!$scope.infoModal){
+                    $ionicModal.fromTemplateUrl("views/checkswipe/infoModal.html" , {
+                        scope: $scope ,
+                        backdropClickToClose: false
+                    }).then(function(modal) {
+                        $scope.infoModal = modal;
+                        $scope.infoModal.show();
+                    });
+                }else{
+                    $scope.infoModal.show();
+                }
+            } ,
+            reSelectInfo: function(){
+                $scope.infoModal.show();
+            } ,
+            changeRoad: function(){
+                delete $scope.info.bridge;
+                delete $scope.info.direction;
+                delete $scope.info.bridgeRecord;
+                delete $scope.info.hasDirection;
+                var road = srv.getRoadById($scope.info.road);
+                if (road){
+                    $scope.info.roadRecord = road;
+                }
+            } ,
+            changeBridge: function(){
+                var bridge = srv.getBridgeById($scope.info.bridge);
+                if (bridge){
+                    $scope.info.bridgeRecord = bridge;
+                }
+                if (bridge.wayType == "double"){
+                    $scope.info.hasDirection = bridge.wayType == "double";
+                    $scope.directions = srv.getDirections($scope.info.roadRecord , $scope.info.bridgeRecord);
+                }else{
+                    $scope.info.direction = "S";
+                }
+            } ,
+            onInfoSelect: function(){
+                //设置基础信息
+                $scope.current.setInfo($scope.info);
+                //获取部件号(孔/联)
+                var bujianSns = srv.getBujianSns();
+                console.log(bujianSns)
+                $scope.bujianSns = {
+                    name:"部件号" , code:"bujianSn" , items: bujianSns
+                };
+                //获取部件类型
+                var bujians = srv.getBujians();
+                $scope.bujians = {
+                    name:"部件" , code:"bujian" , items: bujians
+                };
+                $scope.infoModal.hide();
+                console.log($scope.current);
+            } ,
 
-        $scope.testWatch = function(){
-            $scope.s[0].items = _.range(1 , _.random(10 , 50))
-        }
+            changeCol: function(coldata){
+                var itemData = coldata.items[coldata.activeIndex];
+                if ($scope.current[coldata.code]){
+                    $scope.current[coldata.code].value = coldata.value;
+                }
+                //$scope.result.values = $scope.getValues();
+                console.log($scope.current)
+            } ,
+            getValues: function(){
+                var vs = [];
+                _.each($scope.current , function(n){
+                    vs.push(n.value);
+                });
+                //return vs.join("-");
+            }
 
-        $scope.showClick = function(col){
-            alert(col.code)
-        }
+        });
 
-        $scope.changeCol = function(coldata){
-            var itemData = coldata.items[coldata.activeIndex];
-            $scope.result.values = $scope.getValues();
-        }
+        $scope.initInfo();
+        $scope.$on('$ionicView.beforeEnter', function(){
+            if ($scope.current.isEmpty) $scope.showInfoModal();
+        });
 
-        $scope.getValues = function(){
-            //bujiannum , bujian columns
-            var result = $scope.result;
-            var s = $scope.s;
-            var vs = [];
-            vs.push(result.bujiannum.value);
-            vs.push(result.bujian.value);
-            _.each(s , function(n){
-                vs.push(n.value);
-            })
-            return vs.join("-");
 
-        }
+
+
+
+
     }
 );

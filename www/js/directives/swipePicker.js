@@ -8,7 +8,7 @@ angular.module('bridge')
                 changecol:"&"
 			} ,
             templateUrl:"views/checkswipe/col.html" ,
-            controller: function ($scope, $element) {
+            controller: function ($scope, $element , $ionicSlideBoxDelegate) {
                 var scope = $scope , elem = $element;
                 $scope.pickerdata.trans = {};
                 var pickerdata = $scope.pickerdata ,
@@ -216,6 +216,7 @@ angular.module('bridge')
                          */
                     } ,
                     handleDragStart: function(e) {
+                        $ionicSlideBoxDelegate.enableSlide(false);
                         if (isMoved || isTouched) return;
                         e.gesture.preventDefault();
                         e.stopPropagation();
@@ -230,6 +231,7 @@ angular.module('bridge')
                             $scope.pickerdata.isActivsted = true;
                         });                    } ,
                     handleDrag: function(e){
+                        $ionicSlideBoxDelegate.enableSlide(false);
                         if (!isTouched) return;
                         var wraper = col.wrapper;
                         e.gesture.preventDefault();
@@ -333,6 +335,9 @@ angular.module('bridge')
                         setTimeout(function () {
                             allowItemClick = true;
                         }, 100);
+
+                        $ionicSlideBoxDelegate.enableSlide(true);
+
 
                     } ,
                     selectItem: function(item){
