@@ -158,6 +158,32 @@ angular.module('bridge').controller(
                     vs.push(n.value);
                 });
                 //return vs.join("-");
+            } ,
+
+
+            showMediaMenu: function(event){
+                //$scope.popover.show(event)
+                var hideSheet = $ionicActionSheet.show({
+                    buttons: [
+                        {text: '<i class="icon ion-ios-camera"></i>拍摄照片' , code:"camera"},
+                        {text: '<i class="icon ion-ios-albums"></i>从相册获取照片' , code:"album"} ,
+                        {text: '<i class="icon ion-ios-videocam"></i>拍摄视频' , code:"video"} ,
+                        {text: '<i class="icon ion-ios-recording"></i>录音' , code:"audio"}
+                    ],
+                    //destructiveText: '删除',
+                    //titleText: '添加媒体信息',
+                    cancelText: '取消',
+                    cancel: function() {
+                        // add cancel code..
+                    },
+                    buttonClicked: function(index , btn) {
+                        var fn = $scope["get"+_.capitalize(btn.code)];
+                        if (fn && _.isFunction(fn)){
+                            fn();
+                        }
+                        return true;
+                    }
+                });
             }
 
         });

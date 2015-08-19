@@ -230,25 +230,25 @@ angular.module("bridge.services")
             ] ,
 
             diseaseTypes: [
-                {id:1 , name:"网状龟裂" , categoryId:1} ,
-                {id:2 , name:"钢筋锈胀" , categoryId:1} ,
-                {id:3 , name:"混凝土蜂窝" , categoryId:1} ,
-                {id:4 , name:"混凝土麻面" , categoryId:1} ,
-                {id:5 , name:"混凝土剥落" , categoryId:1} ,
-                {id:6 , name:"混凝土露筋" , categoryId:1} ,
-                {id:7 , name:"混凝土掉角" , categoryId:1} ,
-                {id:8 , name:"混凝土空洞" , categoryId:1} ,
-                {id:9 , name:"混凝土孔洞" , categoryId:1} ,
+                {id:1 , name:"网状龟裂" , categoryId:1 , evalLevel:2} ,
+                {id:2 , name:"钢筋锈胀" , categoryId:1 , evalLevel:3} ,
+                {id:3 , name:"混凝土蜂窝" , categoryId:1 , evalLevel:4} ,
+                {id:4 , name:"混凝土麻面" , categoryId:1 , evalLevel:2} ,
+                {id:5 , name:"混凝土剥落" , categoryId:1 , evalLevel:4} ,
+                {id:6 , name:"混凝土露筋" , categoryId:1 , evalLevel:3} ,
+                {id:7 , name:"混凝土掉角" , categoryId:1 , evalLevel:3} ,
+                {id:8 , name:"混凝土空洞" , categoryId:1 , evalLevel:5} ,
+                {id:9 , name:"混凝土孔洞" , categoryId:1 , evalLevel:2} ,
 
-                {id:10 , name:"横向裂缝" , categoryId:2} ,
-                {id:11 , name:"纵向裂缝" , categoryId:2} ,
-                {id:12 , name:"斜向裂缝" , categoryId:2} ,
-                {id:13 , name:"竖向裂缝" , categoryId:2} ,
-                {id:14 , name:"水平裂缝" , categoryId:2} ,
+                {id:10 , name:"横向裂缝" , categoryId:2 , evalLevel:3} ,
+                {id:11 , name:"纵向裂缝" , categoryId:2 , evalLevel:4} ,
+                {id:12 , name:"斜向裂缝" , categoryId:2 , evalLevel:2} ,
+                {id:13 , name:"竖向裂缝" , categoryId:2 , evalLevel:3} ,
+                {id:14 , name:"水平裂缝" , categoryId:2 , evalLevel:4} ,
 
-                {id:15 , name:"轻微锈胀" , categoryId:3} ,
-                {id:16 , name:"钢筋锈胀脱落" , categoryId:3} ,
-                {id:17 , name:"钢筋分层锈蚀剥落" , categoryId:3}
+                {id:15 , name:"轻微锈胀" , categoryId:3 , evalLevel:2} ,
+                {id:16 , name:"钢筋锈胀脱落" , categoryId:3 , evalLevel:3} ,
+                {id:17 , name:"钢筋分层锈蚀剥落" , categoryId:3 , evalLevel:4}
             ] ,
 
 

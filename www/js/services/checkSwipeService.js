@@ -290,13 +290,13 @@ yy
             } ,
             getSSmainColumns: function(cols){
                 var cs = [
-                    {name:"梁号" , code:"liang"} ,
-                    {name:"形式" , code:"formal"} ,
-                    {name:"距墩" , code:"dun"} ,
-                    {name:"米" , code:"distance"} ,
-                    {name:"位置" , code:"position"} ,
-                    {name:"分类" , code:"diseaseCategory"} ,
-                    {name:"类型" , code:"diseaseType"} ,
+                    {name:"梁号" , code:"liang" , width:70} ,
+                    {name:"形式" , code:"formal" , width:100} ,
+                    {name:"距墩" , code:"dun" , width:100} ,
+                    {name:"米" , code:"distance" , width:80} ,
+                    {name:"位置" , code:"position" , width:100} ,
+                    {name:"分类" , code:"diseaseCategory" , width:120} ,
+                    {name:"类型" , code:"diseaseType" , width:120} ,
                     {name:"长" , code:"length" , hidden:true} ,
                     {name:"宽" , code:"width" , hidden:true} ,
                     {name:"高" , code:"height" , hidden:true} ,
@@ -398,76 +398,88 @@ yy
                                 changes[typeIndex].items = items;
                                 var lengthIndex = _.findIndex(cols , "code" , "length");
                                 var widthIndex = _.findIndex(cols , "code" , "width");
-                                var quantityIndex = _.findIndex(cols , "code" , "quantity");                                var quantityIndex = _.findIndex(cols , "code" , "quantity");
+                                var quantityIndex = _.findIndex(cols , "code" , "quantity");
                                 var extquantityIndex = _.findIndex(cols , "code" , "extquantity");
+                                var descriptionIndex = _.findIndex(cols , "code" , "description");
 
                                 changes[lengthIndex] = {hidden:true};
                                 changes[widthIndex] = {hidden:true};
                                 changes[quantityIndex] = {hidden:true};
                                 changes[extquantityIndex] = {hidden:true};
+                                changes[descriptionIndex] = {hidden:true};
 
                                 switch (categoryId){
                                     case 1:
                                         changes[lengthIndex] = {
                                             name:"长m" ,
                                             items: this.distances ,
-                                            hidden: false ,
-                                            width: 80
+                                            hidden: false
                                         };
                                         changes[widthIndex] = {
                                             name:"宽m" ,
                                             items: this.distances ,
-                                            hidden: false ,
-                                            width: 80
+                                            hidden: false
                                         };
                                         break;
                                     case 2:
                                         changes[lengthIndex] = {
                                             name:"长" ,
                                             items: this.distances ,
-                                            hidden: false ,
-                                            width: 80
+                                            hidden: false
                                         };
                                         changes[widthIndex] = {
-                                            name:"最大缝宽mm" ,
+                                            name:"最大缝宽" ,
                                             items: this.distances ,
                                             hidden: false ,
-                                            width: 130
+                                            width:100
                                         };
                                         changes[quantityIndex] = {
                                             name:"条数" ,
                                             items: _.map(_.range(1,11) , function(n){
                                                 return {name:n , value:n};
                                             }) ,
+                                            hidden: false
+                                        };
+                                        changes[descriptionIndex] = {
+                                            name:"状态" ,
+                                            items: _.map(["已封闭","已加固" , "有崩叉" , "通长" , "渗水"] , function(n){
+                                                return {name:n , value:n};
+                                            }) ,
                                             hidden: false ,
-                                            width: 80
+                                            width:100
                                         };
                                         break;
 
                                     case 3:
                                         changes[quantityIndex] = {
-                                            name:"电位水平mV" ,
+                                            name:"电位水平" ,
                                             items: _.map(_.range(1,11) , function(n){
                                                 return {name:n , value:n};
                                             }) ,
-                                            hidden: false ,
-                                            width: 150
+                                            hidden: false
                                         };
                                         changes[extquantityIndex] = {
-                                            name:"电阻率Ωcm" ,
+                                            name:"电阻率" ,
                                             items: _.map(_.range(1,11) , function(n){
                                                 return {name:n , value:n};
                                             }) ,
-                                            hidden: false ,
-                                            width: 150
+                                            hidden: false
                                         };
                                         break;
                                         break;
                                 }
+                                break;
+                            case "diseaseType":
+                                var type = current.diseaseType.record;
+                                if (!type) return;
+                                var evaluateIndex = _.findIndex(cols , "code" , "diseaseEvaluate");
+                                console.log(evaluateIndex , type.evalLevel , _.range(1 , type.evalLevel+1))
+                                changes[evaluateIndex] = {};
+                                changes[evaluateIndex].items = _.map(_.range(1 , type.evalLevel+1) , function(n){
 
-
-
-
+                                    console.log(n)
+                                    return {name:n , value:1};
+                                });
                                 break;
                         }
                         break;

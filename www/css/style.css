@@ -40,7 +40,7 @@
 
 .button-float {
     position: fixed;
-    bottom: 64px;
+    bottom: 48px;
     border: none;
     border-radius: 50%;
     min-width: 56px;
