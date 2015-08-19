@@ -433,5 +433,6 @@
 
 .aaaa {
     width:100%;
+    border-top:#ccc solid 1px;
 }
-.aaaa td {border:#ccc solid 1px;border-bottom:0;line-height:32px;text-align:center}
+.aaaa td {border-bottom:#ccc solid 1px;line-height:32px;text-align:center}

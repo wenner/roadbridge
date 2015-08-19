@@ -167,25 +167,92 @@ angular.module("bridge.services")
                 {id:16 , name:"照明/标志" , code:"BDlight" , buweiId:3}
             ] ,
             kongs: [
-                {sn:1 , bridgeId:1 , direction:"L" , ss_main:""} ,
-                {sn:2 , bridgeId:1 , direction:"L" , ss_main:""} ,
-                {sn:3 , bridgeId:1 , direction:"L" , ss_main:""} ,
-                {sn:4 , bridgeId:1 , direction:"L" , ss_main:""} ,
-                {sn:5 , bridgeId:1 , direction:"L" , ss_main:""} ,
-                {sn:6 , bridgeId:1 , direction:"L" , ss_main:""} ,
-                {sn:7 , bridgeId:1 , direction:"L" , ss_main:""} ,
-                {sn:8 , bridgeId:1 , direction:"L" , ss_main:""} ,
-                {sn:9 , bridgeId:1 , direction:"L" , ss_main:""} ,
-                {sn:10 , bridgeId:1 , direction:"L" , ss_main:""} , 
-                {sn:1 , bridgeId:1 , direction:"R" , ss_main:""} ,
-                {sn:2 , bridgeId:1 , direction:"R" , ss_main:""} ,
-                {sn:3 , bridgeId:1 , direction:"R" , ss_main:""} ,
-                {sn:4 , bridgeId:1 , direction:"R" , ss_main:""} ,
-                {sn:5 , bridgeId:1 , direction:"R" , ss_main:""} ,
-                {sn:6 , bridgeId:1 , direction:"R" , ss_main:""} ,
-                {sn:7 , bridgeId:1 , direction:"R" , ss_main:""} ,
-                {sn:8 , bridgeId:1 , direction:"R" , ss_main:""}
+                {sn:1 , bridgeId:1 , direction:"L" , ss_main:"" , liangCount:2} ,
+                {sn:2 , bridgeId:1 , direction:"L" , ss_main:"" , liangCount:3} ,
+                {sn:3 , bridgeId:1 , direction:"L" , ss_main:"" , liangCount:4} ,
+                {sn:4 , bridgeId:1 , direction:"L" , ss_main:"" , liangCount:5} ,
+                {sn:5 , bridgeId:1 , direction:"L" , ss_main:"" , liangCount:11} ,
+                {sn:6 , bridgeId:1 , direction:"L" , ss_main:"" , liangCount:15} ,
+                {sn:7 , bridgeId:1 , direction:"L" , ss_main:"" , liangCount:8} ,
+                {sn:8 , bridgeId:1 , direction:"L" , ss_main:"" , liangCount:7} ,
+                {sn:9 , bridgeId:1 , direction:"L" , ss_main:"" , liangCount:2} ,
+                {sn:10 , bridgeId:1 , direction:"L" , ss_main:"" , liangCount:2 , isLast:1} ,
+                {sn:1 , bridgeId:1 , direction:"R" , ss_main:"" , liangCount:2} ,
+                {sn:2 , bridgeId:1 , direction:"R" , ss_main:"" , liangCount:2} ,
+                {sn:3 , bridgeId:1 , direction:"R" , ss_main:"" , liangCount:2} ,
+                {sn:4 , bridgeId:1 , direction:"R" , ss_main:"" , liangCount:2} ,
+                {sn:5 , bridgeId:1 , direction:"R" , ss_main:"" , liangCount:2} ,
+                {sn:6 , bridgeId:1 , direction:"R" , ss_main:"" , liangCount:2} ,
+                {sn:7 , bridgeId:1 , direction:"R" , ss_main:"" , liangCount:2} ,
+                {sn:8 , bridgeId:1 , direction:"R" , ss_main:"" , liangCount:2 , isLast:1}
             ] ,
+
+            goujians: [
+                {id:1 , name:"挂梁" , code:"" , bujianId:1} ,
+                {id:2 , name:"悬臂梁" , code:"" , bujianId:1} ,
+                {id:3 , name:"板梁" , code:"" , bujianId:1} ,
+                {id:4 , name:"箱梁" , code:"" , bujianId:1} ,
+                {id:5 , name:"T梁" , code:"" , bujianId:1} ,
+                {id:6 , name:"小箱梁" , code:"" , bujianId:1} ,
+                {id:7 , name:"组合梁" , code:"" , bujianId:1} ,
+
+                {id:8 , name:"钢梁" , code:"" , bujianId:1} ,
+
+                {id:9 , name:"桥面板" , code:"" , bujianId:1} ,
+                {id:10 , name:"主梁" , code:"" , bujianId:1} ,
+                {id:11 , name:"横梁" , code:"" , bujianId:1} ,
+                {id:12 , name:"纵梁" , code:"" , bujianId:1}
+            ] ,
+
+            diseaseCategorys: [
+                {id:1 , "name":"混凝土", goujianIds:"1,2,3,4,5,6,7"} ,
+                {id:2 , "name":"裂缝", goujianIds:"1,2,3,4,5,6,7"} ,
+                {id:3 , "name":"钢筋锈蚀", goujianIds:"1,2,3,4,5,6,7"} ,
+                {id:4 , "name":"保护层厚度", goujianIds:"1,2,3,4,5,6,7"} ,
+                {id:6 , "name":"碳化深度", goujianIds:"1,2,3,4,5,6,7"} ,
+                /*
+                {id:7 , "name":"混凝土强度", goujianIds:"1,2,3,4,5,6,7"} ,
+                {id:8 , "name":"跨中挠度", goujianIds:"1,2,3,4,5,6,7"} ,
+                {id:9 , "name":"结构变位", goujianIds:"1,2,3,4,5,6,7"} ,
+                {id:10 , "name":"预应力构件损伤", goujianIds:"1,2,3,4,5,6,7"} ,
+                {id:11 , "name":"简支桥钢架桥裂缝", goujianIds:"1,2,3,4,5,6,7"} ,
+                {id:12 , "name":"连续结构及钢构桥裂缝", goujianIds:"1,2,3,4,5,6,7"} ,
+                */
+
+                {id:13 , "name":"涂层劣化",goujianIds:"8"} ,
+                {id:14 , "name":"锈蚀",goujianIds:"8"} ,
+                {id:15 , "name":"焊接开缝",goujianIds:"8"} ,
+                {id:16 , "name":"铆钉(螺栓)损失",goujianIds:"8"} ,
+                {id:17 , "name":"构件变形",goujianIds:"8"} ,
+                {id:18 , "name":"跨中挠度",goujianIds:"8"} ,
+                {id:19 , "name":"结构变位",goujianIds:"8"} ,
+                {id:20 , "name":"构件裂缝",goujianIds:"8"}
+            ] ,
+
+            diseaseTypes: [
+                {id:1 , name:"网状龟裂" , categoryId:1} ,
+                {id:2 , name:"钢筋锈胀" , categoryId:1} ,
+                {id:3 , name:"混凝土蜂窝" , categoryId:1} ,
+                {id:4 , name:"混凝土麻面" , categoryId:1} ,
+                {id:5 , name:"混凝土剥落" , categoryId:1} ,
+                {id:6 , name:"混凝土露筋" , categoryId:1} ,
+                {id:7 , name:"混凝土掉角" , categoryId:1} ,
+                {id:8 , name:"混凝土空洞" , categoryId:1} ,
+                {id:9 , name:"混凝土孔洞" , categoryId:1} ,
+
+                {id:10 , name:"横向裂缝" , categoryId:2} ,
+                {id:11 , name:"纵向裂缝" , categoryId:2} ,
+                {id:12 , name:"斜向裂缝" , categoryId:2} ,
+                {id:13 , name:"竖向裂缝" , categoryId:2} ,
+                {id:14 , name:"水平裂缝" , categoryId:2} ,
+
+                {id:15 , name:"轻微锈胀" , categoryId:3} ,
+                {id:16 , name:"钢筋锈胀脱落" , categoryId:3} ,
+                {id:17 , name:"钢筋分层锈蚀剥落" , categoryId:3}
+            ] ,
+
+
+
             leibies: [
                 //上部主要承重构件-default ,
                 {"name":"蜂窝麻面","value":"","memo":"3级","bujian":"上部主要承重构件","bujian_value":"default"} ,

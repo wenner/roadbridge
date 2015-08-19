@@ -121,7 +121,7 @@ angular.module('bridge')
                     if(typeof activeIndex === 'undefined') activeIndex = -Math.round((translate - maxTranslate)/itemWidth);
                     if (activeIndex < 0) activeIndex = 0;
                     if (activeIndex >= scope.pickerdata.items.length) activeIndex = scope.pickerdata.items.length - 1;
-                    var previousActiveIndex = col.activeIndex;
+                    var previousActiveIndex //= col.activeIndex;
                     col.activeIndex = activeIndex;
                     var wrapper = $(col.wrapper);
                     var items = $(col.items);
@@ -157,13 +157,13 @@ angular.module('bridge')
                             item.transform('translate3d( ' + (-translate + maxTranslate) + 'px, 0,' + (originBug ? -110 : 0) + 'px) rotateX(' + angle + 'deg)');
                         });
                     }
-
                     if (valueCallbacks) {
                         pickerdata.activeIndex = activeIndex;
                         var itemData = pickerdata.items[activeIndex];
                         pickerdata.value = itemData.value;
                         // On change callback
                         if (previousActiveIndex !== activeIndex) {
+                            previousActiveIndex = col.activeIndex;
                             if ($scope.changecol){
                                 $scope.changecol(pickerdata);
                             }
@@ -321,8 +321,7 @@ angular.module('bridge')
                             trans.form = parseInt(endTransform,10);
                             trans.duration = 300;
                         });
-                        // Update items
-                        updateItems(activeIndex, endTransform, '', true);
+
 
                         // Watch items
                         if (col.attrs.updateValuesOnMomentum) {
@@ -334,12 +333,15 @@ angular.module('bridge')
                         scope.$apply(function(){
                             pickerdata.isActivsted = false;
                         });
+                        // Update items
+                        updateItems(activeIndex, endTransform, '', true);
 
                         // Allow click
                         setTimeout(function () {
                             allowItemClick = true;
                         }, 100);
-                        $ionicSlideBoxDelegate.enableSlide(true);
+
+                        //$ionicSlideBoxDelegate.enableSlide(true);
                     } ,
                     selectItem: function(item){
                         setValue(item.value , 300);

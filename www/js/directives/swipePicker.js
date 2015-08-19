@@ -118,7 +118,7 @@ angular.module('bridge')
                     if(typeof activeIndex === 'undefined') activeIndex = -Math.round((translate - maxTranslate)/itemHeight);
                     if (activeIndex < 0) activeIndex = 0;
                     if (activeIndex >= scope.pickerdata.items.length) activeIndex = scope.pickerdata.items.length - 1;
-                    var previousActiveIndex = col.activeIndex;
+                    var previousActiveIndex //= col.activeIndex;
                     col.activeIndex = activeIndex;
                     var wrapper = $(col.wrapper);
                     var items = $(col.items);
@@ -154,13 +154,13 @@ angular.module('bridge')
                             item.transform('translate3d(0, ' + (-translate + maxTranslate) + 'px, ' + (originBug ? -110 : 0) + 'px) rotateX(' + angle + 'deg)');
                         });
                     }
-
                     if (valueCallbacks) {
                         pickerdata.activeIndex = activeIndex;
                         var itemData = pickerdata.items[activeIndex];
                         pickerdata.value = itemData.value;
                         // On change callback
                         if (previousActiveIndex !== activeIndex) {
+                            previousActiveIndex = col.activeIndex;
                             if ($scope.changecol){
                                 $scope.changecol(pickerdata , itemData);
                             }
@@ -186,6 +186,7 @@ angular.module('bridge')
                 };
                 angular.extend($scope , {
                     calcSize: function () {
+                        if (!scope.pickerdata.items || scope.pickerdata.items.length == 0) return;
                         if (col.attrs.rotateEffect) {
                             //col.container.removeClass('picker-items-col-absolute');
                             //if (!col.width) col.container.css({width:''});
@@ -216,7 +217,8 @@ angular.module('bridge')
                          */
                     } ,
                     handleDragStart: function(e) {
-                        $ionicSlideBoxDelegate.enableSlide(false);
+                        if (!scope.pickerdata.items || scope.pickerdata.items.length == 0) return;
+                        //$ionicSlideBoxDelegate.enableSlide(false);
                         if (isMoved || isTouched) return;
                         e.gesture.preventDefault();
                         e.stopPropagation();
@@ -231,7 +233,9 @@ angular.module('bridge')
                             $scope.pickerdata.isActivsted = true;
                         });                    } ,
                     handleDrag: function(e){
-                        $ionicSlideBoxDelegate.enableSlide(false);
+                        if (!scope.pickerdata.items || scope.pickerdata.items.length == 0) return;
+
+                        //$ionicSlideBoxDelegate.enableSlide(false);
                         if (!isTouched) return;
                         var wraper = col.wrapper;
                         e.gesture.preventDefault();
@@ -281,6 +285,8 @@ angular.module('bridge')
                         prevTranslate = currentTranslate;
                     } ,
                     handleDragEnd: function(e) {
+                        if (!scope.pickerdata.items || scope.pickerdata.items.length == 0) return;
+
                         if (!isTouched || !isMoved) {
                             isTouched = isMoved = false;
                             return;
