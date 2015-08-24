@@ -95,7 +95,7 @@
             </div>
 
             <!--历史记录-->
-            <div style="height:230px;border-bottom1:#ccc solid 1px;display:flex">
+            <div style="height:280px;border-bottom1:#ccc solid 1px;display:flex">
                 <table class="aaaa">
                     <tr>
                         <td colspan=4>
@@ -104,7 +104,7 @@
                     </tr>
                     <tr>
                         <td style="width:240px;">病害编号</td>
-                        <td style="text-align:left">病害位置</td>
+                        <td style="text-align:left">病害描述</td>
                         <td style="width:80px">标度</td>
                         <td style="width:80px">照片</td>
                     </tr>
@@ -164,13 +164,31 @@
             </div>
             -->
         </div>
-
     </ion-content>
+
+    <ion-footer-bar class="bar-royal">
+        <button class="button button-icon  ion-checkmark-round pull-left">保存</button>
+        <h1 class="title">
+        </h1>
+        <div class="buttons pull-right" side="right">
+            <button class='button button-icon ion-ios-camera'
+                    ng-click="showMediaMenu($event)">拍照</button>
+            <!--
+            <button class='button button-badge button-icon ion-ios-clock-outline'
+                    style="padding-left:0"
+                    ng-hide="historys.length==0" ng-click="showHistoryModal()">
+                <span class="badge badge-assertive">{{historys.length}}1</span>
+            </button>
+            -->
+        </div>
+    </ion-footer-bar>
 </ion-view>
+<!--
 <button class="button-float button-float-left button button-positive icon ion-checkmark-round"
 		style="border-radius:10%;"
         ng-click="save()">保存</button>
 
 <button class="button-float button-float-right button button-energized icon ion-ios-camera ion-ios-more1 "
         ng-click="showMediaMenu($event)"></button>
+-->
 
