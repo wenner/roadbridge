@@ -4,7 +4,7 @@
                 ng-clic1k='goback()' ui-sref=tab.disease></button>
         <h1 class="title">
             <div ng-show="!current.isEmpty()">
-                {{current.road.display}} / {{current.bridge.display}} / {{current.buwei.value}}
+                {{current.road.display}} / {{current.bridge.display}} / {{current.bujianGroup.value}}
             </div>
             <div ng-if="current.isEmpty()">请选择检测基础信息</div>
         </h1>
@@ -95,7 +95,7 @@
             </div>
 
             <!--历史记录-->
-            <div style="height:200px;border-bottom1:#ccc solid 1px;display:flex">
+            <div style="height:230px;border-bottom1:#ccc solid 1px;display:flex">
                 <table class="aaaa">
                     <tr>
                         <td colspan=4>
@@ -103,7 +103,23 @@
                         </td>
                     </tr>
                     <tr>
+                        <td style="width:240px;">病害编号</td>
+                        <td style="text-align:left">病害位置</td>
+                        <td style="width:80px">标度</td>
+                        <td style="width:80px">照片</td>
+                    </tr>
+                    <tr>
                         <td style="width:240px;">S1-20150609-093L-0001</td>
+                        <td style="text-align:left">
+                            第1孔3#小箱梁，距7#墩2m，外侧腹板
+                            横向裂缝
+                            2条, 长0.5，最大缝宽0.18
+                        </td>
+                        <td style="width:80px">1</td>
+                        <td style="width:80px">2</td>
+                    </tr>
+                    <tr>
+                        <td style="width:240px;">S1-20150609-093L-0002</td>
                         <td style="text-align:left">
                             第1孔3#小箱梁，距7#墩2m，外侧腹板
                             横向裂缝
@@ -113,7 +129,7 @@
                         <td style="width:80px">2</td>
                     </tr>
                     <tr>
-                        <td style="width:240px;">S1-20150609-093L-0001</td>
+                        <td style="width:240px;">S1-20150609-093L-0003</td>
                         <td style="text-align:left">
                             第1孔3#小箱梁，距7#墩2m，外侧腹板
                             横向裂缝
@@ -123,7 +139,7 @@
                         <td style="width:80px">2</td>
                     </tr>
                     <tr>
-                        <td style="width:240px;">S1-20150609-093L-0001</td>
+                        <td style="width:240px;">S1-20150609-093L-0004</td>
                         <td style="text-align:left">
                             第1孔3#小箱梁，距7#墩2m，外侧腹板
                             横向裂缝
