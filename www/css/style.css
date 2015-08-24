@@ -40,7 +40,7 @@
 
 .button-float {
     position: fixed;
-    bottom: 48px;
+    bottom: 16px;
     border: none;
     border-radius: 50%;
     min-width: 56px;
@@ -435,4 +435,4 @@
     width:100%;
     border-top:#ccc solid 1px;
 }
-.aaaa td {border-bottom:#ccc solid 1px;line-height:32px;text-align:center}
+.aaaa td {border-bottom:#ccc solid 1px;line-height:36px;text-align:center}

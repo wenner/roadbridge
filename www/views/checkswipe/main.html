@@ -4,23 +4,16 @@
                 ng-clic1k='goback()' ui-sref=tab.disease></button>
         <h1 class="title">
             <div ng-show="!current.isEmpty()">
-                {{current.road.display}} / {{current.bridge.display}} / {{current.buwei.value}}
+                {{current.road.display}} {{current.bridge.display}} {{current.buwei.value}}
             </div>
             <div ng-if="current.isEmpty()">请选择检测基础信息</div>
         </h1>
         <div class="buttons" side="right">
-            <button class='button button-icon ion-ios-loop'
-                    ng-click="reSelectInfo()">重新选择</button>
-            <button class='button button-icon button-clear ion-ios-more'
-                    ng-click="showPopover($event)"></button>
-
-            <!--
             <button class='button button-badge button-icon ion-ios-clock-outline'
                     style="padding-left:0"
                     ng-hide="historys.length==0" ng-click="showHistoryModal()">
                 <span class="badge badge-assertive">{{historys.length}}1</span>
             </button>
-            -->
         </div>
     </ion-header-bar>
     <ion-content scroll="false" class="has-header">
@@ -29,19 +22,17 @@
              ng-if="!current.isEmpty()">
 
             <!--桥梁部件信息-->
-            <!--
             <div class="row inforow" style='background-color:#e8f4ff'>
                 <div class="col col-20">线路信息: {{current.road.display}}</div>
                 <div class="col">桥梁信息: {{current.bridge.display}}</div>
                 <div class="col col-20">部位: {{current.bujianGroup.value}} <span class="badge badge-assertive">0</span></div>
                 <div class="col col-10 text-center" style="font-weight:bold;color:red" ng-click="reSelectInfo()">重新选择</div>
             </div>
-            -->
 
             <!--桥梁部件号选择-->
             <div class="hpicker-container hpicker-container-borderbottom">
                 <div class="hpicker-row">
-                    <div class="hpicker-header">{{current.bujianGroup.value}}:</div>
+                    <div class="hpicker-header">桥梁{{current.bujianType.value == "kong" ? "孔" : "联"}}号:</div>
                     <div hswipepicker
                          pickerdata="bujianSns"
                          momentumRatio="10"
@@ -99,43 +90,30 @@
                 <table class="aaaa">
                     <tr>
                         <td colspan=4>
-                            桥梁检测记录
+                            2015年度桥梁检测记录（只代入选中的孔或联的病害记录）
                         </td>
+                        <td colspan=2 class="text-center" style="background-color:#ffffcc">跟踪上一年病害趋势</td>
                     </tr>
                     <tr>
-                        <td style="width:240px;">S1-20150609-093L-0001</td>
-                        <td style="text-align:left">
-                            第1孔3#小箱梁，距7#墩2m，外侧腹板
-                            横向裂缝
-                            长0.5，最大缝宽0.18
-                        </td>
-                        <td style="width:80px">1</td>
-                        <td style="width:80px">2</td>
+                        <td>病害编号</td>
+                        <td>病害位置</td>
+                        <td>定性描述</td>
+                        <td>定量描述</td>
+                        <td>状态</td>
+                        <td>标度</td>
                     </tr>
                     <tr>
-                        <td style="width:240px;">S1-20150609-093L-0001</td>
-                        <td style="text-align:left">
-                            第1孔3#小箱梁，距7#墩2m，外侧腹板
-                            横向裂缝
-                            长0.5，最大缝宽0.18
-                        </td>
-                        <td style="width:80px">1</td>
-                        <td style="width:80px">2</td>
-                    </tr>
-                    <tr>
-                        <td style="width:240px;">S1-20150609-093L-0001</td>
-                        <td style="text-align:left">
-                            第1孔3#小箱梁，距7#墩2m，外侧腹板
-                            横向裂缝
-                            长0.5，最大缝宽0.18
-                        </td>
-                        <td style="width:80px">1</td>
-                        <td style="width:80px">2</td>
+                        <td>S1-20150609-093L-0001</td>
+                        <td>第1孔3#小箱梁，距7#墩2m，外侧腹板</td>
+                        <td>横向裂缝</td>
+                        <td>2条,0.5,0.18</td>
+                        <td>有崩叉</td>
+                        <td>1</td>
                     </tr>
                 </table>
             </div>
 
-            <!--
+
             <div style="border-top:#ccc solid 1px;">
                 <div style="line-height:36px;padding:0;text-align:center" class="row">
                     <div class="col">病害采集</div>
@@ -146,8 +124,7 @@
                     <div class="col">桥梁评价</div>
                 </div>
             </div>
-            -->
-        </div>
+        </div  >
 
     </ion-content>
 </ion-view>

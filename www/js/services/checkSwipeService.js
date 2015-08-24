@@ -428,10 +428,10 @@ yy
                                             hidden: false
                                         };
                                         changes[widthIndex] = {
-                                            name:"缝宽" ,
+                                            name:"最大缝宽" ,
                                             items: this.distances ,
                                             hidden: false ,
-                                            width:80
+                                            width:100
                                         };
                                         changes[quantityIndex] = {
                                             name:"条数" ,

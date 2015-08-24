@@ -22,9 +22,9 @@
                 </select>
             </label>
             <label class='item item-input item-select'>
-                <span class="input-label">选择桥梁</span>
+                <span class="input-label">桥梁</span>
                 <select ng-model="info.bridge"
-                        ng-options='x.id as x.name for x in bridges | filter:{"roadId":info.road}'
+                        ng-options='x.id as x.name+" "+x.sn+" "+x.zhuanghao for x in bridges | filter:{"roadId":info.road}'
                         ng-change="changeBridge()"
                         required>
                 </select>
