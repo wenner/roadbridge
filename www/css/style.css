@@ -37,7 +37,6 @@
     font-family: '微软雅黑'
 }
 
-
 .button-float {
     position: fixed;
     bottom: 16px;
@@ -365,6 +364,14 @@
     overflow: hidden;
 }
 
+.hpicker-badge .badge {
+    font-weight:normal;
+    padding: 1px 6px;
+    height: auto;
+    font-size: 12px;
+    line-height: 16px;
+}
+
 .hpicker-item {
     float:left;
     border-left1:#ccc solid 1px;
@@ -380,6 +387,9 @@
     -webkit-transform: translate3d(0, 0, 0) rotateX(0deg);
     transform: translate3d(0, 0, 0) rotateX(0deg);
 }
+.hpicker-item.picker-selected .badge{background-color:blue}
+
+
 .hpicker-highlight {
     box-sizing: border-box;
     position: absolute;
@@ -430,6 +440,9 @@
 .inforow .col:first-child{
     border-left:0
 }
+
+
+
 
 .aaaa {
     width:100%;

@@ -122,19 +122,21 @@ angular.module('bridge').controller(
                 });
                 switch (coldata.code){
                     case "bujianSn":
-                        $scope.changeColumnsByBujianSn();
+                        $scope.changeColumnsByBujianSn(code);
                         break;
                     case "bujian":
                         if (!$scope.pickerColumns){
                             $scope.pickerColumns = srv.getPickerColumns();
                         }
-                        $scope.changeColumnsByBujian();
-                        $scope.changeColumnsByBujianSn();
+                        $scope.changeColumnsByBujian(code);
+                        $scope.changeColumnsByBujianSn(code);
                         break;
                     default:
                         $scope.changeColumnsByPick(code);
                         break;
                 }
+                if (!$scope.result) $scope.result = {};
+                $scope.result.values = $scope.getValues();
             } ,
             applyChanges: function(changes){
                 if(!$scope.$$phase) {
@@ -153,10 +155,26 @@ angular.module('bridge').controller(
                 var changes = srv.getColumnsByBujian($scope.pickerColumns);
                 $scope.applyChanges(changes);
             },
-            changeColumnsByBujianSn: function(){
+            changeColumnsByBujianSn: function(code){
                 if (!$scope.pickerColumns) return;
                 var changes = srv.getColumnsByBujianSn($scope.pickerColumns);
                 $scope.applyChanges(changes);
+
+                //修改部件的badge
+                if (code == "bujianSn"){
+                    var badge = $scope.current.bujianSn.record.badge;
+                    var bujianBadge = 0;
+                    _.each($scope.bujians.items , function(n){
+                        if (badge - bujianBadge == 0) return false;
+                        var count = _.random(badge-bujianBadge);
+                        n.badge = count;
+                        bujianBadge += count;
+                    });
+                    console.log($scope.bujians);
+                }
+
+
+
             } ,
 
             changeColumnsByPick: function(code){
@@ -165,11 +183,23 @@ angular.module('bridge').controller(
                 $scope.applyChanges(changes);
             } ,
             getValues: function(){
-                var vs = [];
-                _.each($scope.current , function(n){
-                    vs.push(n.value);
+                var vs = {};
+                _.each($scope.current , function(n , key){
+                    if (n) vs[key] = n.display || n.value;
                 });
-                //return vs.join("-");
+                var template = _.template([
+                    "{{bujianSn}} {{liang}}{{formal}} " ,
+                    "{{dun}}{{distance}}m {{position}} " ,
+                    "{{diseaseType}} {{length}} {{width}} " ,
+                    "{{quantity}} {{diseaseEvaluate}}"].join(""));
+
+                var html;
+                try{
+                    html= template(vs);
+                }catch(e){
+
+                }
+                return html;
             } ,
 
 
@@ -202,7 +232,7 @@ angular.module('bridge').controller(
 
         $scope.initInfo();
         $scope.$on('$ionicView.beforeEnter', function(){
-            if ($scope.current.isEmpty) $scope.showInfoModal();
+            if ($scope.current.isEmpty()) $scope.showInfoModal();
         });
 
 

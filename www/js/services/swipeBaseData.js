@@ -149,8 +149,8 @@ angular.module("bridge.services")
                 {id:3 , name:"桥面系" , code:"bd" , bujianGroup:"桥上检测" , bujianType:"lian"}
             ] ,
             bujians: [
-                {id:1 , name:"上部主要承重构件" , code:"SSmain" , buweiId:1} ,
-                {id:2 , name:"上部一般承重构件" , code:"SSnormal" , buweiId:1} ,
+                {id:1 , name:"主要承重" , code:"SSmain" , buweiId:1} ,
+                {id:2 , name:"一般承重" , code:"SSnormal" , buweiId:1} ,
                 {id:3 , name:"支座" , code:"SSbearing" , buweiId:1} ,
                 {id:4 , name:"翼墙/耳墙" , code:"ISwingwall" , buweiId:2} ,
                 {id:5 , name:"锥坡/护坡" , code:"ISslope" , buweiId:2} ,
@@ -167,9 +167,9 @@ angular.module("bridge.services")
                 {id:16 , name:"照明/标志" , code:"BDlight" , buweiId:3}
             ] ,
             kongs: [
-                {sn:1 , bridgeId:1 , direction:"L" , ss_main:"" , liangCount:2} ,
+                {sn:1 , bridgeId:1 , direction:"L" , ss_main:"" , liangCount:2 , badge:2} ,
                 {sn:2 , bridgeId:1 , direction:"L" , ss_main:"" , liangCount:3} ,
-                {sn:3 , bridgeId:1 , direction:"L" , ss_main:"" , liangCount:4} ,
+                {sn:3 , bridgeId:1 , direction:"L" , ss_main:"" , liangCount:4 , badge:5} ,
                 {sn:4 , bridgeId:1 , direction:"L" , ss_main:"" , liangCount:5} ,
                 {sn:5 , bridgeId:1 , direction:"L" , ss_main:"" , liangCount:11} ,
                 {sn:6 , bridgeId:1 , direction:"L" , ss_main:"" , liangCount:15} ,

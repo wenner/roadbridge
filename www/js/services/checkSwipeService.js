@@ -56,7 +56,7 @@ angular.module('bridge.services')
 
                 bujianSn: {
                     getDisplay: function(current , code){
-                        return current.bujianSn.record.name;
+                        if (current.bujianSn.record) return current.bujianSn.record.name;
                     }
                 }, //孔,联
                 bujian: {
@@ -90,7 +90,7 @@ angular.module('bridge.services')
             var item = this[key];
             if (_.isObject(value)){
                 _.extend(item , value);
-                item.display = item.display || item.name || item.value;
+                item.display =  (value.record ? value.record.name : null) || item.name || item.display || item.value;
                 if (item.getDisplay){
                     item.display = item.getDisplay(this , key);
                 }
@@ -220,7 +220,7 @@ angular.module('bridge.services')
             getLians: function(){
                 var jointCount = current.bridge.record.jointCount;
                 return _.map(_.range(1 , jointCount+1) , function(n){
-                    return _.extend(n , {name:"第"+n+"联" , value:n});
+                    return {name:"第"+n+"联" , value:n};
                 })
             } ,
             //获取部件
@@ -294,8 +294,8 @@ yy
                     {name:"形式" , code:"formal" , width:100} ,
                     {name:"距墩" , code:"dun" , width:100} ,
                     {name:"米" , code:"distance" , width:80} ,
-                    {name:"位置" , code:"position" , width:100} ,
-                    {name:"类型" , code:"diseaseCategory" , width:120} ,
+                    {name:"局部位置" , code:"position" , width:100} ,
+                    {name:"病害类型" , code:"diseaseCategory" , width:120} ,
                     {name:"定性描述" , code:"diseaseType" , width:120} ,
                     {name:"长" , code:"length" , hidden:true} ,
                     {name:"宽" , code:"width" , hidden:true} ,
@@ -476,8 +476,6 @@ yy
                                 console.log(evaluateIndex , type.evalLevel , _.range(1 , type.evalLevel+1))
                                 changes[evaluateIndex] = {};
                                 changes[evaluateIndex].items = _.map(_.range(1 , type.evalLevel+1) , function(n){
-
-                                    console.log(n)
                                     return {name:n , value:1};
                                 });
                                 break;
