@@ -165,10 +165,13 @@ angular.module('bridge').controller(
                     var badge = $scope.current.bujianSn.record.badge;
                     var bujianBadge = 0;
                     _.each($scope.bujians.items , function(n){
-                        if (badge - bujianBadge == 0) return false;
-                        var count = _.random(badge-bujianBadge);
-                        n.badge = count;
-                        bujianBadge += count;
+                        n.badge = 0;
+                        if (badge - bujianBadge != 0) {
+                            var count = _.random(badge-bujianBadge);
+                            n.badge = count;
+                            bujianBadge += count;
+                        };
+
                     });
                     console.log($scope.bujians);
                 }
