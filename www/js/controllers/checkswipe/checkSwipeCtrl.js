@@ -8,6 +8,14 @@ angular.module('bridge').controller(
 
         var srv = CheckSwipeService;
 
+        // .fromTemplateUrl() method
+        $ionicPopover.fromTemplateUrl('views/checkswipe/menu.html', {
+            scope: $scope
+        }).then(function(popover) {
+            $scope.popover = popover;
+        });
+
+
         _.extend($scope , {
             current : srv.current,
 
@@ -22,10 +30,14 @@ angular.module('bridge').controller(
                 direction: "L" ,
                 bujianGroup: "桥下检测" ,
                 weather: "晴" ,
-                checkdept: "天津交通科学研究院" ,
+                checkdept: "天津市交通科学研究院" ,
                 checkuser: "张文涛" ,
                 checkday: new Date()
             },
+
+            showPopover: function(event){
+                $scope.popover.show(event);
+            } ,
 
             goback: function(){
                 history.back();
