@@ -16,6 +16,16 @@ angular.module('bridge').controller(
         });
 
 
+        var db = window.openDatabase("test", 1.1, 'mydb', 30000);
+        /*
+        db.transaction(function(tx){
+            tx.executeSql("select * from product",[],function(tx,results){
+                console.log(results.rows.item(1))
+            },function(tx,error){
+                return false;
+            });
+        });
+        */
         _.extend($scope , {
             current : srv.current,
 
@@ -194,8 +204,7 @@ angular.module('bridge').controller(
                     "{{bujianSn}} {{liang}}{{formal}} " ,
                     "{{dun}}{{distance}}m {{position}} " ,
                     "{{diseaseType}} {{length}} {{width}} " ,
-                    "{{quantity}} {{diseaseEvaluate}}"].join(""));
-
+                    "{{diseaseEvaluate}}"].join(""));
                 var html;
                 try{
                     html= template(vs);

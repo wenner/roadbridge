@@ -78,7 +78,7 @@
             </div>
 
             <!--病害量化选择-->
-            <div class="picker-columns">
+            <div class="picker-columns" style="height:218px">
                 <div ng-repeat="col in pickerColumns"
                      ng-show = "!col.hidden"
                      class="picker-column text-{{col.align || 'center'}}"
@@ -96,61 +96,17 @@
             </div>
 
             <!--历史记录-->
-            <div style="height:280px;border-bottom1:#ccc solid 1px;display:flex">
-                <table class="aaaa">
-                    <tr style="background-color:#ffffcc">
-                        <td colspan=4>
-                            桥梁检测记录
-                        </td>
-                    </tr>
-                    <tr style="background-color:#e8f4ff">
-                        <td style="width:240px;">病害编号</td>
-                        <td style="text-align:left">病害描述</td>
-                        <td style="width:80px">标度</td>
-                        <td style="width:80px">照片</td>
-                    </tr>
-                    <tr>
-                        <td style="width:240px;">S1-20150609-093L-0001</td>
-                        <td style="text-align:left">
-                            第1孔3#小箱梁，距7#墩2m，外侧腹板
-                            横向裂缝
-                            2条, 长0.5，最大缝宽0.18
-                        </td>
-                        <td style="width:80px">1</td>
-                        <td style="width:80px">2</td>
-                    </tr>
-                    <tr>
-                        <td style="width:240px;">S1-20150609-093L-0002</td>
-                        <td style="text-align:left">
-                            第1孔3#小箱梁，距7#墩2m，外侧腹板
-                            横向裂缝
-                            长0.5，最大缝宽0.18
-                        </td>
-                        <td style="width:80px">1</td>
-                        <td style="width:80px">2</td>
-                    </tr>
-                    <tr>
-                        <td style="width:240px;">S1-20150609-093L-0003</td>
-                        <td style="text-align:left">
-                            第1孔3#小箱梁，距7#墩2m，外侧腹板
-                            横向裂缝
-                            长0.5，最大缝宽0.18
-                        </td>
-                        <td style="width:80px">1</td>
-                        <td style="width:80px">2</td>
-                    </tr>
-                    <tr>
-                        <td style="width:240px;">S1-20150609-093L-0004</td>
-                        <td style="text-align:left">
-                            第1孔3#小箱梁，距7#墩2m，外侧腹板
-                            横向裂缝
-                            长0.5，最大缝宽0.18
-                        </td>
-                        <td style="width:80px">1</td>
-                        <td style="width:80px">2</td>
-                    </tr>
-                </table>
-            </div>
+
+            <div ng-include="'views/checkswipe/record.html'" style="flex:1;-webkit-flex:1;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-flow:column;
+    -webkit-flex-flow:column;
+    -webkit-flex-dircetion:column;
+"
+            ></div>
 
             <!--
             <div style="border-top:#ccc solid 1px;">

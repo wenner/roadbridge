@@ -26,8 +26,9 @@ angular.module('bridge')
                     scope.calcSize();
                     trans.form = maxTranslate;
                     trans.duration = 300;
-                    transform(col.wrapper , 'translate3d(0,' + maxTranslate + 'px,0)');
-                    transition(col.wrapper , 0);
+                    //transform(col.wrapper , 'translate3d(0,' + maxTranslate + 'px,0)');
+                    //transition(col.wrapper , 0);
+                    setValue(pickerdata.value || null , 0 , false);
                 });
                 var transform = function (el , transform) {
                     var el = angular.element(el);
@@ -157,10 +158,10 @@ angular.module('bridge')
                     if (valueCallbacks) {
                         pickerdata.activeIndex = activeIndex;
                         var itemData = pickerdata.items[activeIndex];
-                        pickerdata.value = itemData.value;
                         // On change callback
-                        if (previousActiveIndex !== activeIndex) {
-                            previousActiveIndex = col.activeIndex;
+                        if (itemData && itemData.value != pickerdata.value) {
+                            pickerdata.value = itemData.value;
+                            //previousActiveIndex = col.activeIndex;
                             if ($scope.changecol){
                                 $scope.changecol(pickerdata , itemData);
                             }
@@ -185,6 +186,23 @@ angular.module('bridge')
                     updateItems(newActiveIndex, newTranslate, transition, true);
                 };
                 angular.extend($scope , {
+                    setValue: function (newValue, mytransition, valueCallbacks) {
+                        if (typeof transition === 'undefined') transition = '';
+                        var newActiveIndex = _.findIndex(pickerdata.items , function(n){
+                            return n.value == newValue;
+                        });
+                        if(typeof newActiveIndex === 'undefined' || newActiveIndex === -1) {
+                            newActiveIndex = 0;
+                        }
+                        var newTranslate = -newActiveIndex * itemHeight + maxTranslate;
+                        // Update wrapper
+                        transition(col.wrapper , mytransition);
+                        transform(col.wrapper , 'translate3d(0,' + (newTranslate) + 'px,0)');
+                        // Update items
+                        updateItems(newActiveIndex, newTranslate, transition, true);
+                    } ,
+
+
                     calcSize: function () {
                         if (!scope.pickerdata.items || scope.pickerdata.items.length == 0) return;
                         if (col.attrs.rotateEffect) {
@@ -360,7 +378,7 @@ angular.module('bridge')
                 $ionicGesture.on('dragstart', scope.handleDragStart , elem);
                 $ionicGesture.on('drag', scope.handleDrag , elem);
                 $ionicGesture.on('dragend', scope.handleDragEnd , elem);
-
+                scope.setValue(null , 0 , false);
             }
         }
     });

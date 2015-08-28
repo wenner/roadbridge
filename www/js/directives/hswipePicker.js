@@ -160,12 +160,12 @@ angular.module('bridge')
                     if (valueCallbacks) {
                         pickerdata.activeIndex = activeIndex;
                         var itemData = pickerdata.items[activeIndex];
-                        pickerdata.value = itemData.value;
                         // On change callback
-                        if (previousActiveIndex !== activeIndex) {
-                            previousActiveIndex = col.activeIndex;
+                        if (itemData && itemData.value != pickerdata.value) {
+                            pickerdata.value = itemData.value;
+                            //previousActiveIndex = col.activeIndex;
                             if ($scope.changecol){
-                                $scope.changecol(pickerdata);
+                                $scope.changecol(pickerdata , itemData);
                             }
                             //p.updateValue();
                         }
@@ -190,6 +190,25 @@ angular.module('bridge')
                     updateItems(newActiveIndex, newTranslate, transition, true);
                 };
                 angular.extend($scope , {
+
+                    setValue: function (newValue, mytransition, valueCallbacks) {
+                        if (typeof transition === 'undefined') transition = '';
+
+                        //todo: 修改
+                        var newActiveIndex = _.findIndex(pickerdata.items , function(n){
+                            return n.value == newValue;
+                        });
+                        if(typeof newActiveIndex === 'undefined' || newActiveIndex === -1) {
+                            newActiveIndex = 0;
+                        }
+                        var newTranslate = -newActiveIndex * itemWidth + maxTranslate;
+                        // Update wrapper
+                        transition(col.wrapper , mytransition);
+                        transform(col.wrapper , 'translate3d(' + (newTranslate) + 'px,0,0)');
+
+                        // Update items
+                        updateItems(newActiveIndex, newTranslate, transition, true);
+                    } ,
                     calcSize: function () {
                         if (col.attrs.rotateEffect) {
                             //col.container.removeClass('picker-items-col-absolute');
@@ -357,7 +376,7 @@ angular.module('bridge')
                 $ionicGesture.on('dragstart', scope.handleDragStart , elem);
                 $ionicGesture.on('drag', scope.handleDrag , elem);
                 $ionicGesture.on('dragend', scope.handleDragEnd , elem);
-
+                scope.setValue(null , 0 , false);
             }
         }
     });

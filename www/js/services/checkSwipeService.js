@@ -268,7 +268,6 @@ angular.module('bridge.services')
                 var changes = {};
                 var bujian = current.bujian.record;
                 var fn = this["get" + bujian.code + "Columns"];
-                console.log(fn)
                 if (fn) {
                     changes =  fn(cols);
                 }
@@ -473,7 +472,7 @@ yy
                                 var type = current.diseaseType.record;
                                 if (!type) return;
                                 var evaluateIndex = _.findIndex(cols , "code" , "diseaseEvaluate");
-                                console.log(evaluateIndex , type.evalLevel , _.range(1 , type.evalLevel+1))
+                                //console.log(evaluateIndex , type.evalLevel , _.range(1 , type.evalLevel+1))
                                 changes[evaluateIndex] = {};
                                 changes[evaluateIndex].items = _.map(_.range(1 , type.evalLevel+1) , function(n){
                                     return {name:n , value:1};

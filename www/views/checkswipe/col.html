@@ -4,7 +4,9 @@
         transition-duration:{{coldata.trans.duration}}ms;
         -webkit-transition-duration:{{coldata.trans.duration}}ms"
         >
-    <div ng-repeat="item in pickerdata.items" class="picker-item"
+    <div ng-repeat="item in pickerdata.items"
+         class="picker-item"
+         ng-class = "{true:'picker-selected'}[pickerdata.value == item.value]"
          ng-click="selectItem(item)">
         {{item.name}}
     </div>
