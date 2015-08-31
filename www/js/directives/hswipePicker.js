@@ -222,7 +222,7 @@ angular.module('bridge')
                         minTranslate = colWidth / 2 - itemsWidth + itemWidth / 2;
                         maxTranslate = colWidth / 2 - itemWidth / 2;
                         $(col.wrapper).css({width:wrapperWidth});
-                        console.log(colWidth , wrapperWidth , itemWidth , itemsWidth , minTranslate , maxTranslate)
+                        //console.log(colWidth , wrapperWidth , itemWidth , itemsWidth , minTranslate , maxTranslate)
                         /*
                          if (col.attrs.rotateEffect) {
                          if (!col.width) {

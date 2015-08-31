@@ -183,11 +183,7 @@ angular.module('bridge').controller(
                         };
 
                     });
-                    console.log($scope.bujians);
                 }
-
-
-
             } ,
 
             changeColumnsByPick: function(code){
@@ -203,7 +199,7 @@ angular.module('bridge').controller(
                 var template = _.template([
                     "{{bujianSn}} {{liang}}{{formal}} " ,
                     "{{dun}}{{distance}}m {{position}} " ,
-                    "{{diseaseType}} {{length}} {{width}} " ,
+                    "{{diseaseQualitative}} {{length}} {{width}} " ,
                     "{{diseaseEvaluate}}"].join(""));
                 var html;
                 try{

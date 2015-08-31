@@ -26,10 +26,15 @@ angular.module("bridge.services")
                 {name:"津保高速" , id:9 , sn:"S7"}
             ] ,
             bridges: [
-                {id:1 , name:"津静公路桥" , roadId:1 , sn:"093" ,
+                {id:1 ,
+                    name:"津静公路桥" ,
+                    roadId:1 ,
+                    sn:"093" ,
                     stakeNo: "K759+061" , //桩号
                     wayType: "double" , //双幅
                     jointCount:5 ,
+
+
                     '上部主要承重构件':'预制板梁' ,
                     '上部一般承重构件':'湿接缝' ,
                     '支座': '钢支座' ,
@@ -143,11 +148,13 @@ angular.module("bridge.services")
                     '桥面铺装': '水泥混凝土'
                 }
             ] ,
+
             buweis:[
                 {id:1 , name:"上部结构" , code:"ss" , bujianGroup:"桥下检测" , bujianType:"kong"} ,
                 {id:2 , name:"下部结构" , code:"is" , bujianGroup:"桥下检测" , bujianType:"kong"} ,
                 {id:3 , name:"桥面系" , code:"bd" , bujianGroup:"桥上检测" , bujianType:"lian"}
             ] ,
+
             bujians: [
                 {id:1 , name:"主要承重" , code:"SSmain" , buweiId:1} ,
                 {id:2 , name:"一般承重" , code:"SSnormal" , buweiId:1} ,
@@ -166,6 +173,7 @@ angular.module("bridge.services")
                 {id:15 , name:"排水系统" , code:"BDdrain" , buweiId:3} ,
                 {id:16 , name:"照明/标志" , code:"BDlight" , buweiId:3}
             ] ,
+
             kongs: [
                 {sn:1 , bridgeId:1 , direction:"L" , ss_main:"" , liangCount:2 , badge:2} ,
                 {sn:2 , bridgeId:1 , direction:"L" , ss_main:"" , liangCount:3} ,
@@ -195,21 +203,27 @@ angular.module("bridge.services")
                 {id:5 , name:"T梁" , code:"" , bujianId:1} ,
                 {id:6 , name:"小箱梁" , code:"" , bujianId:1} ,
                 {id:7 , name:"组合梁" , code:"" , bujianId:1} ,
-
                 {id:8 , name:"钢梁" , code:"" , bujianId:1} ,
-
                 {id:9 , name:"桥面板" , code:"" , bujianId:1} ,
                 {id:10 , name:"主梁" , code:"" , bujianId:1} ,
                 {id:11 , name:"横梁" , code:"" , bujianId:1} ,
-                {id:12 , name:"纵梁" , code:"" , bujianId:1}
+                {id:12 , name:"纵梁" , code:"" , bujianId:1} ,
+
+                {id:13 , name:"横隔板" , code:"" , bujianId:2} ,
+                {id:14 , name:"铰缝" , code:"" , bujianId:2} ,
+                {id:15 , name:"湿接头" , code:"" , bujianId:2} ,
+                {id:16 , name:"干接头" , code:"" , bujianId:2}
+
             ] ,
 
+
             diseaseCategorys: [
-                {id:1 , "name":"混凝土", goujianIds:"1,2,3,4,5,6,7"} ,
-                {id:2 , "name":"裂缝", goujianIds:"1,2,3,4,5,6,7"} ,
-                {id:3 , "name":"钢筋锈蚀", goujianIds:"1,2,3,4,5,6,7"} ,
-                {id:4 , "name":"保护层厚度", goujianIds:"1,2,3,4,5,6,7"} ,
-                {id:6 , "name":"碳化深度", goujianIds:"1,2,3,4,5,6,7"} ,
+                {id:1 , "name":"混凝土"} ,
+                {id:2 , "name":"裂缝"} ,
+                {id:3 , "name":"钢筋锈蚀"} ,
+                {id:4 , "name":"保护层厚度"} ,
+                {id:6 , "name":"碳化深度"} ,
+                
                 /*
                 {id:7 , "name":"混凝土强度", goujianIds:"1,2,3,4,5,6,7"} ,
                 {id:8 , "name":"跨中挠度", goujianIds:"1,2,3,4,5,6,7"} ,
@@ -219,18 +233,91 @@ angular.module("bridge.services")
                 {id:12 , "name":"连续结构及钢构桥裂缝", goujianIds:"1,2,3,4,5,6,7"} ,
                 */
 
-                {id:13 , "name":"涂层劣化",goujianIds:"8"} ,
-                {id:14 , "name":"锈蚀",goujianIds:"8"} ,
-                {id:15 , "name":"焊接开缝",goujianIds:"8"} ,
-                {id:16 , "name":"铆钉(螺栓)损失",goujianIds:"8"} ,
-                {id:17 , "name":"构件变形",goujianIds:"8"} ,
-                {id:18 , "name":"跨中挠度",goujianIds:"8"} ,
-                {id:19 , "name":"结构变位",goujianIds:"8"} ,
-                {id:20 , "name":"构件裂缝",goujianIds:"8"}
+                {id:13 , "name":"涂层劣化"} ,
+                {id:14 , "name":"锈蚀"} ,
+                {id:15 , "name":"焊接开缝"} ,
+                {id:16 , "name":"铆钉(螺栓)损失"} ,
+                {id:17 , "name":"构件变形"} ,
+                {id:18 , "name":"跨中挠度"} ,
+                {id:19 , "name":"结构变位"} ,
+                {id:20 , "name":"构件裂缝"} ,
+
+
+                {id:21 , "name":"砼缺陷"} ,
+                {id:22 , "name":"裂缝"} ,
+                {id:23 , "name":"铰缝病害"}
+
             ] ,
 
-            diseaseTypes: [
-                {id:1 , name:"网状龟裂" , categoryId:1 , evalLevel:2} ,
+
+            goujianCategoryRelation: [
+                {goujianId:1 , categoryId:1} ,
+                {goujianId:1 , categoryId:2} ,
+                {goujianId:1 , categoryId:3} ,
+                {goujianId:1 , categoryId:4} ,
+                {goujianId:1 , categoryId:5} ,
+                {goujianId:1 , categoryId:6} ,
+                {goujianId:2 , categoryId:1} ,
+                {goujianId:2 , categoryId:2} ,
+                {goujianId:2 , categoryId:3} ,
+                {goujianId:2 , categoryId:4} ,
+                {goujianId:2 , categoryId:5} ,
+                {goujianId:2 , categoryId:6} ,
+                {goujianId:3 , categoryId:1} ,
+                {goujianId:3 , categoryId:2} ,
+                {goujianId:3 , categoryId:3} ,
+                {goujianId:3 , categoryId:4} ,
+                {goujianId:3 , categoryId:5} ,
+                {goujianId:3 , categoryId:6} ,
+                {goujianId:4 , categoryId:1} ,
+                {goujianId:4 , categoryId:2} ,
+                {goujianId:4 , categoryId:3} ,
+                {goujianId:4 , categoryId:4} ,
+                {goujianId:4 , categoryId:5} ,
+                {goujianId:4 , categoryId:6} ,
+                {goujianId:5 , categoryId:1} ,
+                {goujianId:5 , categoryId:2} ,
+                {goujianId:5 , categoryId:3} ,
+                {goujianId:5 , categoryId:4} ,
+                {goujianId:5 , categoryId:5} ,
+                {goujianId:5 , categoryId:6} ,
+                {goujianId:6 , categoryId:1} ,
+                {goujianId:6 , categoryId:2} ,
+                {goujianId:6 , categoryId:3} ,
+                {goujianId:6 , categoryId:4} ,
+                {goujianId:6 , categoryId:5} ,
+                {goujianId:6 , categoryId:6} ,
+                {goujianId:7 , categoryId:1} ,
+                {goujianId:7 , categoryId:2} ,
+                {goujianId:7 , categoryId:3} ,
+                {goujianId:7 , categoryId:4} ,
+                {goujianId:7 , categoryId:5} ,
+                {goujianId:7 , categoryId:6} ,
+                {goujianId:8 , categoryId:13} ,
+                {goujianId:8 , categoryId:14} ,
+                {goujianId:8 , categoryId:15} ,
+                {goujianId:8 , categoryId:16} ,
+                {goujianId:8 , categoryId:17} ,
+                {goujianId:8 , categoryId:18} ,
+                {goujianId:8 , categoryId:19} ,
+                {goujianId:8 , categoryId:20} ,
+
+                {goujianId:13 , categoryId:21} ,
+                {goujianId:13 , categoryId:22} ,
+                {goujianId:13 , categoryId:23} ,
+                {goujianId:14 , categoryId:21} ,
+                {goujianId:14 , categoryId:22} ,
+                {goujianId:14 , categoryId:23} ,
+                {goujianId:15 , categoryId:21} ,
+                {goujianId:15 , categoryId:22} ,
+                {goujianId:15 , categoryId:23} ,
+                {goujianId:16 , categoryId:21} ,
+                {goujianId:16 , categoryId:22} ,
+                {goujianId:16 , categoryId:23}
+            ] ,
+
+            diseaseQualitatives: [
+                {id:1 , name:"网状龟裂" , categoryId:1 , evalLevel:2 , template:""} ,
                 {id:2 , name:"钢筋锈胀" , categoryId:1 , evalLevel:3} ,
                 {id:3 , name:"混凝土蜂窝" , categoryId:1 , evalLevel:4} ,
                 {id:4 , name:"混凝土麻面" , categoryId:1 , evalLevel:2} ,
@@ -248,11 +335,132 @@ angular.module("bridge.services")
 
                 {id:15 , name:"轻微锈胀" , categoryId:3 , evalLevel:2} ,
                 {id:16 , name:"钢筋锈胀脱落" , categoryId:3 , evalLevel:3} ,
-                {id:17 , name:"钢筋分层锈蚀剥落" , categoryId:3 , evalLevel:4}
+                {id:17 , name:"钢筋分层锈蚀剥落" , categoryId:3 , evalLevel:4} ,
+
+                //21,22,23
+                {id:18 , name:"网状龟裂" , categoryId:21} ,
+                {id:19 , name:"蜂窝" , categoryId:21} ,
+                {id:20 , name:"麻面" , categoryId:21} ,
+                {id:21 , name:"砼剥落" , categoryId:21} ,
+                {id:22 , name:"露筋" , categoryId:21} ,
+                {id:23 , name:"掉角" , categoryId:21} ,
+                {id:24 , name:"空洞" , categoryId:21} ,
+                {id:25 , name:"孔洞" , categoryId:21} ,
+
+                {id:26 , name:"竖向裂缝" , categoryId:22} ,
+                {id:27 , name:"横向裂缝" , categoryId:22} ,
+                {id:28 , name:"纵向裂缝" , categoryId:22} ,
+                {id:29 , name:"斜向裂缝" , categoryId:22} ,
+
+                {id:30 , name:"通长渗水" , categoryId:23} ,
+                {id:31 , name:"局部渗水" , categoryId:23} ,
+                {id:32 , name:"填充物脱落" , categoryId:23} ,
+                {id:33 , name:"铰缝开裂" , categoryId:23}
             ] ,
 
+            diseaseEvaluates: [
+                {id:1 , name:"aaa" , sn:1} ,
+                {id:2 , name:"bbb" , sn:2} ,
+                {id:3 , name:"ccc" , sn:3} ,
+                {id:4 , name:"ddd" , sn:4} ,
+                {id:5 , name:"eeee" , sn:1} ,
+                {id:6 , name:"ffff" , sn:2}
+            ] ,
+            qualitativeEvaluateRelation: [
+                {qualitativeId:1 , evaluateId:1} ,
+                {qualitativeId:1 , evaluateId:2} ,
+                {qualitativeId:1 , evaluateId:3} ,
+                {qualitativeId:1 , evaluateId:4} ,
+                {qualitativeId:2 , evaluateId:5} ,
+                {qualitativeId:2 , evaluateId:6}
+            ] ,
+            diseaseFields: [
+                //主要承重
+                {name:"梁号" , code:"liang" , position:"before" , ix:1 , width:70 ,
+                    bujianId:1 , goujianId:0 , categoryId:0 ,
+                    type:"" , description:"" } ,
+                { name:"形式" , code:"formal" , position:"before" , ix:2 , width:100 ,
+                    bujianId:1 , goujianId:0 , categoryId:0 ,
+                    type:"" , description:"" } ,
+                {name:"距墩" , code:"dun" , position:"before" , ix:3 , width:100 ,
+                    bujianId:1 , goujianId:0 , categoryId:0 ,
+                    type:"" , description:"" } ,
+                {name:"米" , code:"distance" , position:"before" , ix:4 , width:80 ,
+                    bujianId:1 , goujianId:0 , categoryId:0 ,
+                    type:"range" , description:'{"min":0.1 , "max":10 , "step":[{"min":0.1 , "max":1 , "step":0.1}]}'} ,
+                {name:"局部位置" , code:"position" , position:"before" , ix:5 , width:100 ,
+                    bujianId:1 , goujianId:0 , categoryId:0 ,
+                    type:"select" , description:"内测腹板,外侧腹板,底板,外侧翼板,内测翼板" } ,
+
+                //category 1
+                {name:"长" , code:"length" , position:"after" , ix:1 , width:0 ,
+                    bujianId:1 , goujianId:0 , categoryId:1 ,
+                    type:"range" , description:'{"min":0.1 , "max":10 , "step":[{"min":0.1 , "max":1 , "step":0.1}]}' } ,
+                {name:"宽" , code:"width" , position:"after" , ix:1 , width:0 ,
+                    bujianId:1 , goujianId:0 , categoryId:1 ,
+                    type:"range" , description:'{"min":0.1 , "max":10 , "step":[{"min":0.1 , "max":1 , "step":0.1}]}' } ,
+                //category 2
+                {name:"条数" , code:"quantity" , position:"after" , ix:1 , width:0 ,
+                    bujianId:1 , goujianId:0 , categoryId:2 ,
+                    type:"range" , description:'{"min":1 , "max":10}' } ,
+                {name:"长" , code:"length" , position:"after" , ix:1 , width:0 ,
+                    bujianId:1 , goujianId:0 , categoryId:2 ,
+                    type:"range" , description:'{"min":0.1 , "max":10 , "step":[{"min":0.1 , "max":5 , "step":0.1}]}' } ,
+                {name:"缝宽" , code:"width" , position:"after" , ix:1 , width:0 ,
+                    bujianId:1 , goujianId:0 , categoryId:2 ,
+                    type:"range" , description:'{"min":0.1 , "max":10 , "step":[{"min":0.1 , "max":5 , "step":0.1}]}' } ,
+                {name:"状态" , code:"description" , position:"after" , ix:1 , width:100 ,
+                    bujianId:1 , goujianId:0 , categoryId:2 ,
+                    type:"select" , description:"已封闭,已加固,有崩叉,通长,渗水" } ,
+                //categoryid 3
+                {name:"电位水平" , code:"quantity" , position:"after" , ix:1 , width:0 ,
+                    bujianId:1 , goujianId:0 , categoryId:3 ,
+                    type:"range" , description:'{"min":0.2 , "max":10 , "step":0.2}'} ,
+                {name:"电阻率" , code:"extquantity" , position:"after" , ix:1 , width:0 ,
+                    bujianId:1 , goujianId:0 , categoryId:3 ,
+                    type:"range" , description:'{"min":0.2 , "max":10 , "step":0.2}' } ,
+
+                //一般承重
+                {name:"整体#" , code:"liang" , position:"before" , ix:1 , width:70 ,
+                    bujianId:2 , goujianId:0 , categoryId:0 ,
+                    type:"" , description:"" } ,
+                {name:"具体#" , code:"dun" , position:"before" , ix:3 , width:100 ,
+                    bujianId:2 , goujianId:0 , categoryId:0 ,
+                    type:"range" , description:'{"min":1 , "max":10}' } ,
+                { name:"形式" , code:"formal" , position:"before" , ix:2 , width:100 ,
+                    bujianId:2 , goujianId:0 , categoryId:0 ,
+                    type:"" , description:"" } ,
+
+                //category 21
+                {name:"长" , code:"length" , position:"after" , ix:1 , width:0 ,
+                    bujianId:2 , goujianId:0 , categoryId:21 ,
+                    type:"range" , description:'{"min":0.1 , "max":10 , "step":[{"min":0.1 , "max":1 , "step":0.1}]}' } ,
+                {name:"宽" , code:"width" , position:"after" , ix:1 , width:0 ,
+                    bujianId:2 , goujianId:0 , categoryId:21 ,
+                    type:"range" , description:'{"min":0.1 , "max":10 , "step":[{"min":0.1 , "max":1 , "step":0.1}]}' } ,
+
+                //category 22
+                {name:"条数" , code:"quantity" , position:"after" , ix:1 , width:0 ,
+                    bujianId:2 , goujianId:0 , categoryId:22 ,
+                    type:"range" , description:'{"min":1 , "max":10}' } ,
+                {name:"总长" , code:"length" , position:"after" , ix:1 , width:0 ,
+                    bujianId:2 , goujianId:0 , categoryId:22 ,
+                    type:"range" , description:'{"min":0.1 , "max":10 , "step":[{"min":0.1 , "max":5 , "step":0.1}]}' } ,
+                {name:"最大宽" , code:"width" , position:"after" , ix:1 , width:0 ,
+                    bujianId:2 , goujianId:0 , categoryId:22 ,
+                    type:"range" , description:'{"min":0.1 , "max":10 , "step":[{"min":0.1 , "max":5 , "step":0.1}]}' } ,
+                {name:"状态" , code:"description" , position:"after" , ix:1 , width:100 ,
+                    bujianId:2 , goujianId:0 , categoryId:22 ,
+                    type:"select" , description:"正常,有崩叉" } ,
+
+                //category 23
+                {name:"长" , code:"length" , position:"after" , ix:1 , width:0 ,
+                    bujianId:2 , goujianId:0 , categoryId:23 ,
+                    type:"range" , description:'{"min":0.1 , "max":10 , "step":[{"min":0.1 , "max":1 , "step":0.1}]}' }
 
 
+
+            ] ,
             leibies: [
                 //上部主要承重构件-default ,
                 {"name":"蜂窝麻面","value":"","memo":"3级","bujian":"上部主要承重构件","bujian_value":"default"} ,

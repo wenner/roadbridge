@@ -23,13 +23,14 @@ angular.module('bridge')
                 var col = $scope.col;
 
                 $scope.$watch("pickerdata.items", function() {
-                    scope.calcSize();
+                    $scope.calcSize();
                     trans.form = maxTranslate;
                     trans.duration = 300;
                     //transform(col.wrapper , 'translate3d(0,' + maxTranslate + 'px,0)');
                     //transition(col.wrapper , 0);
-                    setValue(pickerdata.value || null , 0 , false);
+                    $scope.setValue(pickerdata.value || null , 0 , false);
                 });
+
                 var transform = function (el , transform) {
                     var el = angular.element(el);
                     for (var i = 0; i < el.length; i++) {
@@ -113,6 +114,8 @@ angular.module('bridge')
                     currentTranslate, prevTranslate, velocityTranslate, velocityTime;
 
                 var updateItems = function (activeIndex, translate, mytransition, valueCallbacks) {
+                    if (!scope.pickerdata.items || scope.pickerdata.items.length == 0) return;
+
                     if (typeof translate === 'undefined') {
                         translate = getTranslate(col.wrapper, 'y');
                     }
@@ -169,6 +172,7 @@ angular.module('bridge')
                         }
                     }
                 };
+                /*
                 var setValue = function (newValue, mytransition, valueCallbacks) {
                     if (typeof transition === 'undefined') transition = '';
                     var newActiveIndex = _.findIndex(pickerdata.items , function(n){
@@ -185,8 +189,10 @@ angular.module('bridge')
                     // Update items
                     updateItems(newActiveIndex, newTranslate, transition, true);
                 };
+                */
                 angular.extend($scope , {
                     setValue: function (newValue, mytransition, valueCallbacks) {
+                        if (!scope.pickerdata.items || scope.pickerdata.items.length == 0) return;
                         if (typeof transition === 'undefined') transition = '';
                         var newActiveIndex = _.findIndex(pickerdata.items , function(n){
                             return n.value == newValue;
@@ -204,6 +210,9 @@ angular.module('bridge')
 
 
                     calcSize: function () {
+                        if (col.container.offsetHeight){
+                            scope.pickerdata.colHeight = col.container.offsetHeight;
+                        }
                         if (!scope.pickerdata.items || scope.pickerdata.items.length == 0) return;
                         if (col.attrs.rotateEffect) {
                             //col.container.removeClass('picker-items-col-absolute');
@@ -211,7 +220,7 @@ angular.module('bridge')
                         }
                         var colWidth, colHeight;
                         colWidth = 0;
-                        colHeight = col.container.offsetHeight;
+                        colHeight = col.container.offsetHeight || scope.pickerdata.colHeight;
                         wrapperHeight = col.wrapper.offsetHeight;
                         itemHeight = 36; //col.items[0].offsetHeight;
                         itemsHeight = itemHeight * scope.pickerdata.items.length;
@@ -365,12 +374,12 @@ angular.module('bridge')
 
                     } ,
                     selectItem: function(item){
-                        setValue(item.value , 300);
+                        $scope.setValue(item.value , 300);
                     }
                 });
                 $(window).on('resize', function(){
                     $scope.calcSize();
-                    setValue(scope.pickerdata.value , 0, false);
+                    $scope.setValue(scope.pickerdata.value , 0, false);
                 });
             },
             link: function (scope, elem, attrs) {
