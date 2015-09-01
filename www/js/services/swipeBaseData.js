@@ -393,17 +393,17 @@ angular.module("bridge.services")
                     type:"select" , description:"内测腹板,外侧腹板,底板,外侧翼板,内测翼板" } ,
 
                 //category 1
-                {name:"长" , code:"length" , position:"after" , ix:1 , width:0 ,
+                {name:"长m" , code:"length" , position:"after" , ix:1 , width:0 ,
                     bujianId:1 , goujianId:0 , categoryId:1 ,
                     type:"range" , description:'{"min":0.1 , "max":10 , "step":[{"min":0.1 , "max":1 , "step":0.1}]}' } ,
-                {name:"宽" , code:"width" , position:"after" , ix:1 , width:0 ,
+                {name:"宽m" , code:"width" , position:"after" , ix:1 , width:0 ,
                     bujianId:1 , goujianId:0 , categoryId:1 ,
                     type:"range" , description:'{"min":0.1 , "max":10 , "step":[{"min":0.1 , "max":1 , "step":0.1}]}' } ,
                 //category 2
                 {name:"条数" , code:"quantity" , position:"after" , ix:1 , width:0 ,
                     bujianId:1 , goujianId:0 , categoryId:2 ,
                     type:"range" , description:'{"min":1 , "max":10}' } ,
-                {name:"长" , code:"length" , position:"after" , ix:1 , width:0 ,
+                {name:"长m" , code:"length" , position:"after" , ix:1 , width:0 ,
                     bujianId:1 , goujianId:0 , categoryId:2 ,
                     type:"range" , description:'{"min":0.1 , "max":10 , "step":[{"min":0.1 , "max":5 , "step":0.1}]}' } ,
                 {name:"缝宽" , code:"width" , position:"after" , ix:1 , width:0 ,
