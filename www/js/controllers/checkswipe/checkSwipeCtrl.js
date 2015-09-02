@@ -37,6 +37,7 @@ angular.module('bridge').controller(
             info : {
                 road:1 ,
                 bridge:1 ,
+                project: "2015-09" ,
                 direction: "L" ,
                 bujianGroup: "桥下检测" ,
                 weather: "晴" ,
@@ -67,6 +68,10 @@ angular.module('bridge').controller(
                         $scope.info.direction = "S";
                     }
                 }
+                $scope.projects = [
+                    {text:"2015-09"} ,
+                    {text:"2015-10"}
+                ];
             } ,
             showInfoModal: function(){
                 if (!$scope.infoModal){

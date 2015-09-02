@@ -441,6 +441,9 @@
     border-left:0
 }
 
+.inforow .button {line-height:36px;min-height:36px}
+.inforow a.button.icon:before {line-height:33px}
+
 .myrow {
     margin:0;
     display:flex;

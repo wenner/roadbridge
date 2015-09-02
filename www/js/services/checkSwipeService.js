@@ -49,6 +49,7 @@ angular.module('bridge.services')
                     }
 
                 },
+                project: {} ,
                 direction: {},
                 buwei: {},
                 bujianType: {},

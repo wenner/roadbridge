@@ -4,7 +4,7 @@
                 ng-clic1k='goback()' ui-sref=tab.disease></button>
         <h1 class="title">
             <div ng-show="!current.isEmpty()">
-                201508 / {{current.road.display}} / {{current.bridge.display}} / {{current.bujianGroup.value}}
+                {{current.project.value}} / {{current.road.display}} / {{current.bridge.display}}
             </div>
             <div ng-if="current.isEmpty()">请选择检测基础信息</div>
         </h1>
@@ -71,8 +71,9 @@
             <div class="row inforow" style="background-color:#ffffcc">
                 <div class="col col-20">当前正在采集的信息</div>
                 <div class="col"> {{result.values}}</div>
-                <div class="col col-10 text-center" style="color:blue">
-                    <a class="button icon-left ion-ios-plus button-clear button-positive" style="font-weight:bold">添加</a>
+                <div class="col col-10 text-center" style="color:blue;border:0">
+                    <a class="button icon ion-ios-plus button-clear button-positive"
+                       style="font-weight:bold"> 添加</a>
                 </div>
             </div>
 
