@@ -439,6 +439,9 @@ angular.module('bridge.services')
                                 return _.extend(n, {name: n.sn, value: n.id, text: n.name});
                             }
                         );
+                        items = _.map(_.range(1 , _.random(4,6)) , function(n){
+                            return {name:n , value:n };
+                        });
                         changes[evaluateIndex] = {};
                         changes[evaluateIndex].items = items;
                 }
