@@ -2,7 +2,7 @@ angular.module('bridge').controller(
     'SettingCtrl',
     function ($scope, $rootScope, $stateParams, $ionicLoading, $ionicModal,
               $timeout, $state, $location, $log ,
-              UserService) {
+              UserService , DataBaseService) {
         $scope.user = UserService.info;
 
         //login
@@ -13,5 +13,12 @@ angular.module('bridge').controller(
                 $state.go("login");
             });
         }
+
+        DataBaseService.single("select count(*) as count from LocalDisease")
+            .then(function(item){
+                console.log(item)
+                $scope.localDiseaseCount = item.count;
+            });
+
     }
 );

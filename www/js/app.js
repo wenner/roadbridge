@@ -6,39 +6,34 @@
 angular.module('bridge', [
         'ionic' ,
 		'ngCordova' ,
+        'bridge.config' ,
         'bridge.services' ,
         'bridge.controllers'
     ])
-    .run(function ($state , $ionicPlatform , $rootScope , $ionicPopup ,
-                   UserService , StorageService ,
-                   CheckListService , CheckDescriptionService , BaseData) {
-        //初始化disease
-        if (!StorageService.exists("diseases")){
-            var diseases = initDiseases;
-            _.forEach(diseases , function(disease){
-                var result = [] , current = {};
-                _.forEach(BaseData.steps, function (n) {
-                    if (disease[n.code]) {
-                        var item = {
-                            code: n.code ,
-                            value:disease[n.code] ,
-                            item_name: n.name
-                        };
-                        current[n.code] = item;
-                        result.push(item);
+    .run(function ($state , $ionicPlatform , $rootScope , $ionicPopup ,$cordovaSQLite ,
+                   UserService , StorageService , EnvService , DataBaseService) {
+        EnvService.getApi();
+        DataBaseService.checkCreated()
+            .then(function(){
+                return DataBaseService.checkUpdated();
+            } , function(){
+                $state.go("baseinfo" , {action:"create"});
+                return false;
+            })
+            .then(function(data){
+                if (data && data.isChanged){
+                    if (confirm("检查到新的数据, 是否更新?")){
+                        $state.go("baseinfo" , {action:"update"});
                     }
-                });
-                _.forEach(result, function (n) {
-                    if (n.inited) return;
-                    n.sourceData = CheckListService.getSourceData(n , current);
-                    n.inited = true;
-                });
-                disease.description = CheckDescriptionService.getDescription(current , disease);
-            });
-            StorageService.set("diseases" , diseases);
-        }
+                }
+            } , function(){
+                if (confirm("检查到新的数据, 是否更新?")){
+                    $state.go("baseinfo" , {action:"update"});
+                }            });
 
         $ionicPlatform.ready(function () {
+
+
             // notify
             if (!navigator.notification) {
                 navigator.notification = {
@@ -65,7 +60,6 @@ angular.module('bridge', [
                 }
                 //toState.authenticated !== true || AuthenticationService.isAuthenticated(Me) || ($state.go("welcome"), event.preventDefault())
             });
-
         });
     })
     .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $httpProvider) {
@@ -150,6 +144,12 @@ angular.module('bridge', [
                     }
                 }
             })
+            //database init
+            .state('baseinfo' , {
+                url: '/baseinfo/{action:string}' ,
+                templateUrl: 'views/baseinfo.html' ,
+                controller: "BaseInfoCtrl"
+            })
             //检查
             .state('check', {
                 url: "",
@@ -192,8 +192,10 @@ angular.module('bridge', [
 
 angular.module('bridge.controllers', [
 	'ngCordova' ,
+    'bridge.config' ,
     'bridge.services'
 ]);
 angular.module('bridge.services', [
+    'bridge.config' ,
 ]);
 

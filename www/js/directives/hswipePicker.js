@@ -10,9 +10,9 @@ angular.module('bridge')
             templateUrl:"views/checkswipe/row.html" ,
             controller: function ($scope, $element , $ionicSlideBoxDelegate) {
                 var scope = $scope , elem = $element;
-                $scope.pickerdata.trans = {};
+                //$scope.pickerdata.trans = {};
                 var pickerdata = $scope.pickerdata ,
-                    trans = $scope.pickerdata.trans ,
+                    trans = $scope.pickerdata.trans || {} ,
                     container = elem[0];
                 $scope.col = {
                     container: container ,
@@ -24,7 +24,8 @@ angular.module('bridge')
 
                 $scope.$watch("pickerdata.items", function() {
                     scope.calcSize();
-                    setValue("" , 0)
+                    $scope.pickerdata.value = null;
+                    $scope.setValue("" , 0);
                     /*
                     trans.form = maxTranslate;
                     trans.duration = 300;

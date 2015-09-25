@@ -24,7 +24,7 @@
             <label class='item item-input item-select'>
                 <span class="input-label">检测任务</span>
                 <select ng-model="info.project"
-                        ng-options='x.text as x.text for x in projects'
+                        ng-options='x.id as x.name for x in projects'
                         required>
                 </select>
             </label>
@@ -58,17 +58,17 @@
             </label>
             <label class='item item-input'>
                 <span class="input-label">检测单位</span>
-                <input type='text' ng-model="info.checkdept"
+                <input type='text' ng-model="info.checkDept"
                        placeholder="请填写检测单位" required>
             </label>
             <label class='item item-input'>
                 <span class="input-label">检测人</span>
-                <input type='text' ng-model="info.checkuser"
+                <input type='text' ng-model="info.checkUser"
                        placeholder="请填写检测人" required>
             </label>
             <label class='item item-input'>
                 <span class="input-label">检测日期</span>
-                <input type='date' ng-model="info.checkday"
+                <input type='date' ng-model="info.checkDay"
                        placeholder="请填写检测日期" required>
             </label>
 

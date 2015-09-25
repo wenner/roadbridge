@@ -7213,7 +7213,7 @@ angular.module('ngCordova.plugins.sqlite', [])
         if (typeof background === 'undefined') {
           background = 0;
         }
-
+console.log($window.sqlitePlugin)
         return $window.sqlitePlugin.openDatabase({
           name: dbName,
           bgType: background

@@ -4,7 +4,7 @@
                 ng-clic1k='goback()' ui-sref=tab.disease></button>
         <h1 class="title">
             <div ng-show="!current.isEmpty()">
-                {{current.project.value}} / {{current.road.display}} / {{current.bridge.display}}
+                {{current.project.display}} / {{current.road.display}} / {{current.bridge.display}}
             </div>
             <div ng-if="current.isEmpty()">请选择检测基础信息</div>
         </h1>
@@ -42,7 +42,8 @@
             <div class="hpicker-container hpicker-container-borderbottom">
                 <div class="hpicker-row">
                     <div class="hpicker-header">{{current.bujianGroup.value}}:</div>
-                    <div hswipepicker
+                    <div ng-if="bujianSns"
+                         hswipepicker
                          pickerdata="bujianSns"
                          momentumRatio="10"
                          changecol = "changeCol(bujianSns)"
@@ -56,7 +57,8 @@
             <div class="hpicker-container hpicker-container-borderbottom">
                 <div class="hpicker-row">
                     <div class="hpicker-header">桥梁部件:</div>
-                    <div hswipepicker
+                    <div ng-if="bujians"
+                         hswipepicker
                          pickerdata="bujians"
                          momentumRatio="10"
                          changecol = "changeCol(bujians)"
@@ -70,7 +72,7 @@
             <!--病害信息显示-->
             <div class="row inforow" style="background-color:#ffffcc">
                 <div class="col col-20">当前正在采集的信息</div>
-                <div class="col"> {{result.values}}</div>
+                <div class="col"> {{current.content.value}}</div>
                 <div class="col col-10 text-center" style="color:blue;border:0">
                     <a class="button icon ion-ios-plus button-clear button-positive"
                        style="font-weight:bold"> 添加</a>
@@ -82,9 +84,10 @@
                 <div ng-repeat="col in pickerColumns"
                      ng-show = "!col.hidden"
                      class="picker-column text-{{col.align || 'center'}}"
-                     style="{{col.width ? 'width:'+col.width+'px' : 'flex:1;-webkit-flex:1'}}">
+                     style="{{col.width && col.width !=0 ? 'width:'+col.width+'px' : 'flex:1;-webkit-flex:1'}}">
                     <div class="picker-column-header">{{col.name}}</div>
-                    <div swipepicker
+                    <div ng-if="col"
+                         swipepicker
                          momentumRatio="10"
                          pickerdata="col"
                          changecol = "changeCol(col)"
@@ -124,7 +127,8 @@
     </ion-content>
 
     <ion-footer-bar class="bar-positive">
-        <button class="button button-icon  ion-checkmark-round pull-left">保存</button>
+        <button class="button button-icon  ion-checkmark-round pull-left"
+                ng-click="save()">保存</button>
         <h1 class="title">
         </h1>
         <div class="buttons pull-right" side="right">

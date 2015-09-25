@@ -1,4 +1,20 @@
 {
   "name": "bridge",
-  "app_id": ""
+  "app_id": "" , 
+   
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ] , 
+  
+  "proxies": [
+    {
+      "path": "/api/",
+      "proxyUrl": "http://192.168.0.107/BridgeWebApi/api/"
+    } , 
+    {
+	"path" : "/docs/" , 
+	"proxyUrl": "http://192.168.0.107/BridgeWebApi/docs/"
+    }
+  ]
 }

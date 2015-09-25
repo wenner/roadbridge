@@ -1,0 +1,57 @@
+<ion-view>
+    <ion-header-bar class="bar-positive">
+        <button class="button button-icon  ion-ios-arrow-back pull-left"
+                ui-sref=tab.setting>返回</button>
+        <h1 class="title">
+            {{action == "create" ? '初始化数据库' : '更新本地数据'}}
+        </h1>
+        <div class="buttons" side="right">
+            <button class='button button-icon ion-ios-loop'
+                    ng-click="checkUpdated()">检查数据更新</button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <div ng-if="action=='create'">
+            <div>{{createMessage}}</div>
+        <ion-list>
+            <ion-item ng-repeat="item in createItems" class='item-icon-right'>
+                {{$index+1}}. {{item.tableName}}
+                <span class="item-note">{{item.error.join("")}}</span>
+                <i class="icon "
+                   ng-class="{true:'ion-checkmark-circled balanced' , false:'ion-close-circled assertive'}[item.complete]"></i>
+            </ion-item>
+        </ion-list>
+        </div>
+        <div ng-if="action=='update'">
+            <ion-item class='item-divider' style="padding-top:5px;padding-bottom:5px">
+                <div class="row">
+                    <div class="col">表名</div>
+                    <div class="col col-25 text-right">本地日期 @ 版本</div>
+                    <div class="col col-25 text-right">服务器日期 @ 版本</div>
+                    <div class="col col-25 text-right">状态</div>
+                    <div class="col item-icon-right" style="width:50px;max-width:50px"></div>
+                </div>
+            </ion-item >
+            <ion-list>
+                <ion-item ng-repeat="item in updateItems" style="padding-top:5px;padding-bottom:5px">
+                    <div class="row">
+                        <div class="col">{{$index+1}}. {{item.tableName}}</div>
+                        <div class="col col-25 text-right"> {{item.local.version || '-'}} @ {{item.local.modifyAt | date : 'yyyy-MM-dd hh:mm'}}</div>
+                        <div class="col col-25 text-right"> {{item.remote.version}} @ {{item.remote.modifyAt | date : 'yyyy-MM-dd hh:mm'}}</div>
+                        <div class="col col-25 text-right"
+                             ng-class="{false:'balanced' , true:'assertive'}[item.isChanged]">
+                            {{tableStatus[item.status]}} {{item.message}}
+                        </div>
+                        <div class="col item-icon-right" style="width:50px;max-width:50px">
+                            <ion-spinner class="balanced iteminside"
+                                         ng-if="item.status != 'complete' && item.status != 'ok'"></ion-spinner>
+                            <i class="icon ion-checkmark-circled balanced" style="font-size:32px;padding-left:5px"
+                               ng-if="item.status == 'complete' || item.status == 'ok'"></i>
+                        </div>
+                    </div>
+
+                </ion-item>
+            </ion-list>
+        </div>
+    </ion-content>
+</ion-view>

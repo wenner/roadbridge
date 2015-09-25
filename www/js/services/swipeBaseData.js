@@ -257,42 +257,49 @@ angular.module("bridge.services")
                 {goujianId:1 , categoryId:4} ,
                 {goujianId:1 , categoryId:5} ,
                 {goujianId:1 , categoryId:6} ,
+
                 {goujianId:2 , categoryId:1} ,
                 {goujianId:2 , categoryId:2} ,
                 {goujianId:2 , categoryId:3} ,
                 {goujianId:2 , categoryId:4} ,
                 {goujianId:2 , categoryId:5} ,
                 {goujianId:2 , categoryId:6} ,
+
                 {goujianId:3 , categoryId:1} ,
                 {goujianId:3 , categoryId:2} ,
                 {goujianId:3 , categoryId:3} ,
                 {goujianId:3 , categoryId:4} ,
                 {goujianId:3 , categoryId:5} ,
                 {goujianId:3 , categoryId:6} ,
+
                 {goujianId:4 , categoryId:1} ,
                 {goujianId:4 , categoryId:2} ,
                 {goujianId:4 , categoryId:3} ,
                 {goujianId:4 , categoryId:4} ,
                 {goujianId:4 , categoryId:5} ,
                 {goujianId:4 , categoryId:6} ,
+
                 {goujianId:5 , categoryId:1} ,
                 {goujianId:5 , categoryId:2} ,
                 {goujianId:5 , categoryId:3} ,
                 {goujianId:5 , categoryId:4} ,
                 {goujianId:5 , categoryId:5} ,
                 {goujianId:5 , categoryId:6} ,
+
                 {goujianId:6 , categoryId:1} ,
                 {goujianId:6 , categoryId:2} ,
                 {goujianId:6 , categoryId:3} ,
                 {goujianId:6 , categoryId:4} ,
                 {goujianId:6 , categoryId:5} ,
                 {goujianId:6 , categoryId:6} ,
+
                 {goujianId:7 , categoryId:1} ,
                 {goujianId:7 , categoryId:2} ,
                 {goujianId:7 , categoryId:3} ,
                 {goujianId:7 , categoryId:4} ,
                 {goujianId:7 , categoryId:5} ,
                 {goujianId:7 , categoryId:6} ,
+
                 {goujianId:8 , categoryId:13} ,
                 {goujianId:8 , categoryId:14} ,
                 {goujianId:8 , categoryId:15} ,
@@ -317,7 +324,7 @@ angular.module("bridge.services")
             ] ,
 
             diseaseQualitatives: [
-                {id:1 , name:"网状龟裂" , categoryId:1 , evalLevel:2 , template:""} ,
+                {id:1 , name:"网状龟裂" , categoryId:1 , evalLevel:2} ,
                 {id:2 , name:"钢筋锈胀" , categoryId:1 , evalLevel:3} ,
                 {id:3 , name:"混凝土蜂窝" , categoryId:1 , evalLevel:4} ,
                 {id:4 , name:"混凝土麻面" , categoryId:1 , evalLevel:2} ,
@@ -374,6 +381,13 @@ angular.module("bridge.services")
                 {qualitativeId:2 , evaluateId:5} ,
                 {qualitativeId:2 , evaluateId:6}
             ] ,
+            diseaseTemplates: [
+                {id:1 , bujianId:1 , goujianId:1 , categoryId:1 ,
+                    template:"第{{bujian.value}}孔 {{liang.value}}#{{formal.display}} {{dun.display}} {{distance.value}}m {{position.value}} {{diseaseCategory.display}} {{diseaseQualitative.display}} {{length.value}}x{{width.value}}"}
+
+
+            ] ,
+
             diseaseFields: [
                 //主要承重
                 {name:"梁号" , code:"liang" , position:"before" , ix:1 , width:70 ,
@@ -458,9 +472,8 @@ angular.module("bridge.services")
                     bujianId:2 , goujianId:0 , categoryId:23 ,
                     type:"range" , description:'{"min":0.1 , "max":10 , "step":[{"min":0.1 , "max":1 , "step":0.1}]}' }
 
-
-
             ] ,
+
             leibies: [
                 //上部主要承重构件-default ,
                 {"name":"蜂窝麻面","value":"","memo":"3级","bujian":"上部主要承重构件","bujian_value":"default"} ,

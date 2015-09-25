@@ -24,14 +24,32 @@
                         <option value="bujian">部件</option>
                     </select>
             </label>
+            <!--数据信息-->
+            <ion-item class="item-divider">数据信息</ion-item>
+            <ion-item>
+                本地数据大小
+                <span class="item-note"> 2.4M</span>
+            </ion-item>
+            <ion-item>
+                未上传检查记录
+                <span class="item-note"> {{localDiseaseCount}}</span>
+            </ion-item>
+            <ion-item href="#/baseinfo/update"  class='item-icon-right'>
+                检查数据更新
+                <span class="item-note">最后更新: xxxxxx-xxxx</span>
+                <i class="icon ion-ios-loop"></i>
+            </ion-item>
             <!--关于-->
             <ion-item class="item-divider">关于</ion-item>
             <ion-item>帮助</ion-item>
             <ion-item>
-                检查更新<span class="item-note">当前版本: {{version}}</span>
+                检查更新<span class="item-note">当前版本: 0.1.x</span>
             </ion-item>
             <ion-item>关于APP</ion-item>
-            <ion-item>关于天津容数</ion-item>
+            <ion-item>
+                关于天津容数
+                <span class="item-note">www.tjxrs.cn</span>
+            </ion-item>
         </ion-list>
     </ion-content>
 </ion-view>
