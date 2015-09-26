@@ -34,7 +34,11 @@ angular.module('bridge.services')
                 var sqlPath = EnvService.api.replace("/api/", "/docs/") + "db.txt";
                 $http.get(sqlPath)
                     .success(function (d) {
-                        var items = me.parseSql(d);
+                        try {
+                            var items = me.parseSql(d);
+                        }catch(e){
+                            alert(e.message);
+                        }
                         alert(items.length);
                         db.transaction(function (tx) {
                             _.each(items , function(item){
