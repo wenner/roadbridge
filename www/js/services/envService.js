@@ -1,52 +1,44 @@
 'use strict';
 angular.module('bridge.services')
     .factory('EnvService', function ($log, StorageService , defaultSetting , defaultConfig) {
-        alert('env')
-        try {
-
-
-            var configKey = 'config',
-                configs = StorageService.set(configKey) || defaultConfig,
-                settingKey = 'settings',
-                settings = StorageService.get(settingKey) || defaultSetting,
-                apiUrl;
-            return {
-                api: apiUrl,
-                getApi: function () {
-                    var apiType = StorageService.get("apiType", true);
-                    if (!apiType) apiType = configs.apiType;
-                    if (ionic.Platform.isWebView()) {
-                        apiType = "internet";
-                    }
-                    this.apiType = apiType;
-                    apiUrl = configs.apiUrls[apiType];
-                    this.api = apiUrl;
-                },
-                changeApiType: function (type) {
-                    StorageService.set("apiType", type, true);
-                    this.getApi();
-                },
-                getSettings: function () {
-                    $log.debug('get settings', settings);
-                    return settings;
-                },
-                saveSetting: function () {
-                    StorageService.set(settingKey, settings);
-                },
-                getConfig: function () {
-                    $log.debug('get configs', configs);
-                    return configs;
-                },
-                saveConfig: function () {
-                    StorageService.set(configKey, configs);
-                },
-
-                getRemoteStorage: function () {
-
+        var configKey = 'config' ,
+            configs = StorageService.set(configKey) || defaultConfig ,
+            settingKey = 'settings' ,
+            settings = StorageService.get(settingKey) || defaultSetting ,
+            apiUrl;
+        return {
+            api: apiUrl ,
+            getApi: function(){
+                var apiType = StorageService.get("apiType" , true);
+                if (!apiType) apiType = configs.apiType;
+                if (ionic.Platform.isWebView()){
+                    apiType = "internet";
                 }
-            };
-        }catch(e){
-            alert('end e'+ e.message)
-        }
-        alert('env end')
+                this.apiType = apiType;
+                apiUrl = configs.apiUrls[apiType];
+                this.api = apiUrl;
+            } ,
+            changeApiType: function(type){
+                StorageService.set("apiType" , type , true);
+                this.getApi();
+            } ,
+            getSettings: function () {
+                $log.debug('get settings', settings);
+                return settings;
+            },
+            saveSetting: function () {
+                StorageService.set(settingKey, settings);
+            } ,
+            getConfig: function(){
+                $log.debug('get configs', configs);
+                return configs;
+            } ,
+            saveConfig: function(){
+                StorageService.set(configKey , configs);
+            } ,
+
+            getRemoteStorage: function(){
+
+            }
+        };
     });
