@@ -12,6 +12,7 @@ angular.module('bridge', [
     ])
     .run(function ($state , $ionicPlatform , $rootScope , $ionicPopup ,$cordovaSQLite ,
                    UserService , StorageService , EnvService , DataBaseService) {
+        alert("run")
         EnvService.getApi();
         DataBaseService.checkCreated()
             .then(function(){
@@ -32,10 +33,10 @@ angular.module('bridge', [
             } , function(){
                 if (confirm("检查到新的数据, 是否更新?")){
                     $state.go("baseinfo" , {action:"update"});
-                }            });
+                }
+            });
 
         $ionicPlatform.ready(function () {
-            alert(2222222)
             // notify
             if (!navigator.notification) {
                 navigator.notification = {
@@ -63,11 +64,10 @@ angular.module('bridge', [
                 //toState.authenticated !== true || AuthenticationService.isAuthenticated(Me) || ($state.go("welcome"), event.preventDefault())
             });
 
-            alert(222222)
         });
     })
     .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $httpProvider) {
-
+        alert("config")
         _.templateSettings.interpolate = /{{([\s\S]+?)}}/g;
 
         $stateProvider
@@ -202,4 +202,5 @@ angular.module('bridge.controllers', [
 angular.module('bridge.services', [
     'bridge.config' ,
 ]);
+alert("app")
 
