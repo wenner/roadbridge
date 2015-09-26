@@ -1,7 +1,7 @@
 'use strict';
 alert(111111111)
 angular.module('bridge.services')
-    .factory('DataBaseService', function (
+    .factory('ddd', function (
 
     ) {
         alert('db start')
