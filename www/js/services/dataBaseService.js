@@ -1,5 +1,4 @@
 'use strict';
-alert(111111111)
 angular.module('bridge.services')
     .factory('ddd', function (
 
