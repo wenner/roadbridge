@@ -15,8 +15,9 @@ angular.module('bridge', [
         alert("run")
         try {
             $ionicPlatform.ready(function () {
+
+                //EnvService.getApi();
                 /*
-                EnvService.getApi();
                 DataBaseService.checkCreated()
                     .then(function () {
                         alert(33333333)

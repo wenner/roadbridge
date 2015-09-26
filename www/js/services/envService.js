@@ -42,4 +42,5 @@ angular.module('bridge.services')
 
             }
         };
+        alert('env end')
     });
