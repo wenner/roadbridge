@@ -11,7 +11,7 @@ angular.module('bridge.services')
             getApi: function(){
                 var apiType = StorageService.get("apiType" , true);
                 if (!apiType) apiType = configs.apiType;
-                if (ionic.Platform.isWebView()){
+                if (ionic.Platform.isWebView() || ionic.Platform.isIOS()){
                     apiType = "internet";
                 }
                 this.apiType = apiType;

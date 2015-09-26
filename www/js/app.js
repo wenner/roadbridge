@@ -32,7 +32,7 @@ angular.module('bridge', [
                     $state.go("baseinfo" , {action:"update"});
                 }
             });
-        
+
 
         $ionicPlatform.ready(function () {
 
