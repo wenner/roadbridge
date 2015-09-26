@@ -5,8 +5,9 @@ angular.module('bridge.services')
         EnvService
     ) {
         alert('db start')
-        var db = window.openDatabase("bridge", 1.1, 'bridge', 30000);
+        //var db = window.openDatabase("bridge", 1.1, 'bridge', 30000);
         return {
+            /*
             db: db,
             isCreated: false,
             isUpdated: false,
@@ -261,6 +262,7 @@ angular.module('bridge.services')
                 });
                 return defer.promise;
             }
+            */
         };
         alert('db end')
     });
