@@ -35,7 +35,7 @@ angular.module('bridge', [
                 }            });
 
         $ionicPlatform.ready(function () {
-
+            alert(2222222)
             // notify
             if (!navigator.notification) {
                 navigator.notification = {
