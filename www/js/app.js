@@ -11,10 +11,11 @@ angular.module('bridge', [
         'bridge.controllers'
     ])
     .run(function ($state , $ionicPlatform , $rootScope , $ionicPopup ,
-                   UserService , StorageService , EnvService , DataBaseService) {
+                   UserService) {
         alert("run")
         try {
             $ionicPlatform.ready(function () {
+                /*
                 EnvService.getApi();
                 DataBaseService.checkCreated()
                     .then(function () {
@@ -37,7 +38,7 @@ angular.module('bridge', [
                             $state.go("baseinfo", {action: "update"});
                         }
                     });
-
+                */
 
                 // notify
                 if (!navigator.notification) {
