@@ -11,7 +11,7 @@ angular.module('bridge', [
         'bridge.controllers'
     ])
     .run(function ($state , $ionicPlatform , $rootScope , $ionicPopup ,$cordovaSQLite ,
-                   UserService , StorageService , EnvService , DataBaseService) {
+                   UserService , StorageService , EnvService) {
         EnvService.getApi();
         /*
         DataBaseService.checkCreated()
