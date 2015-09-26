@@ -263,5 +263,4 @@ angular.module('bridge.services')
             }
             */
         };
-        alert('db end')
     });
