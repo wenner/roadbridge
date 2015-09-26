@@ -27,7 +27,8 @@ angular.module('bridge').controller(
             createDataBase: function(){
                 db.createDataBase().then(function(data){
                     $scope.createItems = data;
-                } , function(){
+                } , function(e){
+                    alert("error:"+e)
                     $scope.error = "不能获取初始化脚本,请联系管理员!";
                 });
             } ,

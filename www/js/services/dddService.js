@@ -4,7 +4,6 @@ angular.module('bridge.services')
         $q, $http, $log, $util ,
         EnvService
     ) {
-        alert('db start')
         var db = window.openDatabase("bridge", 1.1, 'bridge', 30000);
         return {
             db: db,
@@ -33,6 +32,7 @@ angular.module('bridge.services')
                 var me = this;
                 var defer = $q.defer();
                 var sqlPath = EnvService.api.replace("/api/", "/docs/") + "db.txt";
+                alert(sqlPath)
                 $http.get(sqlPath)
                     .success(function (d) {
                         var items = me.parseSql(d);
@@ -54,7 +54,7 @@ angular.module('bridge.services')
                         defer.resolve(items);
                     })
                     .error(function(e){
-                        defer.reject();
+                        defer.reject(e.message);
                     });
                 return defer.promise;
             },
@@ -262,5 +262,4 @@ angular.module('bridge.services')
                 return defer.promise;
             }
         };
-        alert('db end')
     });
