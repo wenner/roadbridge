@@ -15,12 +15,15 @@ angular.module('bridge', [
         EnvService.getApi();
         DataBaseService.checkCreated()
             .then(function(){
+                alert(33333333)
                 return DataBaseService.checkUpdated();
             } , function(){
+                alert(555555555)
                 $state.go("baseinfo" , {action:"create"});
                 return false;
             })
             .then(function(data){
+                alert(2222222222)
                 if (data && data.isChanged){
                     if (confirm("检查到新的数据, 是否更新?")){
                         $state.go("baseinfo" , {action:"update"});
@@ -32,7 +35,6 @@ angular.module('bridge', [
                 }            });
 
         $ionicPlatform.ready(function () {
-            alert(111111111)
 
             // notify
             if (!navigator.notification) {
@@ -60,6 +62,8 @@ angular.module('bridge', [
                 }
                 //toState.authenticated !== true || AuthenticationService.isAuthenticated(Me) || ($state.go("welcome"), event.preventDefault())
             });
+
+            alert(222222)
         });
     })
     .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $httpProvider) {
