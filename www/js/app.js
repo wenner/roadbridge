@@ -13,58 +13,63 @@ angular.module('bridge', [
     .run(function ($state , $ionicPlatform , $rootScope , $ionicPopup ,$cordovaSQLite ,
                    UserService , StorageService , EnvService , DataBaseService) {
         alert("run")
-        EnvService.getApi();
-        DataBaseService.checkCreated()
-            .then(function(){
-                alert(33333333)
-                return DataBaseService.checkUpdated();
-            } , function(){
-                alert(555555555)
-                $state.go("baseinfo" , {action:"create"});
-                return false;
-            })
-            .then(function(data){
-                alert(2222222222)
-                if (data && data.isChanged){
-                    if (confirm("检查到新的数据, 是否更新?")){
-                        $state.go("baseinfo" , {action:"update"});
+        try {
+            $ionicPlatform.ready(function () {
+                EnvService.getApi();
+                DataBaseService.checkCreated()
+                    .then(function () {
+                        alert(33333333)
+                        return DataBaseService.checkUpdated();
+                    }, function () {
+                        alert(555555555)
+                        $state.go("baseinfo", {action: "create"});
+                        return false;
+                    })
+                    .then(function (data) {
+                        alert(2222222222)
+                        if (data && data.isChanged) {
+                            if (confirm("检查到新的数据, 是否更新?")) {
+                                $state.go("baseinfo", {action: "update"});
+                            }
+                        }
+                    }, function () {
+                        if (confirm("检查到新的数据, 是否更新?")) {
+                            $state.go("baseinfo", {action: "update"});
+                        }
+                    });
+
+
+                // notify
+                if (!navigator.notification) {
+                    navigator.notification = {
+                        alert: function (message, title) {
+                            $ionicPopup.alert({template: message, title: title || '信息'});
+                        }
+                    };
+                }
+
+                // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+                // for form inputs)
+                if (window.cordova && window.cordova.plugins.Keyboard) {
+                    cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+                }
+                if (window.StatusBar) {
+                    StatusBar.styleDefault();
+                }
+                //event, toState, toParams, fromState, fromParams
+                $rootScope.$on("$stateChangeStart", function (event, toState) {
+                    //如果页面的authenticated == true , 并且没有登录 , 转到welcome
+                    if (!(toState.authenticated !== true || UserService.isLogin())) {
+                        $state.go("login");
+                        event.preventDefault();
                     }
-                }
-            } , function(){
-                if (confirm("检查到新的数据, 是否更新?")){
-                    $state.go("baseinfo" , {action:"update"});
-                }
+                    //toState.authenticated !== true || AuthenticationService.isAuthenticated(Me) || ($state.go("welcome"), event.preventDefault())
+                });
+
             });
-
-        $ionicPlatform.ready(function () {
-            // notify
-            if (!navigator.notification) {
-                navigator.notification = {
-                    alert: function (message, title) {
-                        $ionicPopup.alert({template: message, title: title || '信息'});
-                    }
-                };
-            }
-
-            // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-            // for form inputs)
-            if (window.cordova && window.cordova.plugins.Keyboard) {
-                cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-            }
-            if (window.StatusBar) {
-                StatusBar.styleDefault();
-            }
-            //event, toState, toParams, fromState, fromParams
-            $rootScope.$on("$stateChangeStart", function (event, toState) {
-                //如果页面的authenticated == true , 并且没有登录 , 转到welcome
-                if (!(toState.authenticated !== true  || UserService.isLogin())) {
-                    $state.go("login");
-                    event.preventDefault();
-                }
-                //toState.authenticated !== true || AuthenticationService.isAuthenticated(Me) || ($state.go("welcome"), event.preventDefault())
-            });
-
-        });
+        }catch(e){
+            alert(e.message);
+        }
     })
     .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $httpProvider) {
         alert("config")
