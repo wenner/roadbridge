@@ -1,8 +1,7 @@
 'use strict';
 angular.module('bridge.services')
     .factory('DataBaseService', function (
-        $q, $http, $log, $util ,
-        EnvService
+
     ) {
         alert('db start')
         //var db = window.openDatabase("bridge", 1.1, 'bridge', 30000);
