@@ -10,7 +10,7 @@ angular.module('bridge', [
         'bridge.services' ,
         'bridge.controllers'
     ])
-    .run(function ($state , $ionicPlatform , $rootScope , $ionicPopup ,$cordovaSQLite ,
+    .run(function ($state , $ionicPlatform , $rootScope , $ionicPopup ,
                    UserService , StorageService , EnvService , DataBaseService) {
         alert("run")
         try {
