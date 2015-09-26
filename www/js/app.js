@@ -13,7 +13,7 @@ angular.module('bridge', [
     .run(function ($state , $ionicPlatform , $rootScope , $ionicPopup ,$cordovaSQLite ,
                    UserService , StorageService , EnvService , DataBaseService) {
         EnvService.getApi();
-        /*
+
         DataBaseService.checkCreated()
             .then(function(){
                 return DataBaseService.checkUpdated();
@@ -32,7 +32,7 @@ angular.module('bridge', [
                     $state.go("baseinfo" , {action:"update"});
                 }
             });
-        */
+        
 
         $ionicPlatform.ready(function () {
 
