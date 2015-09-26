@@ -32,7 +32,7 @@ angular.module('bridge', [
                 }            });
 
         $ionicPlatform.ready(function () {
-
+            alert(111111111)
 
             // notify
             if (!navigator.notification) {
