@@ -32,10 +32,10 @@ angular.module('bridge.services')
                 var me = this;
                 var defer = $q.defer();
                 var sqlPath = EnvService.api.replace("/api/", "/docs/") + "db.txt";
-                alert(sqlPath)
                 $http.get(sqlPath)
                     .success(function (d) {
                         var items = me.parseSql(d);
+                        alert(items.length);
                         db.transaction(function (tx) {
                             _.each(items , function(item){
                                 var complete = true;
@@ -54,6 +54,7 @@ angular.module('bridge.services')
                         defer.resolve(items);
                     })
                     .error(function(e){
+                        alert(e.message);
                         defer.reject(e.message);
                     });
                 return defer.promise;
