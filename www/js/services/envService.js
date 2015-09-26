@@ -1,6 +1,7 @@
 'use strict';
 angular.module('bridge.services')
     .factory('EnvService', function ($log, StorageService , defaultSetting , defaultConfig) {
+        alert('env')
         var configKey = 'config' ,
             configs = StorageService.set(configKey) || defaultConfig ,
             settingKey = 'settings' ,

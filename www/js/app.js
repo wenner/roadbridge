@@ -11,7 +11,7 @@ angular.module('bridge', [
         'bridge.controllers'
     ])
     .run(function ($state , $ionicPlatform , $rootScope , $ionicPopup ,
-                   UserService) {
+                   UserService , StorageService , EnvService , DataBaseService) {
         alert("run")
         try {
             $ionicPlatform.ready(function () {
