@@ -1,6 +1,6 @@
 'use strict';
 angular.module('bridge.services')
-    .factory('dddService', function ($log, StorageService , defaultSetting , defaultConfig) {
+    .factory('DataBaseService', function ($log, StorageService , defaultSetting , defaultConfig) {
         var configKey = 'config' ,
             configs = StorageService.set(configKey) || defaultConfig ,
             settingKey = 'settings' ,
