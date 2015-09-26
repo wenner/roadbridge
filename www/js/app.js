@@ -11,12 +11,13 @@ angular.module('bridge', [
         'bridge.controllers'
     ])
     .run(function ($state , $ionicPlatform , $rootScope , $ionicPopup ,
-                   UserService , StorageService , DataBaseService) {
+                   UserService , StorageService , EnvService) {
         alert("run")
         try {
             $ionicPlatform.ready(function () {
 
-                //EnvService.getApi();
+                EnvService.getApi();
+                alert(3333)
                 /*
                 DataBaseService.checkCreated()
                     .then(function () {
