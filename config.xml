@@ -48,6 +48,7 @@
     <gap:splash gap:platform="ios" src="resources\ios\splash\Default-Landscape~ipad.png" width="1024" height="768"/>
     -->
     <gap:splash src="splash.png"/>
+    <gap:splash src="img\splash.png"/>
 
 
     <platform name="ios">
