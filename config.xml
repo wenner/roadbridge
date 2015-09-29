@@ -42,9 +42,11 @@
     <icon gap:platform="ios" src="resources\ios\icon\icon-small@3x.png" width="87" height="87"/>
     -->
     <!--splash-->
+    <!--
     <gap:splash gap:platform="ios" src="resources\ios\splash\Default-Landscape-736h.png" width="2208" height="1242"/>
     <gap:splash gap:platform="ios" src="resources\ios\splash\Default-Landscape@2x~ipad.png" width="2048" height="1536"/>
     <gap:splash gap:platform="ios" src="resources\ios\splash\Default-Landscape~ipad.png" width="1024" height="768"/>
+    -->
     <gap:splash src="splash.png"/>
 
 
