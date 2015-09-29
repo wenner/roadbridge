@@ -47,7 +47,7 @@
     <icon gap:platform="ios" src="img1\ios\icon\icon-76.png" width="76" height="76"/>
 	    <icon gap:platform="ios" src="img1/icons/ios/icon76.png" width="76" height="76" /> <!-- iPad non retina iOS7 -->
     <icon gap:platform="ios" src="img1\ios\icon\icon-76@2x.png" width="152" height="152"/>
-	    <icon gap:platform="ios" src="img1/icons/ios/icon152.png" width="152" height="152" /> <!-- iPad retina iOS7 -->
+	    <icon gap:platform="ios" src="img1/icons/ios/icon-76@2x.png" width="152" height="152" /> <!-- iPad retina iOS7 -->
 
     <icon gap:platform="ios" src="img1\ios\icon\icon-small.png" width="29" height="29"/>
     <icon gap:platform="ios" src="img1\ios\icon\icon-small@2x.png" width="58" height="58"/>
