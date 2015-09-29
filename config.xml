@@ -25,6 +25,7 @@
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
   <icon src="icon.png"/>
+  <splash src="splash.png" gap:platform="ios"/>
   <gap:splash src="splash.png" gap:platform="ios"/>
 
 
