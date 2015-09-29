@@ -4,6 +4,7 @@ angular.module('bridge.services')
         $q, $http, $log, $util ,
         EnvService
     ) {
+
         var db = window.openDatabase("bridge", 1.1, 'bridge', 30000);
         return {
             db: db,
