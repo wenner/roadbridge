@@ -25,13 +25,13 @@
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
   <icon src="icon.png"/>
-  <splash src="splash.png"/>
 
   <gap:splash gap:platform="ios" height="480" src="splash.png" width="320" />
   <gap:splash gap:platform="ios" height="960" src="splash.png" width="640" />
   <gap:splash gap:platform="ios" height="1136" src="splash.png" width="640" />
   <gap:splash gap:platform="ios" height="1024" src="splash.png" width="768" />
   <gap:splash gap:platform="ios" height="768" src="splash.png" width="1024" />
+  <gap:splash src="splash.png"/>
 
 
   <platform name="ios">
