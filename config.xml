@@ -47,8 +47,22 @@
     <gap:splash gap:platform="ios" src="resources\ios\splash\Default-Landscape@2x~ipad.png" width="2048" height="1536"/>
     <gap:splash gap:platform="ios" src="resources\ios\splash\Default-Landscape~ipad.png" width="1024" height="768"/>
     -->
-    <gap:splash src="splash.png"/>
-    <gap:splash src="img\splash.png"/>
+    <gap:splash src="splash.png" /> <!-- default 320x480 pixels -->
+        
+    <gap:splash src="img/splash/ios/splash320x480.png" gap:platform="ios" width="320" height="480" /> <!-- iPhone & iPod Touch non retina -->
+    <gap:splash src="img/splash/ios/splash640x960.png" gap:platform="ios" width="640" height="960" /> <!-- iPhone & iPod Touch retina 4- -->
+    <gap:splash src="img/splash/ios/splash640x1136.png" gap:platform="ios" width="640" height="1136" /> <!-- iPhone & iPod Touch retina 5+ -->
+    <gap:splash src="img/splash/ios/splash1024x768.png" gap:platform="ios" width="1024" height="768" /> <!-- iPad non retina -->
+    <gap:splash src="img/splash/ios/splash768x1024.png" gap:platform="ios" width="768" height="1024" /> <!-- iPad non retina -->
+    <gap:splash src="img/splash/ios/splash2048x1496.png" gap:platform="ios" width="2048" height="1496" /> <!-- iPad retina -->
+    <gap:splash src="img/splash/ios/splash1536x2008.png" gap:platform="ios" width="1536" height="2008" /> <!-- iPad retina -->
+        
+    <gap:splash src="img/splash/android/ldpi.png" gap:platform="android" gap:density="ldpi" /> <!-- 200x320 -->
+    <gap:splash src="img/splash/android/mdpi.png" gap:platform="android" gap:density="mdpi" /> <!-- 320x480 -->
+    <gap:splash src="img/splash/android/hdpi.png" gap:platform="android" gap:density="hdpi" /> <!-- 480x800 -->
+    <gap:splash src="img/splash/android/xhdpi.png" gap:platform="android" gap:density="xhdpi" /> <!-- 720x1280 -->
+        
+    <gap:splash src="img/splash/winphone/splash.jpg" gap:platform="winphone" /> <!-- Windows Phone 7 480x800 -->
 
 
     <platform name="ios">
