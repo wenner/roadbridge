@@ -41,9 +41,9 @@
 
     <!--splash-->
     <gap:splash src="splash.png" />
-    <gap:splash gap:platform="ios" src="img1\ios\splash\Default-Landscape-736h.png" width="2208" height="1242"/>
-    <gap:splash gap:platform="ios" src="img1\ios\splash\Default-Landscape@2x~ipad.png" width="2048" height="1536"/>
-    <gap:splash gap:platform="ios" src="img1\ios\splash\Default-Landscape~ipad.png" width="1024" height="768"/>
+    <gap:splash gap:platform="ios" src="img1/ios/splash/Default-Landscape-736h.png" width="2208" height="1242"/>
+    <gap:splash gap:platform="ios" src="img1/ios/splash/Default-Landscape@2x~ipad.png" width="2048" height="1536"/>
+    <gap:splash gap:platform="ios" src="img1/ios/splash/Default-Landscape~ipad.png" width="1024" height="768"/>
 
     <platform name="ios">
         <icon src="resources\ios\icon\icon.png" width="57" height="57"/>
