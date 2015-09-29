@@ -1,12 +1,11 @@
 'use strict';
 angular.module('bridge.services')
-    .factory('ddd', function (
-
+    .factory('DataBaseService', function (
+        $q, $http, $log, $util ,
+        EnvService
     ) {
-        alert('db start')
-        //var db = window.openDatabase("bridge", 1.1, 'bridge', 30000);
+        var db = window.openDatabase("bridge", 1.1, 'bridge', 30000);
         return {
-            /*
             db: db,
             isCreated: false,
             isUpdated: false,
@@ -54,7 +53,7 @@ angular.module('bridge.services')
                         defer.resolve(items);
                     })
                     .error(function(e){
-                        defer.reject();
+                        defer.reject(e.message);
                     });
                 return defer.promise;
             },
@@ -181,7 +180,7 @@ angular.module('bridge.services')
                         }
                         _.each(data , function(n , i){
                             var values = _.map(fields , function(field){
-                               return "'"+n[field]+"'";
+                                return "'"+n[field]+"'";
                             });
                             sql.push(values.join(" , "));
                         });
@@ -261,6 +260,5 @@ angular.module('bridge.services')
                 });
                 return defer.promise;
             }
-            */
         };
     });

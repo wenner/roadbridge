@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.tjxrs.bridge" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.tjxrs.bridge"
+        version="0.0.1"
+        xmlns="http://www.w3.org/ns/widgets"
+        xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>桥梁检测</name>
   <description>道桥检测系统</description>
-  <author email="wenner.cn@gmail.com" href="http://tjxrs.com/">TJXRS</author>
+  <author email="wenner.cn@gmail.com" href="http://tjxrs.com/">天津容数</author>
   <content src="index.html"/>
   <access origin="*"/>
+
+  <preference name="orientation" value="landscape" />
+  <preference name="detect-data-types" value="false" />
+
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>
   <preference name="DisallowOverscroll" value="true"/>
@@ -12,15 +19,16 @@
   <preference name="BackupWebStorage" value="none"/>
   <preference name="SplashScreen" value="splash"/>
   <preference name="SplashScreenDelay" value="3000"/>
+
   <gap:plugin name="org.apache.cordova.splashscreen"/>
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
   <icon src="icon.png"/>
-  <gap:splash src="splash.png" gap:platform="ios" width="768" height="1024"/>
-  <gap:splash src="splash.png" gap:platform="ios" width="1024" height="768"/>
-  <gap:splash src="splash.png" gap:platform="ios" width="1536" height="2048"/>
-  <gap:splash src="splash.png" gap:platform="ios" width="2048" height="1536"/>
+  <gap:splash src="splash.png" gap:platform="ios"/>
+
+
+
   <platform name="ios">
     <icon src="resources/ios/icon/icon.png" width="57" height="57"/>
     <icon src="resources/ios/icon/icon@2x.png" width="114" height="114"/>
