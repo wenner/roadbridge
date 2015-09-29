@@ -24,21 +24,36 @@
     <!--icon-->
     <icon src="icon.png"/>
     <icon gap:platform="ios" src="img1\ios\icon\icon.png" width="57" height="57"/>
+	    <icon gap:platform="ios" src="img/icons/ios/icon57.png" width="57" height="57" /> <!-- iPhone & iPod Touch non retina iOS6 -->
+
     <icon gap:platform="ios" src="img1\ios\icon\icon@2x.png" width="114" height="114"/>
+	    <icon gap:platform="ios" src="img/icons/ios/icon114.png" width="114" height="114" /> <!-- iPhone & iPod Touch retina iOS6 -->
+
     <icon gap:platform="ios" src="img1\ios\icon\icon-40.png" width="40" height="40"/>
     <icon gap:platform="ios" src="img1\ios\icon\icon-40@2x.png" width="80" height="80"/>
     <icon gap:platform="ios" src="img1\ios\icon\icon-50.png" width="50" height="50"/>
     <icon gap:platform="ios" src="img1\ios\icon\icon-50@2x.png" width="100" height="100"/>
     <icon gap:platform="ios" src="img1\ios\icon\icon-60.png" width="60" height="60"/>
     <icon gap:platform="ios" src="img1\ios\icon\icon-60@2x.png" width="120" height="120"/>
+	    <icon gap:platform="ios" src="img/icons/ios/icon120.png" width="120" height="120" /> <!-- iPhone & iPod Touch retina iOS7 -->
+
     <icon gap:platform="ios" src="img1\ios\icon\icon-60@3x.png" width="180" height="180"/>
+
     <icon gap:platform="ios" src="img1\ios\icon\icon-72.png" width="72" height="72"/>
+	    <icon gap:platform="ios" src="img/icons/ios/icon72.png" width="72" height="72" /> <!-- iPad non retina iOS6 -->
     <icon gap:platform="ios" src="img1\ios\icon\icon-72@2x.png" width="144" height="144"/>
+	    <icon gap:platform="ios" src="img/icons/ios/icon144.png" width="144" height="144" /> <!-- iPad retina iOS6 -->
+
     <icon gap:platform="ios" src="img1\ios\icon\icon-76.png" width="76" height="76"/>
+	    <icon gap:platform="ios" src="img/icons/ios/icon76.png" width="76" height="76" /> <!-- iPad non retina iOS7 -->
     <icon gap:platform="ios" src="img1\ios\icon\icon-76@2x.png" width="152" height="152"/>
+	    <icon gap:platform="ios" src="img/icons/ios/icon152.png" width="152" height="152" /> <!-- iPad retina iOS7 -->
+
     <icon gap:platform="ios" src="img1\ios\icon\icon-small.png" width="29" height="29"/>
     <icon gap:platform="ios" src="img1\ios\icon\icon-small@2x.png" width="58" height="58"/>
     <icon gap:platform="ios" src="img1\ios\icon\icon-small@3x.png" width="87" height="87"/>
+
+
 
     <!--splash-->
     <gap:splash src="splash.png" />
