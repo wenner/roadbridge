@@ -2,7 +2,9 @@
 <widget id="com.tjxrs.bridge"
         version="0.0.1"
         xmlns="http://www.w3.org/ns/widgets"
+        xmlns:gap = "http://phonegap.com/ns/1.0"
         xmlns:cdv="http://cordova.apache.org/ns/1.0">
+
   <name>桥梁检测</name>
   <description>道桥检测系统</description>
   <author email="wenner.cn@gmail.com" href="http://tjxrs.com/">天津容数</author>
