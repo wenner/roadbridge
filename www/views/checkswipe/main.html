@@ -24,7 +24,6 @@
         </div>
     </ion-header-bar>
     <ion-content scroll="false" class="has-header">
-
         <div class="picker-container"
              ng-if="!current.isEmpty()">
 
@@ -100,7 +99,9 @@
 
             <!--历史记录-->
 
-            <div ng-include="'views/checkswipe/record.html'" style="flex:1;-webkit-flex:1;
+            <div ng-if="!forMedia"
+                 ng-include="'views/checkswipe/record.html'"
+                 style="flex:1;-webkit-flex:1;
     display: -webkit-box;
     display: -ms-flexbox;
     display: -webkit-flex;
@@ -108,8 +109,9 @@
     flex-flow:column;
     -webkit-flex-flow:column;
     -webkit-flex-dircetion:column;
-"
-            ></div>
+"></div>
+            <div ng-if="forMedia"
+                 ng-include="'views/checkswipe/media.html'"></div>
 
             <!--
             <div style="border-top:#ccc solid 1px;">
@@ -133,7 +135,11 @@
         </h1>
         <div class="buttons pull-right" side="right">
             <button class='button button-icon ion-ios-camera'
+                    ng-if="!forMedia"
                     ng-click="showMediaMenu($event)">拍照</button>
+            <button class='button button-icon ion-close-round'
+                    ng-if="forMedia"
+                    ng-click="hideMediaMenu()">取消拍照</button>
             <!--
             <button class='button button-badge button-icon ion-ios-clock-outline'
                     style="padding-left:0"

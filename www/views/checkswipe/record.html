@@ -35,13 +35,13 @@
                     <div class="mycol" style="flex:1;-webkit-flex:1">
                         {{disease.content}}
                     </div>
-                    <div class="mycol text-center" style="width:80px">{{disease.evaluate}}</div>
+                    <div class="mycol text-center" style="width:80px">{{disease.evaluateId}}</div>
                     <div class="mycol text-center" style="width:80px">{{disease.medias}}</div>
                 </div>
-                <ion-option-button class="button-balanced" ng-click="maintain(maintain)">
+                <ion-option-button class="button-balanced" ng-click="editDisease(disease)">
                     <i class='icon ion-wrench padding'></i>修改
                 </ion-option-button>
-                <ion-option-button class="button-assertive" ng-click="maintain(maintain)">
+                <ion-option-button class="button-assertive" ng-click="deleteDisease(disease)">
                     <i class='icon ion-delete padding'></i>删除
                 </ion-option-button>
             </ion-item>

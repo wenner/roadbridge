@@ -3,7 +3,7 @@ angular.module('bridge').controller(
     function ($scope, $rootScope, $q , $stateParams, $ionicLoading, $ionicModal,
               $ionicTabsDelegate, $ionicPopover, $ionicActionSheet,
               $timeout, $state, $location, $log, $ionicSideMenuDelegate,
-              $cordovaCapture, $cordovaCamera, $cordovaGeolocation,
+              $cordovaCapture, $cordovaCamera, $cordovaGeolocation, $ionicPopup ,
               CheckSwipeService, $ionicSlideBoxDelegate , $ionicScrollDelegate) {
 
         var srv = CheckSwipeService;
@@ -24,10 +24,11 @@ angular.module('bridge').controller(
                 bridge: 1,
                 project: 1,
                 direction: "L",
-                bujianGroup: "桥下检测",
-                weather: "晴",
+                //暂时注释掉,因为异步并且值为中文,则不会选中select option
+                //bujianGroup: "桥下检测",
+                //weather: "晴",
                 checkDept: "天津市交通科学研究院",
-                checkUser: "张文涛",
+                checkUserName: "张文涛",
                 checkDay: new Date()
             },
 
@@ -43,10 +44,12 @@ angular.module('bridge').controller(
                 //buweis
                 srv.getBuweis().then(function(items){
                     $scope.buweis = items;
+                    $scope.info.bujianGroup = "桥下检测";
                 });
                 //weathers
                 srv.getWeathers().then(function(items){
                     $scope.weathers = items;
+                    $scope.info.weather = '晴';
                 });
             } ,
 
@@ -247,6 +250,9 @@ angular.module('bridge').controller(
 
             //显示拍照的menu
             showMediaMenu: function (event) {
+
+                $scope.forMedia = true;
+
                 //$scope.popover.show(event)
                 var hideSheet = $ionicActionSheet.show({
                     buttons: [
@@ -271,6 +277,10 @@ angular.module('bridge').controller(
                 });
             },
 
+            hideMediaMenu: function(){
+                $scope.forMedia = false;
+            } ,
+
             //保存
             save: function () {
                 srv.save().then(function(){
@@ -282,8 +292,30 @@ angular.module('bridge').controller(
                 } , function(msg){
                     alert(msg)
                 });
+            } ,
+
+            //删除
+            deleteDisease: function(disease) {
+                var confirmPopup = $ionicPopup.confirm({
+                    title: '<b>确认删除</b>',
+                    template: '当前操作将删除该病害,不可恢复 , 是否继续删除?' ,
+                    cancelText: "取消" ,
+                    okText:"确认删除" ,
+                    okType: "button-assertive"
+                });
+                confirmPopup.then(function (res) {
+                    if (res) {
+                        srv.delete(disease).then(function(){
+                            $scope.getDiseases();
+                        })
+                    } else {
+                    }
+                });
             }
+
         });
+
+
         $scope.getBaseInfo();
         $scope.initInfo();
         $scope.$on('$ionicView.beforeEnter', function () {

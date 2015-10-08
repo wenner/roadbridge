@@ -8,16 +8,15 @@
         </div>
         <ion-list ng-if="!isLoading">
             <ion-item>
-                {{disease.description}}
+                {{disease.content}}
             </ion-item>
             <ion-item class="item-divider">病害信息</ion-item>
-            <ion-item  ng-repeat="item in result" style="pointer-events:auto">
-                {{item.item_name}}
-                <ng-include src="'views/check/result-item.html'"></ng-include>
+            <ion-item  ng-repeat="item in disease" style="pointer-events:auto">
+                {{item}}
             </ion-item>
             <ion-item class="item-divider">媒体信息</ion-item>
             <ion-slide-box class='welcome'>
-                <ion-slide ng-repeat="item in disease.medias">
+                <ion-slide ng-repeat="item in medias">
                     <div class="padding text-center">
                         <img ng-src="{{item.result}}" style="width:100%">
                     </div>

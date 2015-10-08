@@ -37,11 +37,11 @@
         </ion-refresher>
         <ion-list>
             <ion-item ng-repeat="disease in diseases"
-                      href="#/disease/{{disease.sn}}">
-                {{disease.description}}
+                      href="#/disease/{{disease.id}}">
+                {{disease.content}}
                 <p style="padding-top:5px">
                     {{disease.sn}}
-                    <span class="item-note">{{disease.username}} @ {{disease.createtime}}</span>
+                    <span class="item-note">{{disease.checkUserName}} @ {{disease.checkDay}}</span>
                 </p>
                 <ion-option-button class="button-balanced" ng-click="maintain(maintain)">
                     <i class='icon ion-wrench padding'></i>修改

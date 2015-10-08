@@ -21,6 +21,7 @@ angular.module('bridge.services')
                 weather: {isBase: true},
                 //检查人 , string
                 checkUser: {isBase: true},
+                checkUserName: {isBase: true} ,
                 //检查部门 , string
                 checkDept: {isBase: true},
                 //检查日期 , date
@@ -324,7 +325,7 @@ angular.module('bridge.services')
                  */
             },
             getKongs: function () {
-                var sql = "select * from bridgekong where bridgeId = ? and direction = ?";
+                var sql = "select * from bridgekong where bridgeId = ? and direction = ? order by id";
                 var params = [current.bridge.value, current.direction.value];
                 return DataBaseService.query(sql, params).then(function(items){
                     return _.map(items , function(n){
@@ -799,7 +800,11 @@ angular.module('bridge.services')
                 values = values || this.getValues();
                 if (!values) {
                     defer.reject("无效的数据,请检查!");
-                    return defer;
+                    return defer.promise;
+                }
+                if (!values.content){
+                    defer.reject("缺少病害描述信息,请检查!");
+                    return defer.promise;
                 }
                 values.sn = [
                     current.road.record.sn, current.bridge.record.sn,
@@ -808,14 +813,19 @@ angular.module('bridge.services')
                 ].join("-");
 
                 //insert into LocalDisease
-                var fields = "projectId,sourceId,status,sn,cherkUser,checkDay,weather,roadId,bridgeId,direction,buweiId,bujianSn,bujianId,categoryId,qualitativeId,evaluateId,content,goujianId,formal,liang,dun,zhizuo,distance,position,length,width,height,quantity,extquantity,description".split(",");
+                var fields = "projectId,sourceId,status,sn,checkUser,checkUserName,checkDay,weather,createAt,roadId,bridgeId,direction,buweiId,bujianSn,bujianId,categoryId,qualitativeId,evaluateId,content,goujianId,formal,liang,dun,zhizuo,distance,position,length,width,height,quantity,extquantity,description".split(",");
+                var s = {};
                 var saveValues = _.map(fields , function(n){
                     var v = values[n] || "";
                     switch (n){
-                        case "checkDay":
+                        case "createAt":
                             v = moment().format('YYYY-MM-DD HH:mm:ss');
                             break;
+                        case "checkDay":
+                            v = moment(v).format('YYYY-MM-DD HH:mm:ss');
+                            break;
                     }
+                    s[n] = v;
                     return "'"+v+"'";
                 });
                 var sql = "insert into LocalDisease ( id , " + fields +" ) ";
@@ -833,6 +843,15 @@ angular.module('bridge.services')
                 defer.resolve();
                 */
                 return defer.promise;
+            } ,
+
+            //删除
+            delete: function(disease){
+                var sql  = [
+                    "delete from LocalDisease where id = "+disease.id ,
+                    "delete from LocalDiseaseMedia where diseaseId = "+disease.id
+                ];
+                return DataBaseService.run(sql);
             } ,
 
             getDiseases: function () {

@@ -6,21 +6,20 @@ angular.module('bridge').controller(
 
         $scope.isLoading = false;
 
-        $scope.load = function(sn){
+        $scope.load = function(id){
             $scope.isLoading = true;
-            sn = sn || $stateParams.sn;
-            console.log(sn)
-            DiseaseService.getDiseaseBySn(sn)
+            id = id || $stateParams.id;
+            DiseaseService.getDiseaseById(id)
                 .then(function(data){
-                    _.extend($scope , data);
+                    var dm = data.data;
+                    $scope.disease =  dm.Disease;
+                    $scope.medias = dm.Medias;
                 })
                 .finally(function() {
                     $scope.isLoading = false;
                     return $scope.$broadcast('scroll.refreshComplete');
                 });
-
-
-        }
+        };
 
         $scope.load();
 

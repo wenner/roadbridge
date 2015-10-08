@@ -10,8 +10,8 @@ angular.module('bridge', [
         'bridge.services' ,
         'bridge.controllers'
     ])
-    .run(function ($state , $ionicPlatform , $rootScope , $ionicPopup ,$cordovaSQLite ,
-                   UserService , StorageService , EnvService , DataBaseService) {
+    .run(function ($state , $ionicPlatform , $rootScope , $timeout , $ionicPopup ,$cordovaSQLite ,
+                   UserService , StorageService , EnvService , DataBaseService , LocalDiseaseService) {
         EnvService.getApi();
 
         DataBaseService.checkCreated()
@@ -62,6 +62,14 @@ angular.module('bridge', [
                 }
                 //toState.authenticated !== true || AuthenticationService.isAuthenticated(Me) || ($state.go("welcome"), event.preventDefault())
             });
+
+            function sync(){
+                //LocalDiseaseService.check();
+                //$timeout(sync , 6000);
+            }
+            sync();
+
+
         });
     })
     .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $httpProvider) {
@@ -100,7 +108,7 @@ angular.module('bridge', [
             })
             .state('tab.diseasedetail' , {
                 authenticated: true ,
-                url: '/disease/{sn:string}',
+                url: '/disease/{id:string}',
                 views: {
                     'tabDisease': {
                         templateUrl: 'views/diseasedetail.html',

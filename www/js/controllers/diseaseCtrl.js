@@ -21,7 +21,7 @@ angular.module('bridge').controller(
             DiseaseService
                 .query($scope.condition)
                 .then(function (data) {
-                    $scope.diseases = data;
+                    $scope.diseases = data.data;
                 })
                 .finally(function () {
                     $scope.loading = false;

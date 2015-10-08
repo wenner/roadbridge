@@ -260,6 +260,16 @@ angular.module('bridge.services')
                     });
                 });
                 return defer.promise;
+            } ,
+            run: function(sqls){
+                var defer = $q.defer();
+                db.transaction(function (tx) {
+                    _.each(sqls , function(sql){
+                        tx.executeSql(sql);
+                    });
+                    defer.resolve();
+                });
+                return defer.promise;
             }
         };
     });
