@@ -307,6 +307,8 @@ angular.module('bridge').controller(
                     if (res) {
                         srv.delete(disease).then(function(){
                             $scope.getDiseases();
+                        } , function(){
+                            alert(22222222)
                         })
                     } else {
                     }
