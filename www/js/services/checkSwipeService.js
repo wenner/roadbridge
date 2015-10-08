@@ -846,11 +846,12 @@ angular.module('bridge.services')
             } ,
 
             //删除
-            delete: function(disease){
+            deleteDisease: function(disease){
                 var sql  = [
                     "delete from LocalDisease where id = "+disease.id ,
                     "delete from LocalDiseaseMedia where diseaseId = "+disease.id
                 ];
+                alert("before delete")
                 return DataBaseService.run(sql);
             } ,
 

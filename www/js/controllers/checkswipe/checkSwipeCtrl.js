@@ -305,7 +305,8 @@ angular.module('bridge').controller(
                 });
                 confirmPopup.then(function (res) {
                     if (res) {
-                        srv.delete(disease).then(function(){
+                        alert("confirmed")
+                        srv.deleteDisease(disease).then(function(){
                             $scope.getDiseases();
                         } , function(){
                             alert(22222222)
