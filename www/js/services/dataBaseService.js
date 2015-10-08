@@ -267,6 +267,7 @@ angular.module('bridge.services')
                     _.each(sqls , function(sql){
                         tx.executeSql(sql);
                     });
+                    alert("run")
                     defer.resolve();
                 });
                 return defer.promise;
