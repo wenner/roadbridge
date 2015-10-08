@@ -264,10 +264,11 @@ angular.module('bridge.services')
             run: function(sqls){
                 var defer = $q.defer();
                 db.transaction(function (tx) {
+                    alert("before run")
                     _.each(sqls , function(sql){
                         tx.executeSql(sql);
                     });
-                    alert("run")
+                    alert("after run")
                     defer.resolve();
                 });
                 return defer.promise;
