@@ -261,7 +261,7 @@ angular.module('bridge.services')
                 });
                 return defer.promise;
             } ,
-            run: function(sqls){
+            runSql: function(sqls){
                 var defer = $q.defer();
                 alert("run")
                 db.transaction(function (tx) {

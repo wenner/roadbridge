@@ -203,7 +203,7 @@
     width:auto;
     position: relative;
     max-height: 100%;
-    border-right:#ccc solid 1px;
+    border-right:#ddd solid 1px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: -webkit-flex;
@@ -214,7 +214,7 @@
 }
 
 .picker-column:first-child{
-    border-left:#ccc solid 1px
+    border-left:#ddd solid 1px
 }
 .picker-column-header {
     background:#e8f4ff;
@@ -223,7 +223,7 @@
     min-height:36px;
     line-height:36px;
     text-align:center;
-    border-bottom:#ccc solid 1px;
+    border-bottom:#ddd solid 1px;
 }
 .picker-column-items {
     overflow: hidden;
@@ -317,8 +317,8 @@
 .hpicker-container {
     background1:#eee;
 }
-.hpicker-container-borderbottom {border-bottom:#ccc solid 1px}
-.hpicker-container-bordertop {border-top:#ccc solid 1px}
+.hpicker-container-borderbottom {border-bottom:#ddd solid 1px}
+.hpicker-container-bordertop {border-top:#ddd solid 1px}
 .hpicker-row {
     display: -webkit-box;
     display: -ms-flexbox;

@@ -853,7 +853,7 @@ angular.module('bridge.services')
                 ];
                 alert("before delete")
                 alert(DataBaseService.run)
-                return DataBaseService.run(sql);
+                return DataBaseService.runSql(sql);
             } ,
 
             getDiseases: function () {
