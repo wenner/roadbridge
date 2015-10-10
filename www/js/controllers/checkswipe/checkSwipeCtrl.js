@@ -305,11 +305,10 @@ angular.module('bridge').controller(
                 });
                 confirmPopup.then(function (res) {
                     if (res) {
-                        alert("confirmed")
                         srv.deleteDisease(disease).then(function(){
                             $scope.getDiseases();
-                        } , function(){
-                            alert(22222222)
+                        } , function(errors){
+                            alert(errors.join("\n"));
                         })
                     } else {
                     }

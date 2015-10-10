@@ -851,8 +851,6 @@ angular.module('bridge.services')
                     "delete from LocalDisease where id = "+disease.id ,
                     "delete from LocalDiseaseMedia where diseaseId = "+disease.id
                 ];
-                alert("before delete")
-                alert(DataBaseService.run)
                 return DataBaseService.run(sql);
             } ,
 
