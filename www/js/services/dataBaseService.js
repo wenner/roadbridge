@@ -222,7 +222,23 @@ angular.module('bridge.services')
             } ,
 
             //db
-
+            query1: function(sqls){
+                var defer = $q.defer();
+                alert("run")
+                db.transaction(function (tx) {
+                    alert("before execute")
+                    _.each(sqls , function(sql){
+                        tx.executeSql(sql , [] , function(){
+                            alert("ok"+sql)
+                        } , function(){
+                            alert(error.message+sql)
+                        });
+                    });
+                    alert("after execute")
+                    defer.resolve();
+                });
+                return defer.promise;
+            } ,
             runSql: function(sqls){
                 var defer = $q.defer();
                 alert("run")
