@@ -4,7 +4,6 @@ angular.module('bridge.services')
         $q, $http, $log, $util ,
         EnvService
     ) {
-
         var db = window.openDatabase("bridge", 1.1, 'bridge', 30000);
         return {
             db: db,
@@ -222,40 +221,6 @@ angular.module('bridge.services')
             } ,
 
             //db
-            query1: function(sqls){
-                var defer = $q.defer();
-                alert("run")
-                db.transaction(function (tx) {
-                    alert("before execute")
-                    _.each(sqls , function(sql){
-                        tx.executeSql(sql , [] , function(){
-                            alert("ok"+sql)
-                        } , function(){
-                            alert(error.message+sql)
-                        });
-                    });
-                    alert("after execute")
-                    defer.resolve();
-                });
-                return defer.promise;
-            } ,
-            runSql: function(sqls){
-                var defer = $q.defer();
-                alert("run")
-                db.transaction(function (tx) {
-                    alert("before execute")
-                    _.each(sqls , function(sql){
-                        tx.executeSql(sql , [] , function(){
-                            alert("ok"+sql)
-                        } , function(){
-                            alert(error.message+sql)
-                        });
-                    });
-                    alert("after execute")
-                    defer.resolve();
-                });
-                return defer.promise;
-            } ,
             query: function(sql , params){
                 var defer = $q.defer();
                 db.transaction(function (tx) {
@@ -292,6 +257,24 @@ angular.module('bridge.services')
                         console.log(error.message);
                         defer.reject(error.message);
                     });
+                });
+                return defer.promise;
+            } ,
+            run: function(sqls){
+                var defer = $q.defer();
+                var errors = [];
+                db.transaction(function (tx) {
+                    _.each(sqls , function(sql){
+                        tx.executeSql(sql , [] , function(){
+                        } , function(error){
+                            errors.push(error.message);
+                        });
+                    });
+                    if (errors.length == 0){
+                        defer.resolve();
+                    }else{
+                        defer.reject(errors);
+                    }
                 });
                 return defer.promise;
             }
