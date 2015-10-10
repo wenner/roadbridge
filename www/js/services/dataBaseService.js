@@ -222,6 +222,24 @@ angular.module('bridge.services')
             } ,
 
             //db
+
+            runSql: function(sqls){
+                var defer = $q.defer();
+                alert("run")
+                db.transaction(function (tx) {
+                    alert("before execute")
+                    _.each(sqls , function(sql){
+                        tx.executeSql(sql , [] , function(){
+                            alert("ok"+sql)
+                        } , function(){
+                            alert(error.message+sql)
+                        });
+                    });
+                    alert("after execute")
+                    defer.resolve();
+                });
+                return defer.promise;
+            } ,
             query: function(sql , params){
                 var defer = $q.defer();
                 db.transaction(function (tx) {
@@ -258,23 +276,6 @@ angular.module('bridge.services')
                         console.log(error.message);
                         defer.reject(error.message);
                     });
-                });
-                return defer.promise;
-            } ,
-            runSql: function(sqls){
-                var defer = $q.defer();
-                alert("run")
-                db.transaction(function (tx) {
-                    alert("before execute")
-                    _.each(sqls , function(sql){
-                        tx.executeSql(sql , [] , function(){
-                            alert("ok"+sql)
-                        } , function(){
-                            alert(error.message+sql)
-                        });
-                    });
-                    alert("after execute")
-                    defer.resolve();
                 });
                 return defer.promise;
             }
