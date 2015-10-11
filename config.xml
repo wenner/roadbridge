@@ -20,9 +20,9 @@
     <preference name="CameraUsesGeolocation" value="true" />
 
     <gap:plugin name="org.apache.cordova.splashscreen"/>
-    <gap:plugin name="cordova-plugin-file-transfer"/>
-    <gap:plugin name="cordova-plugin-camera"/>
-    <gap:plugin name="cordova-plugin-media-capture"/>
+    <gap:plugin name="org.apache.cordova.file-transfer"/>
+    <gap:plugin name="org.apache.cordova.camera"/>
+    <gap:plugin name="org.apache.cordova.media-capture"/>
 
 
 
