@@ -10,7 +10,8 @@ angular.module('bridge', [
         'bridge.services' ,
         'bridge.controllers'
     ])
-    .run(function ($state , $ionicPlatform , $rootScope , $timeout , $ionicPopup ,$cordovaSQLite ,
+    .run(function ($state , $ionicPlatform , $rootScope , $timeout , $ionicPopup ,
+                   $cordovaSQLite , $cordovaNetwork ,
                    UserService , StorageService , EnvService , DataBaseService , LocalDiseaseService) {
         EnvService.getApi();
 
@@ -35,6 +36,7 @@ angular.module('bridge', [
 
 
         $ionicPlatform.ready(function () {
+            //navigator.notification.vibrate()
 
             // notify
             if (!navigator.notification) {

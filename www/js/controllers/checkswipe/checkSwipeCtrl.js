@@ -1,10 +1,11 @@
 angular.module('bridge').controller(
     'CheckSwipeCtrl',
-    function ($scope, $rootScope, $q , $stateParams, $ionicLoading, $ionicModal,
+    function ($scope, $rootScope, $q, $stateParams, $ionicLoading, $ionicModal,
               $ionicTabsDelegate, $ionicPopover, $ionicActionSheet,
               $timeout, $state, $location, $log, $ionicSideMenuDelegate,
-              $cordovaCapture, $cordovaCamera, $cordovaGeolocation, $ionicPopup ,
-              CheckSwipeService, $ionicSlideBoxDelegate , $ionicScrollDelegate) {
+              $cordovaCapture, $cordovaCamera, $cordovaGeolocation, $ionicPopup,
+              CheckSwipeService, $ionicSlideBoxDelegate, $ionicScrollDelegate ,
+                EnvService) {
 
         var srv = CheckSwipeService;
 
@@ -19,6 +20,7 @@ angular.module('bridge').controller(
             current: srv.current,
             diseases: [],
             directions: [],
+            medias: [],
             info: {
                 road: 1,
                 bridge: 1,
@@ -32,26 +34,26 @@ angular.module('bridge').controller(
                 checkDay: new Date()
             },
 
-            getBaseInfo: function(){
+            getBaseInfo: function () {
                 //road
-                srv.getRoads().then(function(items){
+                srv.getRoads().then(function (items) {
                     $scope.roads = items;
                 });
                 //bridges
-                srv.getBridges().then(function(items){
+                srv.getBridges().then(function (items) {
                     $scope.bridges = items;
                 });
                 //buweis
-                srv.getBuweis().then(function(items){
+                srv.getBuweis().then(function (items) {
                     $scope.buweis = items;
                     $scope.info.bujianGroup = "桥下检测";
                 });
                 //weathers
-                srv.getWeathers().then(function(items){
+                srv.getWeathers().then(function (items) {
                     $scope.weathers = items;
                     $scope.info.weather = '晴';
                 });
-            } ,
+            },
 
             showPopover: function (event) {
                 $scope.popover.show(event);
@@ -61,14 +63,14 @@ angular.module('bridge').controller(
                 history.back();
             },
             initInfo: function () {
-                srv.getRoadById($scope.info.road).then(function(road){
+                srv.getRoadById($scope.info.road).then(function (road) {
                     $scope.info.roadRecord = road;
                 });
-                srv.getBridgeById($scope.info.bridge).then(function(bridge){
+                srv.getBridgeById($scope.info.bridge).then(function (bridge) {
                     $scope.info.bridgeRecord = bridge;
                     if (bridge.wayType == "double") {
                         $scope.info.hasDirection = bridge.wayType == "double";
-                        srv.getDirections($scope.info.roadRecord, $scope.info.bridgeRecord).then(function(items){
+                        srv.getDirections($scope.info.roadRecord, $scope.info.bridgeRecord).then(function (items) {
                             $scope.directions = items;
                         });
                         //$scope.directions = srv.getDirections($scope.info.roadRecord, $scope.info.bridgeRecord);
@@ -77,8 +79,8 @@ angular.module('bridge').controller(
                     }
                 });
                 $scope.projects = [
-                    {id: 1 , name: "2015-09"},
-                    {id: 2 , name: "2015-10"}
+                    {id: 1, name: "2015-09"},
+                    {id: 2, name: "2015-10"}
                 ];
             },
             showInfoModal: function () {
@@ -102,23 +104,23 @@ angular.module('bridge').controller(
                 delete $scope.info.direction;
                 delete $scope.info.bridgeRecord;
                 delete $scope.info.hasDirection;
-                srv.getRoadById($scope.info.road).then(function(road){
+                srv.getRoadById($scope.info.road).then(function (road) {
                     $scope.info.roadRecord = road;
                 });
                 /*
-                var road = srv.getRoadById($scope.info.road);
-                console.log(road)
-                if (road) {
-                    $scope.info.roadRecord = road;
+                 var road = srv.getRoadById($scope.info.road);
+                 console.log(road)
+                 if (road) {
+                 $scope.info.roadRecord = road;
                  }
-                */
+                 */
             },
             changeBridge: function () {
-                srv.getBridgeById($scope.info.bridge).then(function(bridge){
+                srv.getBridgeById($scope.info.bridge).then(function (bridge) {
                     $scope.info.bridgeRecord = bridge;
                     if (bridge.wayType == "double") {
                         $scope.info.hasDirection = bridge.wayType == "double";
-                        srv.getDirections($scope.info.roadRecord, $scope.info.bridgeRecord).then(function(items){
+                        srv.getDirections($scope.info.roadRecord, $scope.info.bridgeRecord).then(function (items) {
                             $scope.directions = items;
                         });
                         //$scope.directions = srv.getDirections($scope.info.roadRecord, $scope.info.bridgeRecord);
@@ -127,29 +129,29 @@ angular.module('bridge').controller(
                     }
                 });
                 /*
-                if (bridge) {
-                    $scope.info.bridgeRecord = bridge;
-                }
-                if (bridge.wayType == "double") {
-                    $scope.info.hasDirection = bridge.wayType == "double";
-                    $scope.directions = srv.getDirections($scope.info.roadRecord, $scope.info.bridgeRecord);
-                } else {
-                    $scope.info.direction = "S";
-                }
-                */
+                 if (bridge) {
+                 $scope.info.bridgeRecord = bridge;
+                 }
+                 if (bridge.wayType == "double") {
+                 $scope.info.hasDirection = bridge.wayType == "double";
+                 $scope.directions = srv.getDirections($scope.info.roadRecord, $scope.info.bridgeRecord);
+                 } else {
+                 $scope.info.direction = "S";
+                 }
+                 */
             },
             onInfoSelect: function () {
                 //设置基础信息
                 $scope.current.setInfo($scope.info);
                 //获取部件号(孔/联)
                 //var bujianSns = srv.getBujianSns();
-                srv.getBujianSns().then(function(items){
+                srv.getBujianSns().then(function (items) {
                     $scope.bujianSns = {
                         name: "部件号", code: "bujianSn", items: items
                     };
                 });
                 //获取部件类型
-                srv.getBujians().then(function(items){
+                srv.getBujians().then(function (items) {
                     items = _.map(items, function (n) {
                         return _.extend(n, {value: n.id});
                     });
@@ -181,14 +183,14 @@ angular.module('bridge').controller(
                     case "bujian":
                         promise = $scope.changeColumnsByBujian()
                             .then($scope.changeColumnsByBujianSn)
-                            //.then($scope.getDiseases);
+                        //.then($scope.getDiseases);
                         break;
                     default:
                         promise = $scope.changeColumnsByPick(code);
                         break;
                 }
                 promise.then(srv.getContent)
-                    .then(function(content){
+                    .then(function (content) {
                         $scope.current.content.value = content;
                     })
             },
@@ -224,24 +226,24 @@ angular.module('bridge').controller(
                     var bujianSn = $scope.current.bujianSn.value;
                     var bujianId = $scope.current.bujian.value;
 
-                    var snGroups = _.groupBy(items , "bujianSn");
-                    _.each($scope.bujianSns.items , function(item , i){
+                    var snGroups = _.groupBy(items, "bujianSn");
+                    _.each($scope.bujianSns.items, function (item, i) {
                         item.badge = 0;
                         var group = snGroups[item.value];
-                        if (group){
+                        if (group) {
                             item.badge = group.length;
                         }
                     });
-                    var bjGroups = _.groupBy(_.filter(items , "bujianSn" , bujianSn) , "bujianId");
-                    _.each($scope.bujians.items , function(item , i){
+                    var bjGroups = _.groupBy(_.filter(items, "bujianSn", bujianSn), "bujianId");
+                    _.each($scope.bujians.items, function (item, i) {
                         item.badge = 0;
                         var group = bjGroups[item.value];
-                        if (group){
+                        if (group) {
                             item.badge = group.length;
                         }
                     });
 
-                    $scope.diseases = _.filter(items , "bujianSn" , $scope.current.bujianSn.value);
+                    $scope.diseases = _.filter(items, "bujianSn", $scope.current.bujianSn.value);
 
 
                 });
@@ -252,6 +254,7 @@ angular.module('bridge').controller(
             showMediaMenu: function (event) {
 
                 $scope.forMedia = true;
+                return;
 
                 //$scope.popover.show(event)
                 var hideSheet = $ionicActionSheet.show({
@@ -277,37 +280,145 @@ angular.module('bridge').controller(
                 });
             },
 
-            hideMediaMenu: function(){
+            hideMediaMenu: function () {
                 $scope.forMedia = false;
-            } ,
+            },
+            //拍照
+            addMedia: function (media) {
+                $scope.$apply(function () {
+                    $scope.medias.push(media);
+                });
+
+            },
+            captureImage: function () {
+                var options = {
+                    destinationType: Camera.DestinationType.FILE_URI,
+                    sourceType: Camera.PictureSourceType.CAMERA,
+                    //encodingType: Camera.EncodingType.JPEG,
+                    saveToPhotoAlbum: false
+                };
+                navigator.camera.getPicture(
+                    function (file) {
+                        var media = {
+                            path: file,
+                            type: "image"
+                        };
+                        $scope.addMedia(media);
+                    },
+                    function (e) {
+                        console.log(e);
+                    },
+                    options
+                );
+            },
+            captureAlbum: function () {
+                var options = {
+                    destinationType: Camera.DestinationType.FILE_URI,
+                    sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM,
+                    //encodingType: Camera.EncodingType.JPEG,
+                    mediaType: Camera.MediaType.PICTURE
+                };
+                navigator.camera.getPicture(
+                    function (file) {
+                        var media = {
+                            path: file,
+                            type: "image"
+                        };
+                        $scope.addMedia(media);
+
+                        var win = function (r) {
+                            console.log("Code = " + r.responseCode);
+                            console.log("Response = " + r.response);
+                            console.log("Sent = " + r.bytesSent);
+                        }
+
+                        var fail = function (error) {
+                            alert("An error has occurred: Code = " + error.code);
+                            console.log("upload error source " + error.source);
+                            console.log("upload error target " + error.target);
+                        }
+
+                        var options = new FileUploadOptions();
+                        options.fileKey = "file";
+                        options.fileName = file.substr(file.lastIndexOf('/') + 1);
+                        options.mimeType = "text/plain";
+
+                        var params = {};
+                        params.value1 = "test";
+                        params.value2 = "param";
+
+                        options.params = params;
+
+                        var ft = new FileTransfer();
+                        alert(encodeURI(EnvService.api + "file/upload"))
+                        ft.upload(file, encodeURI(EnvService.api + "file/upload"), win, fail, options);
+
+
+                    },
+                    function (error) {
+                        console.log(error);
+                    },
+                    options
+                );
+            },
+            captureAudio: function () {
+                navigator.device.capture.captureAudio(
+                    function (files) {
+                        var file = files[0];
+                        var media = {
+                            path: file.fullPath,
+                            type: "audio"
+                        };
+                        $scope.addMedia(media);
+                    },
+                    function (error) {
+                        console.log(error)
+                    }
+                );
+            },
+            captureVideo: function () {
+                navigator.device.capture.captureVideo(
+                    function (files) {
+                        var file = files[0];
+                        var media = {
+                            path: file.fullPath,
+                            type: "video"
+                        };
+                        $scope.addMedia(media);
+                    },
+                    function (error) {
+                        console.log(error)
+                    }
+                );
+            },
 
             //保存
             save: function () {
-                srv.save().then(function(){
+                srv.save().then(function () {
                     $scope.getDiseases();
-                    setTimeout(function(){
+                    setTimeout(function () {
                         $ionicScrollDelegate.$getByHandle('diseaselist')
                             .scrollBottom();
-                    } , 500)
-                } , function(msg){
+                    }, 500)
+                }, function (msg) {
                     alert(msg)
                 });
-            } ,
+            },
 
             //删除
-            deleteDisease: function(disease) {
+            deleteDisease: function (disease) {
                 var confirmPopup = $ionicPopup.confirm({
                     title: '<b>确认删除</b>',
-                    template: '当前操作将删除该病害,不可恢复 , 是否继续删除?' ,
-                    cancelText: "取消" ,
-                    okText:"确认删除" ,
+                    template: '当前操作将删除该病害,不可恢复 , 是否继续删除?',
+                    cancelText: "取消",
+                    okText: "确认删除",
                     okType: "button-assertive"
                 });
                 confirmPopup.then(function (res) {
                     if (res) {
-                        srv.deleteDisease(disease).then(function(){
+                        srv.deleteDisease(disease).then(function () {
                             $scope.getDiseases();
-                        } , function(errors){
+                        }, function (errors) {
                             alert(errors.join("\n"));
                         })
                     } else {
@@ -323,7 +434,6 @@ angular.module('bridge').controller(
         $scope.$on('$ionicView.beforeEnter', function () {
             if ($scope.current.isEmpty()) $scope.showInfoModal();
         });
-
 
 
     }

@@ -461,3 +461,63 @@
 .myrecord .mycol {line-height:48px;height:48px;}
 
 .iteminside svg {width:16px;height:100%}
+
+
+.flex-row , .flex-column {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.flex-column {
+    flex-flow:column;
+    -webkit-flex-flow:column;
+    -webkit-flex-dircetion:column;
+}
+
+.flex1 {
+    flex:1;
+    -webkit-flex:1
+}
+
+.mediamenu {
+    width:auto;
+}
+
+.mediamenu div .button {
+    width:90px;
+    line-height:180%
+}
+.mediamenu .button:before {
+    font-size:36px;
+    display:block;
+    line-height:120%
+}
+
+.mediacontainer {
+    padding:10px 0 0 10px;
+}
+
+.mediacontainer div.imgwrap {
+    float:left;
+    margin:0 10px 10px 0;
+    border:#eee solid 1px;
+    box-size: border-box;
+}
+
+.mediacontainer .imgwrap img {
+    width:120px;
+    height:120px;
+    box-size: border-box;
+}
+
+.mediacontainer .imgwrap video {
+    width:120px;
+    height:120px;
+}
+
+.mediacontainer .imgwrap audio {
+    width:120px;
+    height:120px;
+}

@@ -101,17 +101,10 @@
 
             <div ng-if="!forMedia"
                  ng-include="'views/checkswipe/record.html'"
-                 style="flex:1;-webkit-flex:1;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    flex-flow:column;
-    -webkit-flex-flow:column;
-    -webkit-flex-dircetion:column;
-"></div>
+                 class="flex-column flex1"></div>
             <div ng-if="forMedia"
-                 ng-include="'views/checkswipe/media.html'"></div>
+                 ng-include="'views/checkswipe/media.html'"
+                 class="flex-column flex1" ></div>
 
             <!--
             <div style="border-top:#ccc solid 1px;">

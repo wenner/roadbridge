@@ -11,7 +11,8 @@ angular.module("bridge.config", [])
         apiUrls:{
             ionicproxy: "/api/" ,
             //penavico: "http://10.128.60.49/penavico/ws/" ,
-            internet: "http://bridge.090730.com/api/"
+            //internet: "http://bridge.090730.com/api/",
+            internet: "http://192.168.0.107/BridgeWebApi/api/"
         }
     })
     .constant('defaultSetting', {
