@@ -202,6 +202,11 @@ angular.module('bridge.services')
         var result = [
             //{name:"xxx" , value:"xxx" , nextstep:"xxx"}
         ];
+        var medias1 = [
+            {path:"aaa" , type:"image"} ,
+            {path:"bbb" , type:"audio"} ,
+            {path:"ccc" , type:"video"}
+        ];
         var medias = [];
         var jsdb = SwipeBaseData;
 
@@ -209,11 +214,11 @@ angular.module('bridge.services')
 
         return {
             current: current,
+            medias: medias ,
             fieldItemDatas: {
                 range: {},
                 select: {}
             },
-
             baseSql: {
                 road: "select * from road order by sn",
                 bridge: "select * from bridge order by sn",
@@ -776,7 +781,7 @@ angular.module('bridge.services')
             },
 
             //获取值
-            getValues: function () {
+            getDiseaseValues: function () {
                 var values = {};
                 var columns = this.baseColumns;
                 var columnCodes = [];
@@ -795,53 +800,91 @@ angular.module('bridge.services')
             },
 
             //保存
-            save: function (values) {
+            getValues: function(values){
                 var defer = $q.defer();
-                values = values || this.getValues();
-                if (!values) {
+                //获取病害信息
+                var disease = values || this.getDiseaseValues();
+                if (!disease) {
                     defer.reject("无效的数据,请检查!");
                     return defer.promise;
                 }
-                if (!values.content){
+                if (!disease.content){
                     defer.reject("缺少病害描述信息,请检查!");
                     return defer.promise;
                 }
-                values.sn = [
-                    current.road.record.sn, current.bridge.record.sn,
-                    current.direction.value, moment().format('YYYYMMDD'),
-                    'temp'
-                ].join("-");
-
-                //insert into LocalDisease
-                var fields = "projectId,sourceId,status,sn,checkUser,checkUserName,checkDay,weather,createAt,roadId,bridgeId,direction,buweiId,bujianSn,bujianId,categoryId,qualitativeId,evaluateId,content,goujianId,formal,liang,dun,zhizuo,distance,position,length,width,height,quantity,extquantity,description".split(",");
-                var s = {};
-                var saveValues = _.map(fields , function(n){
-                    var v = values[n] || "";
-                    switch (n){
-                        case "createAt":
-                            v = moment().format('YYYY-MM-DD HH:mm:ss');
-                            break;
-                        case "checkDay":
-                            v = moment(v).format('YYYY-MM-DD HH:mm:ss');
-                            break;
-                    }
-                    s[n] = v;
-                    return "'"+v+"'";
-                });
-                var sql = "insert into LocalDisease ( id , " + fields +" ) ";
-                sql += "select case when max(id) is null then 1 else max(id)+1 end ,  "+saveValues+" from LocalDisease ";
-                DataBaseService.execute(sql , [])
-                    .then(function(){
-                        defer.resolve();
-                    });
-
+                //获取照片信息
                 /*
-                var diseases = StorageService.get("diseases") || [];
-                diseases.push(values);
-                StorageService.set('diseases', diseases);
-
-                defer.resolve();
+                if (medias.length == 0){
+                    defer.reject("没有图片信息,请现场拍照!");
+                    return defer.promise;
+                }
                 */
+                defer.resolve({
+                    disease: disease ,
+                    medias: medias
+                });
+                return defer.promise;
+            } ,
+            save: function (values) {
+                var defer = $q.defer();
+                $q.all({
+                    values: this.getValues(values),
+                    maxId: function () {
+                        var maxIdSql = "select max(id) as diseaseId from localDisease";
+                        return DataBaseService.single(maxIdSql)
+                    }()
+                }).then(function(rs){
+                    var disease = rs.values.disease;
+                    var medias = rs.values.medias;
+                    var diseaseId = rs.maxId.diseaseId;
+                    diseaseId = diseaseId ? diseaseId+1 : 1;
+                    disease.sn = [
+                        current.road.record.sn, current.bridge.record.sn,
+                        current.direction.value, moment().format('YYYYMMDD'),
+                        _.padLeft(diseaseId , 4 , '0')
+                    ].join("-");
+
+                    var insertSqls = [];
+                    //insert into LocalDisease
+                    var diseaseSqlFields = [
+                        "projectId","sourceId","status","sn",
+                        "checkUser","checkUserName","checkDay","weather",
+                        "createAt",
+                        "roadId","bridgeId","direction","buweiId","bujianSn","bujianId",
+                        "categoryId","qualitativeId","evaluateId","content","goujianId",
+                        "formal","liang","dun","zhizuo","distance","position",
+                        "length","width","height","quantity","extquantity",
+                        "description"
+                    ];
+                    var diseaseSqlValues = _.map(diseaseSqlFields , function(n){
+                        var v = disease[n] || "";
+                        switch (n){
+                            case "createAt":
+                                v = moment().format('YYYY-MM-DD HH:mm:ss');
+                                break;
+                            case "checkDay":
+                                v = moment(v).format('YYYY-MM-DD HH:mm:ss');
+                                break;
+                        }
+                        return "'"+v+"'";
+                    });
+                    var diseaseSql = "insert into LocalDisease ( id , " + diseaseSqlFields +" )  values ("+diseaseId+" , "+diseaseSqlValues+");";
+                    insertSqls.push(diseaseSql);
+                    //insert into medias
+                    _.each(medias , function(n , i){
+                        var id = _.now()+i;
+                        var mediaSql = "insert into LocalDiseaseMedia (id , diseaseId , path) values ("+id+" , "+diseaseId+" , '"+ n.path+"')";
+                        insertSqls.push(mediaSql);
+                    });
+                    DataBaseService.run(insertSqls)
+                        .then(function(){
+                            defer.resolve();
+                        } , function(errors){
+                            defer.reject(errors.toString());
+                        });
+                } , function(msg){
+                    defer.reject(msg);
+                });
                 return defer.promise;
             } ,
 

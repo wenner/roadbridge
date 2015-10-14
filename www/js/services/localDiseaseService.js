@@ -1,3 +1,9 @@
+/**
+ * 同步本地数据库内容
+ * 1. 判断网络状态 -> a. 是否有网络 b. 是否是wifi+仅在wifi下上传
+ * 2. 判断是否有本地数据
+ * 3. 
+ */
 'use strict';
 angular.module('bridge.services')
     .factory(
@@ -5,7 +11,7 @@ angular.module('bridge.services')
     function ($log, $q, $timeout, $http,
               DataBaseService, EnvService) {
         return {
-            check: function () {
+            sync: function () {
                 var me = this;
                 var sql = "select * from LocalDisease limit 4";
                 DataBaseService

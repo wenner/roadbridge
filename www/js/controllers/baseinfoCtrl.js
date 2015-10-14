@@ -2,14 +2,15 @@ angular.module('bridge').controller(
     'BaseInfoCtrl',
     function ($scope, $rootScope, $stateParams, $ionicLoading, $ionicModal,
               $timeout, $state, $location, $log , $q , $ionicHistory,
-              DataBaseService , EnvService) {
+              DataBaseService , BaseInfoService , EnvService) {
         var db = DataBaseService;
+        var srv = BaseInfoService;
         _.extend($scope , {
             action: "create" ,
             checkCreated: function(){
                 $scope.action = "create";
                 $ionicLoading.show();
-                db.checkCreated()
+                srv.checkCreated()
                     .then($scope.confirmReCreate)
                     .catch($scope.createDataBase)
                     .finally(function(){
@@ -17,7 +18,7 @@ angular.module('bridge').controller(
                     })
             } ,
             confirmReCreate: function(){
-                db.getTables().then(function(data){
+                srv.getTables().then(function(data){
                     $scope.createItems = data;
                     if (confirm("已有本地数据库 , 确定要删除以前数据并重新创建数据库么?")){
                         $scope.createDataBase();
@@ -25,7 +26,7 @@ angular.module('bridge').controller(
                 });
             } ,
             createDataBase: function(){
-                db.createDataBase().then(function(data){
+                srv.createDataBase().then(function(data){
                     $scope.createItems = data;
                 } , function(e){
                     alert("error:"+e)
@@ -36,7 +37,7 @@ angular.module('bridge').controller(
             checkUpdated: function(){
                 $ionicLoading.show();
                 $scope.action = "update";
-                db.checkUpdated().then(function(data){
+                srv.checkUpdated().then(function(data){
                     $scope.updateItems = data.items;
                     $ionicLoading.hide();
                     if (data.isChanged) $scope.updateDataBase(data.items);
@@ -59,7 +60,7 @@ angular.module('bridge').controller(
                 error: "错误"
             } ,
             updateTable: function(item){
-                db.updateTable(item).then(
+                srv.updateTable(item).then(
                     function(count){
                         item.status = "complete";
                         item.message = " , "+count+"条数据";

@@ -4,17 +4,21 @@
     </div>
     <div style="border-top:#ccc solid 1px;" class="flex-row flex1">
 
-        <div class='flex1 mediacontainer' style="height:100%">
+        <ion-scroll direction="x" class='flex1 mediacontainer' style="height:100%">
                 <div ng-repeat = "media in medias"
                      class="imgwrap"
                      ng-switch="media.type"
+                     ng-click="showMediaView($index)"
                      style1='background-image:url({{media.path}});background-size:cover;background-position:center'>
                     <img ng-switch-when="image" src="{{media.path}}">
-                    <video ng-switch-when="video" src="{{media.path}}"></video>
+                    <div ng-switch-when="video">
+                        <button class="button button-clear button-positive icon
+                    ion-ios-albums"></button>
+                    </div>
+                    <div><video ng-switch-when="video" src="{{media.path}}" controls></video></div>
                     <audio ng-switch-when="audio" src="{{media.path}}" controls></audio>
-                    <div>{{media.type}}</div>
                 </div>
-        </div>
+        </ion-scroll>
 
         <div class="mediamenu padding">
             <div>

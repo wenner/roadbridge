@@ -3,9 +3,9 @@ angular.module('bridge').controller(
     function ($scope, $rootScope, $q, $stateParams, $ionicLoading, $ionicModal,
               $ionicTabsDelegate, $ionicPopover, $ionicActionSheet,
               $timeout, $state, $location, $log, $ionicSideMenuDelegate,
-              $cordovaCapture, $cordovaCamera, $cordovaGeolocation, $ionicPopup,
+              $cordovaCapture, $cordovaCamera, $cordovaGeolocation, $cordovaToast , $ionicPopup,
               CheckSwipeService, $ionicSlideBoxDelegate, $ionicScrollDelegate ,
-                EnvService) {
+                EnvService , MediaService) {
 
         var srv = CheckSwipeService;
 
@@ -20,7 +20,7 @@ angular.module('bridge').controller(
             current: srv.current,
             diseases: [],
             directions: [],
-            medias: [],
+            medias: srv.medias ,
             info: {
                 road: 1,
                 bridge: 1,
@@ -285,116 +285,56 @@ angular.module('bridge').controller(
             },
             //拍照
             addMedia: function (media) {
-                $scope.$apply(function () {
+                //$scope.$apply(function () {
                     $scope.medias.push(media);
-                });
-
+                //});
             },
             captureImage: function () {
-                var options = {
-                    destinationType: Camera.DestinationType.FILE_URI,
-                    sourceType: Camera.PictureSourceType.CAMERA,
-                    //encodingType: Camera.EncodingType.JPEG,
-                    saveToPhotoAlbum: false
-                };
-                navigator.camera.getPicture(
-                    function (file) {
-                        var media = {
-                            path: file,
-                            type: "image"
-                        };
-                        $scope.addMedia(media);
-                    },
-                    function (e) {
-                        console.log(e);
-                    },
-                    options
-                );
+                MediaService.captureImage().then(function(file){
+                    var media = {path: file,type: "image"};
+                    $scope.addMedia(media);
+                });
             },
             captureAlbum: function () {
-                var options = {
-                    destinationType: Camera.DestinationType.FILE_URI,
-                    sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM,
-                    //encodingType: Camera.EncodingType.JPEG,
-                    mediaType: Camera.MediaType.PICTURE
-                };
-                navigator.camera.getPicture(
-                    function (file) {
-                        var media = {
-                            path: file,
-                            type: "image"
-                        };
-                        $scope.addMedia(media);
-
-                        var win = function (r) {
-                            console.log("Code = " + r.responseCode);
-                            console.log("Response = " + r.response);
-                            console.log("Sent = " + r.bytesSent);
-                        }
-
-                        var fail = function (error) {
-                            alert("An error has occurred: Code = " + error.code);
-                            console.log("upload error source " + error.source);
-                            console.log("upload error target " + error.target);
-                        }
-
-                        var options = new FileUploadOptions();
-                        options.fileKey = "file";
-                        options.fileName = file.substr(file.lastIndexOf('/') + 1);
-                        options.mimeType = "text/plain";
-
-                        var params = {};
-                        params.value1 = "test";
-                        params.value2 = "param";
-
-                        options.params = params;
-
-                        var ft = new FileTransfer();
-                        alert(encodeURI(EnvService.api + "file/upload"))
-                        ft.upload(file, encodeURI(EnvService.api + "file/upload"), win, fail, options);
-
-
-                    },
-                    function (error) {
-                        console.log(error);
-                    },
-                    options
-                );
+                MediaService.captureAlbum().then(function(file){
+                    var media = {path: file,type: "image"};
+                    $scope.addMedia(media);
+                });
             },
             captureAudio: function () {
-                navigator.device.capture.captureAudio(
-                    function (files) {
-                        var file = files[0];
-                        var media = {
-                            path: file.fullPath,
-                            type: "audio"
-                        };
-                        $scope.addMedia(media);
-                    },
-                    function (error) {
-                        console.log(error)
-                    }
-                );
+                MediaService.captureAudio().then(function(files){
+                    var file = files[0];
+                    var media = {path: file.fullPath,type: "audio"};
+                    $scope.addMedia(media);
+                });
             },
             captureVideo: function () {
-                navigator.device.capture.captureVideo(
-                    function (files) {
-                        var file = files[0];
-                        var media = {
-                            path: file.fullPath,
-                            type: "video"
-                        };
-                        $scope.addMedia(media);
-                    },
-                    function (error) {
-                        console.log(error)
-                    }
-                );
+                MediaService.captureVideo().then(function(files){
+                    var file = files[0];
+                    var media = {path: file.fullPath,type: "video"};
+                    $scope.addMedia(media);
+                });
             },
+            showMediaView: function(index){
+                $scope.activeSlide = index;
+                $ionicModal.fromTemplateUrl("views/checkswipe/mediaView.html", {
+                    scope: $scope,
+                    animation: 'slide-in-up'
+                }).then(function(modal) {
+                    $scope.modal = modal;
+                    $scope.modal.show();
+                });
+            } ,
 
+            closeMediaView: function(){
+                $scope.modal.hide();
+                $scope.modal.remove();
+                console.log(22222222)
+            } ,
             //保存
             save: function () {
                 srv.save().then(function () {
+                    //$cordovaToast.show('保存成功!');
                     $scope.getDiseases();
                     setTimeout(function () {
                         $ionicScrollDelegate.$getByHandle('diseaselist')

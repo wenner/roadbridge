@@ -1,0 +1,13 @@
+<div class="modal image-modal transparent" ng-click="closeMediaView()">
+    <ion-slide-box on-slide-changed="slideChanged(index)" show-pager="true" active-slide="activeSlide">
+        <ion-slide ng-repeat="media in medias" ng-switch="media.type">
+            <img ng-switch-when="image" ng-src="{{media.path}}" class="fullscreen-image"/>
+            <div  class="fullscreen-player" ng-switch-when="video">
+                <video  src="{{media.path}}" controls class="centerme"></video>
+            </div>
+            <div  ng-switch-when="audio">
+                <audio  src="{{media.path}}" controls></audio>
+            </div>
+        </ion-slide>
+    </ion-slide-box>
+</div>

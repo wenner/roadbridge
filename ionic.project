@@ -10,11 +10,11 @@
   "proxies": [
     {
       "path": "/api/",
-      "proxyUrl": "http://192.168.0.107/BridgeWebApi/api/"
+      "proxyUrl": "http://10.1.115.5/BridgeWebApi/api/"
     } , 
     {
 	"path" : "/docs/" , 
-	"proxyUrl": "http://192.168.0.107/BridgeWebApi/docs/"
+	"proxyUrl": "http://10.1.115.5/BridgeWebApi/docs/"
     }
   ]
 }

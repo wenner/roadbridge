@@ -23,12 +23,17 @@ angular.module('bridge')
                 var col = $scope.col;
 
                 $scope.$watch("pickerdata.items", function() {
-                    $scope.calcSize();
-                    trans.form = maxTranslate;
-                    trans.duration = 300;
+
+                    //加一个timeout , 有几个列总是无法正确定位
+                    setTimeout(function(){
+                        $scope.calcSize();
+                        $scope.setValue(pickerdata.value || null , 0 , false);
+                        trans.form = maxTranslate;
+                        trans.duration = 300;
+                    } , 0);
+
                     //transform(col.wrapper , 'translate3d(0,' + maxTranslate + 'px,0)');
                     //transition(col.wrapper , 0);
-                    $scope.setValue(pickerdata.value || null , 0 , false);
                 });
 
                 var transform = function (el , transform) {
@@ -212,6 +217,7 @@ angular.module('bridge')
                     calcSize: function () {
                         if (col.container.offsetHeight){
                             scope.pickerdata.colHeight = col.container.offsetHeight;
+                        }else{
                         }
                         if (!scope.pickerdata.items || scope.pickerdata.items.length == 0) return;
                         if (col.attrs.rotateEffect) {

@@ -16,7 +16,6 @@ angular.module('bridge').controller(
 
         DataBaseService.single("select count(*) as count from LocalDisease")
             .then(function(item){
-                console.log(item)
                 $scope.localDiseaseCount = item.count;
             });
 

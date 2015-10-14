@@ -1,9 +1,4 @@
-<div class="picker-column-items-wrapper"
-     style1="transform: translate3d(0px, {{coldata.trans.form}}px, 0px);
-        -webkit-transform: translate3d(0px, {{coldata.trans.form}}px, 0px);
-        transition-duration:{{coldata.trans.duration}}ms;
-        -webkit-transition-duration:{{coldata.trans.duration}}ms"
-        >
+<div class="picker-column-items-wrapper">
     <div ng-repeat="item in pickerdata.items"
          class="picker-item"
          ng-class = "{true:'picker-selected'}[pickerdata.value == item.value]"
