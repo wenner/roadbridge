@@ -297,7 +297,9 @@ angular.module('bridge').controller(
             },
             //拍照
             captureImage: function () {
+                alert(33333333)
                 MediaService.captureImage().then(function(file){
+                    alert(44444444444)
                     var media = {path: file,type: "image"};
                     $scope.addMedia(media);
                 });
@@ -363,7 +365,7 @@ angular.module('bridge').controller(
                 srv.getValues()
                     .then(srv.save)
                     .then(function () {
-                        console.log("ok")
+                        console.log("save ok");
                         //$cordovaToast.show('保存成功!');
                         $scope.getDiseases();
                         setTimeout(function () {
