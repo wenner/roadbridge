@@ -15,22 +15,27 @@
   <preference name="SplashScreen" value="screen"/>
   <preference name="SplashScreenDelay" value="3000"/>
   <preference name="CameraUsesGeolocation" value="true"/>
-  <gap:plugin name="org.apache.cordova.splashscreen"/>
-  <gap:plugin name="cordova-plugin-file-transfer" source="npm"/>
-  <gap:plugin name="cordova-plugin-camera" source="npm"/>
-  <gap:plugin name="cordova-plugin-media-capture" source="npm"/>
-  <gap:plugin name="cordova-plugin-x-toast" source="npm"/>
+
+  <plugin name="cordova-plugin-camera" spec="2.1.0" />
+  <plugin name="cordova-plugin-file-transfer" spec="1.5.0" />
+  <plugin name="cordova-plugin-media-capture" spec="1.2.0" />
+  <plugin name="cordova-plugin-x-toast" spec="2.4.0" />
+  <plugin name="org.apache.cordova.splashscreen" source="pgb" spec="1.0.0" />
+
+
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
   <feature name="NetworkStatus">
     <param name="ios-package" value="CDVConnection"/>
   </feature>
+  <!--
   <icon src="resources\android\icon\drawable-xhdpi-icon.png"/>
   <gap:splash src="splash.png"/>
   <gap:splash gap:platform="ios" src="resources/ios/splash/Default-Landscape-736h.png" width="2208" height="1242"/>
   <gap:splash gap:platform="ios" src="resources/ios/splash/Default-Landscape@2x~ipad.png" width="2048" height="1536"/>
   <gap:splash gap:platform="ios" src="resources/ios/splash/Default-Landscape~ipad.png" width="1024" height="768"/>
+  -->
   <platform name="ios">
     <icon src="resources\ios\icon\icon.png" width="57" height="57"/>
     <icon src="resources\ios\icon\icon@2x.png" width="114" height="114"/>
@@ -66,8 +71,10 @@
     <splash src="resources\android\splash\drawable-land-xxhdpi-screen.png" density="land-xxhdpi"/>
     <splash src="resources\android\splash\drawable-land-xxxhdpi-screen.png" density="land-xxxhdpi"/>
   </platform>
+  <!--
   <platform name="wp8">
     <icon src="resources\wp8\icon\ApplicationIcon.png" width="99" height="99"/>
     <icon src="resources\wp8\icon\Background.png" width="159" height="159"/>
   </platform>
+  -->
 </widget>
