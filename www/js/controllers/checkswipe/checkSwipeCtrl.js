@@ -297,11 +297,11 @@ angular.module('bridge').controller(
             },
             //拍照
             captureImage: function () {
-                alert(33333333)
                 MediaService.captureImage().then(function(file){
-                    alert(44444444444)
                     var media = {path: file,type: "image"};
                     $scope.addMedia(media);
+                } , function(err){
+                    console.log(err)
                 });
             },
             //从相册获取照片
