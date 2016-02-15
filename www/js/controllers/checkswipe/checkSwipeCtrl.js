@@ -1,36 +1,46 @@
 angular.module('bridge').controller(
     'CheckSwipeCtrl',
     function ($scope, $rootScope, $q, $stateParams, $ionicLoading, $ionicModal,
-              $ionicTabsDelegate, $ionicPopover, $ionicActionSheet,
-              $timeout, $state, $location, $log, $ionicSideMenuDelegate,
-              $cordovaCapture, $cordovaCamera, $cordovaGeolocation, $cordovaToast , $ionicPopup,
-              CheckSwipeService, $ionicSlideBoxDelegate, $ionicScrollDelegate ,
-                EnvService , MediaService) {
-
+              $timeout, $state, $location, $log, $ionicPopup, $ionicPopover ,
+              CheckSwipeService,  $ionicScrollDelegate ,
+              EnvService , MediaService , UserService) {
+        //services
         var srv = CheckSwipeService;
 
-        // .fromTemplateUrl() method
+        //main popovermenu
         $ionicPopover.fromTemplateUrl('views/checkswipe/menu.html', {
             scope: $scope
         }).then(function (popover) {
-            $scope.popover = popover;
+            $scope.mainPopoverMenu = popover;
         });
+
+
+        //save , preview modal
+        $ionicModal.fromTemplateUrl("views/checkswipe/previewModal.html" , {
+            scope: $scope ,
+            animation:"mh-slide" ,
+            backdropClickToClose: false
+        }).then(function (modal) {
+            $scope.previewModal = modal;
+        });
+
 
         _.extend($scope, {
             current: srv.current,
             diseases: [],
             directions: [],
             medias: srv.medias ,
+            preview: {} ,
             info: {
                 road: 1,
                 bridge: 1,
                 project: 1,
                 direction: "L",
-                //暂时注释掉,因为异步并且值为中文,则不会选中select option
+                //暂时注释掉,因为异步并且值为中文,则不会选中select option , 在下面赋值的时候给info赋值
                 //bujianGroup: "桥下检测",
                 //weather: "晴",
                 checkDept: "天津市交通科学研究院",
-                checkUserName: "张文涛",
+                checkUserName: UserService.info.name,
                 checkDay: new Date()
             },
 
@@ -54,11 +64,9 @@ angular.module('bridge').controller(
                     $scope.info.weather = '晴';
                 });
             },
-
-            showPopover: function (event) {
-                $scope.popover.show(event);
+            showMainPopoverMenu: function (event) {
+                $scope.mainPopoverMenu.show(event);
             },
-
             goback: function () {
                 history.back();
             },
@@ -256,7 +264,6 @@ angular.module('bridge').controller(
                 $scope.forMedia = true;
                 return;
 
-                //$scope.popover.show(event)
                 var hideSheet = $ionicActionSheet.show({
                     buttons: [
                         {text: '<i class="icon ion-ios-camera"></i>拍摄照片', code: "camera"},
@@ -283,24 +290,26 @@ angular.module('bridge').controller(
             hideMediaMenu: function () {
                 $scope.forMedia = false;
             },
-            //拍照
             addMedia: function (media) {
                 //$scope.$apply(function () {
                     $scope.medias.push(media);
                 //});
             },
+            //拍照
             captureImage: function () {
                 MediaService.captureImage().then(function(file){
                     var media = {path: file,type: "image"};
                     $scope.addMedia(media);
                 });
             },
+            //从相册获取照片
             captureAlbum: function () {
                 MediaService.captureAlbum().then(function(file){
                     var media = {path: file,type: "image"};
                     $scope.addMedia(media);
                 });
             },
+            //录音
             captureAudio: function () {
                 MediaService.captureAudio().then(function(files){
                     var file = files[0];
@@ -308,6 +317,7 @@ angular.module('bridge').controller(
                     $scope.addMedia(media);
                 });
             },
+            //摄像
             captureVideo: function () {
                 MediaService.captureVideo().then(function(files){
                     var file = files[0];
@@ -315,6 +325,7 @@ angular.module('bridge').controller(
                     $scope.addMedia(media);
                 });
             },
+            //全屏查看图片,视频
             showMediaView: function(index){
                 $scope.activeSlide = index;
                 $ionicModal.fromTemplateUrl("views/checkswipe/mediaView.html", {
@@ -325,24 +336,43 @@ angular.module('bridge').controller(
                     $scope.modal.show();
                 });
             } ,
-
+            //关闭全屏查看
             closeMediaView: function(){
                 $scope.modal.hide();
                 $scope.modal.remove();
-                console.log(22222222)
+            } ,
+            //预览
+            previewBeforeSave: function(){
+                $scope.preview = {
+                    beforeSave: true ,
+                    content: $scope.current.content.value ,
+                    medias: $scope.medias
+                };
+                $scope.previewModal.show();
+            } ,
+            hidePreview: function(){
+                $scope.previewModal.hide();
+            } ,
+            //查看病害信息
+            previewDisease: function(disease){
+                console.log(disease);
             } ,
             //保存
             save: function () {
-                srv.save().then(function () {
-                    //$cordovaToast.show('保存成功!');
-                    $scope.getDiseases();
-                    setTimeout(function () {
-                        $ionicScrollDelegate.$getByHandle('diseaselist')
-                            .scrollBottom();
-                    }, 500)
-                }, function (msg) {
-                    alert(msg)
-                });
+                $scope.hidePreview();
+                srv.getValues()
+                    .then(srv.save)
+                    .then(function () {
+                        console.log("ok")
+                        //$cordovaToast.show('保存成功!');
+                        $scope.getDiseases();
+                        setTimeout(function () {
+                            $ionicScrollDelegate.$getByHandle('diseaselist')
+                                .scrollBottom();
+                        }, 500)
+                    }, function (msg) {
+                        alert(msg)
+                    });
             },
 
             //删除

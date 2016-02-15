@@ -13,7 +13,7 @@ angular.module("bridge.config", [])
             //penavico: "http://10.128.60.49/penavico/ws/" ,
             //internet: "http://bridge.090730.com/api/",
             //internet: "http://192.168.0.107/BridgeWebApi/api/" ,
-            internet: "http://10.1.115.5/BridgeWebApi/api/"
+            internet: "http://192.168.43.179/BridgeWebApi/api/"
         }
     })
     .constant('defaultSetting', {

@@ -12,15 +12,15 @@
     </ion-header-bar>
     <ion-content>
         <div ng-if="action=='create'">
-            <div>{{createMessage}}</div>
-        <ion-list>
-            <ion-item ng-repeat="item in createItems" class='item-icon-right'>
-                {{$index+1}}. {{item.tableName}}
-                <span class="item-note">{{item.error.join("")}}</span>
-                <i class="icon "
-                   ng-class="{true:'ion-checkmark-circled balanced' , false:'ion-close-circled assertive'}[item.complete]"></i>
-            </ion-item>
-        </ion-list>
+            <div class="padding">{{createMessage}}</div>
+            <ion-list>
+                <ion-item ng-repeat="item in createItems" class='item-icon-right'>
+                    {{$index+1}}. {{item.tableName}}
+                    <span class="item-note">{{item.error.join("")}}</span>
+                    <i class="icon "
+                       ng-class="{true:'ion-checkmark-circled balanced' , false:'ion-close-circled assertive'}[item.complete]"></i>
+                </ion-item>
+            </ion-list>
         </div>
         <div ng-if="action=='update'">
             <ion-item class='item-divider' style="padding-top:5px;padding-bottom:5px">

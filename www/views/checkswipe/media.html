@@ -11,10 +11,6 @@
                      ng-click="showMediaView($index)"
                      style1='background-image:url({{media.path}});background-size:cover;background-position:center'>
                     <img ng-switch-when="image" src="{{media.path}}">
-                    <div ng-switch-when="video">
-                        <button class="button button-clear button-positive icon
-                    ion-ios-albums"></button>
-                    </div>
                     <div><video ng-switch-when="video" src="{{media.path}}" controls></video></div>
                     <audio ng-switch-when="audio" src="{{media.path}}" controls></audio>
                 </div>

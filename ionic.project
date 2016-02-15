@@ -1,20 +1,18 @@
 {
-  "name": "bridge",
-  "app_id": "" , 
-   
+  "name": "Bridge",
+  "app_id": "0b49593f",
   "watchPatterns": [
     "www/**/*",
     "!www/lib/**/*"
-  ] , 
-  
+  ],
   "proxies": [
     {
       "path": "/api/",
-      "proxyUrl": "http://10.1.115.5/BridgeWebApi/api/"
-    } , 
+      "proxyUrl": "http://localhost/BridgeWebApi/api/"
+    },
     {
-	"path" : "/docs/" , 
-	"proxyUrl": "http://10.1.115.5/BridgeWebApi/docs/"
+      "path": "/docs/",
+      "proxyUrl": "http://localhost/BridgeWebApi/docs/"
     }
   ]
 }

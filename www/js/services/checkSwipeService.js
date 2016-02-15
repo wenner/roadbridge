@@ -800,10 +800,10 @@ angular.module('bridge.services')
             },
 
             //保存
-            getValues: function(values){
+            getValues: function(){
                 var defer = $q.defer();
                 //获取病害信息
-                var disease = values || this.getDiseaseValues();
+                var disease = this.getDiseaseValues();
                 if (!disease) {
                     defer.reject("无效的数据,请检查!");
                     return defer.promise;
@@ -819,6 +819,10 @@ angular.module('bridge.services')
                     return defer.promise;
                 }
                 */
+                disease.isRemote = 0;
+                disease.isModified = 0;
+                disease.isDisease = 1;
+
                 defer.resolve({
                     disease: disease ,
                     medias: medias
@@ -828,14 +832,14 @@ angular.module('bridge.services')
             save: function (values) {
                 var defer = $q.defer();
                 $q.all({
-                    values: this.getValues(values),
+                    //values: this.getValues(values),
                     maxId: function () {
                         var maxIdSql = "select max(id) as diseaseId from localDisease";
                         return DataBaseService.single(maxIdSql)
                     }()
                 }).then(function(rs){
-                    var disease = rs.values.disease;
-                    var medias = rs.values.medias;
+                    var disease = values.disease;
+                    var medias = values.medias;
                     var diseaseId = rs.maxId.diseaseId;
                     diseaseId = diseaseId ? diseaseId+1 : 1;
                     disease.sn = [
@@ -849,7 +853,7 @@ angular.module('bridge.services')
                     var diseaseSqlFields = [
                         "projectId","sourceId","status","sn",
                         "checkUser","checkUserName","checkDay","weather",
-                        "createAt",
+                        "createAt", 'isRemote' , 'isModified' , 'isDisease' ,
                         "roadId","bridgeId","direction","buweiId","bujianSn","bujianId",
                         "categoryId","qualitativeId","evaluateId","content","goujianId",
                         "formal","liang","dun","zhizuo","distance","position",
@@ -899,10 +903,12 @@ angular.module('bridge.services')
 
             getDiseases: function () {
                 var template = [
-                    "select * from Disease where projectId = {{projectId}} " ,
-                    "and roadId = {{roadId}} " ,
-                    "and bridgeId = {{bridgeId}} " ,
-                    "and direction = '{{direction}}'"
+                    "select d.* , m.mediaCount from Disease d " ,
+                    "left join (select diseaseId , count(*) as mediaCount from DiseaseMedia group by diseaseId) m on m.diseaseId = d.id" ,
+                    "where d.projectId = {{projectId}} " ,
+                    "and d.roadId = {{roadId}} " ,
+                    "and d.bridgeId = {{bridgeId}} " ,
+                    "and d.direction = '{{direction}}'"
                 ].join(" ");
                 template = _.template(template);
                 var sql = template({
@@ -913,22 +919,12 @@ angular.module('bridge.services')
                     buweiId: current.buwei.value ,
                     bujianSn: current.bujianSn.value
                 });
-                sql += " union "+ sql.replace("Disease" , "LocalDisease");
-                sql += "order by checkDay desc";
+                sql += " union "+ sql.replace(/Disease/g , "LocalDisease");
+                sql += " order by checkDay desc";
                 return DataBaseService.query(sql);
-
-                var defer = $q.defer();
-
-                $timeout(function () {
-                    var allDiseases = StorageService.get("diseases") || [];
-                    var disease = _.filter(allDiseases, function (n) {
-                        return n.bujianSn == current.bujianSn.value
-                            && n.bujianId == current.bujian.value;
-                    });
-                    defer.resolve(disease);
-                }, 500);
-                return defer.promise;
             }
 
         }
     });
+
+

@@ -1,4 +1,4 @@
-<ion-view>
+<ion-view view-title="病害检查">
     <ion-header-bar class="bar-positive">
         <button class="button button-icon  ion-ios-close-outline pull-left"
                 ng-clic1k='goback()' ui-sref=tab.disease></button>
@@ -12,7 +12,7 @@
             <button class='button button-icon ion-ios-loop'
                     ng-click="reSelectInfo()">重新选择</button>
             <button class='button button-icon button-clear ion-ios-more'
-                    ng-click="showPopover($event)"></button>
+                    ng-click="showMainPopoverMenu($event)"></button>
 
             <!--
             <button class='button button-badge button-icon ion-ios-clock-outline'
@@ -123,7 +123,7 @@
 
     <ion-footer-bar class="bar-positive">
         <button class="button button-icon  ion-checkmark-round pull-left"
-                ng-click="save()">保存</button>
+                ng-click="previewBeforeSave()">保存</button>
         <h1 class="title">
         </h1>
         <div class="buttons pull-right" side="right">

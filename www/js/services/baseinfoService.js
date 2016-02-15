@@ -10,13 +10,14 @@ angular.module('bridge.services')
             isUpdated: false,
             updateList: [],
             checkCreated: function () {
+                var me = this;
                 var defer = $q.defer();
                 db.transaction(function (tx) {
                     var sql = "select count(*) as count from sqlite_master where type='table' and name='BaseInfoVersion'";
                     tx.executeSql(sql, [], function (tx, results) {
                         var count = results.rows.item(0).count;
                         if (count == 1) {
-                            this.isCreated = true;
+                            me.isCreated = true;
                             defer.resolve();
                         } else {
                             defer.reject();
@@ -52,7 +53,7 @@ angular.module('bridge.services')
                         defer.resolve(items);
                     })
                     .error(function(e){
-                        defer.reject(e.message);
+                        defer.reject(e.message || e);
                     });
                 return defer.promise;
             },

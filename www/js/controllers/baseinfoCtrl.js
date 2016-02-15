@@ -14,10 +14,11 @@ angular.module('bridge').controller(
                     .then($scope.confirmReCreate)
                     .catch($scope.createDataBase)
                     .finally(function(){
-                        $ionicLoading.hide();
+                        //$ionicLoading.hide();
                     })
             } ,
             confirmReCreate: function(){
+                $ionicLoading.hide();
                 srv.getTables().then(function(data){
                     $scope.createItems = data;
                     if (confirm("已有本地数据库 , 确定要删除以前数据并重新创建数据库么?")){
@@ -26,14 +27,15 @@ angular.module('bridge').controller(
                 });
             } ,
             createDataBase: function(){
+                $ionicLoading.show();
                 srv.createDataBase().then(function(data){
+                    $ionicLoading.hide();
                     $scope.createItems = data;
                 } , function(e){
-                    alert("error:"+e)
-                    $scope.error = "不能获取初始化脚本,请联系管理员!";
+                    $ionicLoading.hide();
+                    $scope.createMessage = "不能获取初始化脚本,请联系管理员!"+e;
                 });
             } ,
-
             checkUpdated: function(){
                 $ionicLoading.show();
                 $scope.action = "update";

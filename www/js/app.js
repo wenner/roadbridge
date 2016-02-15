@@ -16,6 +16,7 @@ angular.module('bridge', [
                    LocalDiseaseService) {
         EnvService.getApi();
 
+        //检查本地数据库及数据更新情况
         BaseInfoService.checkCreated()
             .then(function(){
                 return BaseInfoService.checkUpdated();
@@ -25,19 +26,35 @@ angular.module('bridge', [
             })
             .then(function(data){
                 if (data && data.isChanged){
-                    if (confirm("检查到新的数据, 是否更新?")){
-                        $state.go("baseinfo" , {action:"update"});
-                    }
+                    $ionicPopup.confirm({
+                        title: '<b>更新</b>',
+                        template: '检查到新的数据, 是否更新?',
+                        cancelText: "取消",
+                        okText: "确认更新",
+                        okType: "button-assertive"
+                    }).then(function (res) {
+                        if (res) {
+                            $state.go("baseinfo" , {action:"update"});
+                        } else {
+                        }
+                    });
                 }
             } , function(err){
-                console.log(err)
-                if (confirm("检查到新的数据, 是否更新?")){
-                    $state.go("baseinfo" , {action:"update"});
-                }
+                $ionicPopup.confirm({
+                    title: '<b>更新</b>',
+                    template: '检查到新的数据, 是否更新?',
+                    cancelText: "取消",
+                    okText: "确认更新",
+                    okType: "button-assertive"
+                }).then(function (res) {
+                    if (res) {
+                        $state.go("baseinfo" , {action:"update"});
+                    } else {
+                    }
+                });
             });
 
-
-        $ionicPlatform.ready(function () {
+        ionic.Platform.ready(function(){
             //navigator.notification.vibrate()
 
             // notify
@@ -48,15 +65,17 @@ angular.module('bridge', [
                     }
                 };
             }
-
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
+            /*有错误
             if (window.cordova && window.cordova.plugins.Keyboard) {
                 cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
             }
+            */
             if (window.StatusBar) {
                 StatusBar.styleDefault();
             }
+
             //event, toState, toParams, fromState, fromParams
             $rootScope.$on("$stateChangeStart", function (event, toState) {
                 //如果页面的authenticated == true , 并且没有登录 , 转到welcome
@@ -66,8 +85,12 @@ angular.module('bridge', [
                 }
                 //toState.authenticated !== true || AuthenticationService.isAuthenticated(Me) || ($state.go("welcome"), event.preventDefault())
             });
+            function sync(){
+                LocalDiseaseService.sync();
+                $timeout(sync , 10000);
 
-            LocalDiseaseService.sync();
+            }
+            sync();
 
         });
     })

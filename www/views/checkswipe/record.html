@@ -29,14 +29,15 @@
                 style="border-top:#ccc solid 1px;flex:1;-webkit-flex:1;">
         <ion-list class="myrecord">
 
-            <ion-item ng-repeat="disease in diseases">
+            <ion-item ng-repeat="disease in diseases"
+                      ng-click="previewDisease(disease)">
                 <div class="myrow">
                     <div class="mycol" style="width:220px;padding-left:15px">{{disease.sn}}</div>
                     <div class="mycol" style="flex:1;-webkit-flex:1">
                         {{disease.content}}
                     </div>
                     <div class="mycol text-center" style="width:80px">{{disease.evaluateId}}</div>
-                    <div class="mycol text-center" style="width:80px">{{disease.medias}}</div>
+                    <div class="mycol text-center" style="width:80px">{{disease.mediaCount}}</div>
                 </div>
                 <ion-option-button class="button-balanced" ng-click="editDisease(disease)">
                     <i class='icon ion-wrench padding'></i>修改
@@ -45,143 +46,6 @@
                     <i class='icon ion-delete padding'></i>删除
                 </ion-option-button>
             </ion-item>
-            <!--
-            <ion-item>
-                <div class="myrow">
-                    <div class="mycol" style="width:220px;padding-left:15px">S1-20150609-093L-0002</div>
-                    <div class="mycol" style="flex:1;-webkit-flex:1">
-                        第1孔3#小箱梁，距7#墩2m，外侧腹板
-                        横向裂缝
-                        2条, 长0.5m，最大缝宽0.18mm
-                    </div>
-                    <div class="mycol text-center" style="width:80px">1</div>
-                    <div class="mycol text-center" style="width:80px">2</div>
-                </div>
-                <ion-option-button class="button-balanced" ng-click="maintain(maintain)">
-                    <i class='icon ion-wrench padding'></i>修改
-                </ion-option-button>
-                <ion-option-button class="button-assertive" ng-click="maintain(maintain)">
-                    <i class='icon ion-delete padding'></i>删除
-                </ion-option-button>
-            </ion-item>
-            <ion-item>
-                <div class="myrow">
-                    <div class="mycol" style="width:220px;padding-left:15px">S1-20150609-093L-0003</div>
-                    <div class="mycol" style="flex:1;-webkit-flex:1">
-                        第13孔 跨中 10m范围内 梁底 横向裂缝 间距20-60cm 最大缝宽 0.14mm
-                    </div>
-                    <div class="mycol text-center" style="width:80px">1</div>
-                    <div class="mycol text-center" style="width:80px">2</div>
-                </div>
-                <ion-option-button class="button-balanced" ng-click="maintain(maintain)">
-                    <i class='icon ion-wrench padding'></i>修改
-                </ion-option-button>
-                <ion-option-button class="button-assertive" ng-click="maintain(maintain)">
-                    <i class='icon ion-delete padding'></i>删除
-                </ion-option-button>
-            </ion-item>
-            <ion-item>
-                <div class="myrow">
-                    <div class="mycol" style="width:220px;padding-left:15px">S1-20150609-093L-0001</div>
-                    <div class="mycol" style="flex:1;-webkit-flex:1">
-                        第10孔 9#墩侧 5m范围内 外侧梁底 6条 横向裂缝 渗水 间距40-80cm
-                    </div>
-                    <div class="mycol text-center" style="width:80px">1</div>
-                    <div class="mycol text-center" style="width:80px">2</div>
-                </div>
-                <ion-option-button class="button-balanced" ng-click="maintain(maintain)">
-                    <i class='icon ion-wrench padding'></i>修改
-                </ion-option-button>
-                <ion-option-button class="button-assertive" ng-click="maintain(maintain)">
-                    <i class='icon ion-delete padding'></i>删除
-                </ion-option-button>
-            </ion-item>
-            <ion-item>
-                <div class="myrow">
-                    <div class="mycol" style="width:220px;padding-left:15px">S1-20150609-093L-0002</div>
-                    <div class="mycol" style="flex:1;-webkit-flex:1">
-                        第1孔3#小箱梁，距7#墩2m，外侧腹板
-                        横向裂缝
-                        2条, 长0.5m，最大缝宽0.18mm
-                    </div>
-                    <div class="mycol text-center" style="width:80px">1</div>
-                    <div class="mycol text-center" style="width:80px">2</div>
-                </div>
-                <ion-option-button class="button-balanced" ng-click="maintain(maintain)">
-                    <i class='icon ion-wrench padding'></i>修改
-                </ion-option-button>
-                <ion-option-button class="button-assertive" ng-click="maintain(maintain)">
-                    <i class='icon ion-delete padding'></i>删除
-                </ion-option-button>
-            </ion-item>
-            <ion-item>
-                <div class="myrow">
-                    <div class="mycol" style="width:220px;padding-left:15px">S1-20150609-093L-0003</div>
-                    <div class="mycol" style="flex:1;-webkit-flex:1">
-                        第13孔 跨中 10m范围内 梁底 横向裂缝 间距20-60cm 最大缝宽 0.14mm
-                    </div>
-                    <div class="mycol text-center" style="width:80px">1</div>
-                    <div class="mycol text-center" style="width:80px">2</div>
-                </div>
-                <ion-option-button class="button-balanced" ng-click="maintain(maintain)">
-                    <i class='icon ion-wrench padding'></i>修改
-                </ion-option-button>
-                <ion-option-button class="button-assertive" ng-click="maintain(maintain)">
-                    <i class='icon ion-delete padding'></i>删除
-                </ion-option-button>
-            </ion-item>
-            <ion-item>
-                <div class="myrow">
-                    <div class="mycol" style="width:220px;padding-left:15px">S1-20150609-093L-0001</div>
-                    <div class="mycol" style="flex:1;-webkit-flex:1">
-                        第10孔 9#墩侧 5m范围内 外侧梁底 6条 横向裂缝 渗水 间距40-80cm
-                    </div>
-                    <div class="mycol text-center" style="width:80px">1</div>
-                    <div class="mycol text-center" style="width:80px">2</div>
-                </div>
-                <ion-option-button class="button-balanced" ng-click="maintain(maintain)">
-                    <i class='icon ion-wrench padding'></i>修改
-                </ion-option-button>
-                <ion-option-button class="button-assertive" ng-click="maintain(maintain)">
-                    <i class='icon ion-delete padding'></i>删除
-                </ion-option-button>
-            </ion-item>
-            <ion-item>
-                <div class="myrow">
-                    <div class="mycol" style="width:220px;padding-left:15px">S1-20150609-093L-0002</div>
-                    <div class="mycol" style="flex:1;-webkit-flex:1">
-                        第1孔3#小箱梁，距7#墩2m，外侧腹板
-                        横向裂缝
-                        2条, 长0.5m，最大缝宽0.18mm
-                    </div>
-                    <div class="mycol text-center" style="width:80px">1</div>
-                    <div class="mycol text-center" style="width:80px">2</div>
-                </div>
-                <ion-option-button class="button-balanced" ng-click="maintain(maintain)">
-                    <i class='icon ion-wrench padding'></i>修改
-                </ion-option-button>
-                <ion-option-button class="button-assertive" ng-click="maintain(maintain)">
-                    <i class='icon ion-delete padding'></i>删除
-                </ion-option-button>
-            </ion-item>
-            <ion-item>
-                <div class="myrow">
-                    <div class="mycol" style="width:220px;padding-left:15px">S1-20150609-093L-0003</div>
-                    <div class="mycol" style="flex:1;-webkit-flex:1">
-                        第13孔 跨中 10m范围内 梁底 横向裂缝 间距20-60cm 最大缝宽 0.14mm
-                    </div>
-                    <div class="mycol text-center" style="width:80px">1</div>
-                    <div class="mycol text-center" style="width:80px">2</div>
-                </div>
-                <ion-option-button class="button-balanced" ng-click="maintain(maintain)">
-                    <i class='icon ion-wrench padding'></i>修改
-                </ion-option-button>
-                <ion-option-button class="button-assertive" ng-click="maintain(maintain)">
-                    <i class='icon ion-delete padding'></i>删除
-                </ion-option-button>
-            </ion-item>
-            -->
-
         </ion-list>
 
     </ion-scroll>
