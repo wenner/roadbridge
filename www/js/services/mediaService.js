@@ -5,19 +5,19 @@ angular.module('bridge.services')
     function ($q , $cordovaCamera , $cordovaCapture) {
         return {
             captureImage: function(options){
-                var defaultOptions = {
+                return $cordovaCapture.captureImage(options);
+            } ,
+            captureAlbum: function(){
+                var options = {
                     destinationType: Camera.DestinationType.FILE_URI,
-                    sourceType: Camera.PictureSourceType.CAMERA,
-                    //encodingType: Camera.EncodingType.JPEG,
+                    //sourceType: Camera.PictureSourceType.CAMERA,
+                    sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM,
+                    mediaType: Camera.MediaType.ALLMEDIA ,
                     saveToPhotoAlbum: false
                 };
-                options = _.extend( defaultOptions , options);
-                return $cordovaCamera.getPicture(options);
-            } ,
-            captureAlbum: function(options){
-                return this.captureImage({
+                return $cordovaCamera.getPicture({
                     sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM,
-                    mediaType: Camera.MediaType.PICTURE
+                    mediaType: Camera.MediaType.ALLMEDIA
                 });
             } ,
             captureAudio: function(options){

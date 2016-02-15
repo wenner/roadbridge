@@ -297,9 +297,12 @@ angular.module('bridge').controller(
             },
             //拍照
             captureImage: function () {
-                MediaService.captureImage().then(function(file){
-                    var media = {path: file,type: "image"};
+                MediaService.captureImage().then(function(files){
+                    var file = files[0];
+                    var media = {path: file.fullPath,type: "image"};
                     $scope.addMedia(media);
+                    //var media = {path: file,type: "image"};
+                    //$scope.addMedia(media);
                 } , function(err){
                     console.log(err)
                 });
