@@ -369,6 +369,8 @@ angular.module('bridge').controller(
                     .then(srv.save)
                     .then(function () {
                         console.log("save ok");
+                        $scope.forMedia = false;
+                        $scope.medias = [];
                         //$cordovaToast.show('保存成功!');
                         $scope.getDiseases();
                         setTimeout(function () {
