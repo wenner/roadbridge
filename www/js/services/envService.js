@@ -2,7 +2,7 @@
 angular.module('bridge.services')
     .factory('EnvService', function ($log, StorageService , defaultSetting , defaultConfig) {
         var configKey = 'config' ,
-            configs = StorageService.set(configKey) || defaultConfig ,
+            configs = StorageService.get(configKey) || defaultConfig ,
             settingKey = 'settings' ,
             settings = StorageService.get(settingKey) || defaultSetting ,
             apiUrl;

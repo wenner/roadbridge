@@ -1,9 +1,12 @@
 angular.module('bridge').controller(
     'SettingCtrl',
     function ($scope, $rootScope, $stateParams, $ionicLoading, $ionicModal,
-              $timeout, $state, $location, $log ,
+              $timeout, $state, $location, $log , EnvService ,
               UserService , DataBaseService) {
         $scope.user = UserService.info;
+
+        $scope.setting = {};
+        $scope.setting.apiUrl = EnvService.api;
 
         //login
         $scope.logout = function(){
@@ -12,7 +15,11 @@ angular.module('bridge').controller(
                 $ionicLoading.hide();
                 $state.go("login");
             });
-        }
+        };
+
+        $scope.changeApiUrl = function(){
+            EnvService.api = $scope.setting.apiUrl;
+        };
 
         DataBaseService.single("select count(*) as count from LocalDisease")
             .then(function(item){
