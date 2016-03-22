@@ -111,10 +111,11 @@ angular.module('bridge.services')
             getDiseaseMedias: function(disease){
                 var defer = $q.defer();
                 var diseaseId = disease.id;
-                var sql = "select * from LocalDiseaseMedia where diseaseId = " + diseaseId;
+                var sql = "select * from LocalDiseaseMedia where diseaseId = " + diseaseId+" order by id";
                 DataBaseService
                     .query(sql)
                     .then(function (medias) {
+                        //console.log(medias);
                         console.log("get medias: "+ medias.length)
                         var data = {
                             disease: disease,

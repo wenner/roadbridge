@@ -1,11 +1,12 @@
 angular.module('bridge').controller(
     'DiseaseDetailCtrl',
     function ($scope, $rootScope, $stateParams, $ionicLoading, $ionicModal,
-              $timeout, $state, $location, $log ,
+              $timeout, $state, $location, $log , EnvService ,
               DiseaseService) {
 
         $scope.isLoading = false;
 
+        $scope.apiUrl = EnvService.api;
         $scope.load = function(id){
             $scope.isLoading = true;
             id = id || $stateParams.id;

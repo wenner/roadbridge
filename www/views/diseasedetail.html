@@ -11,14 +11,34 @@
                 {{disease.content}}
             </ion-item>
             <ion-item class="item-divider">病害信息</ion-item>
-            <ion-item  ng-repeat="item in disease" style="pointer-events:auto">
-                {{item}}
+            <ion-item>
+                编号<span class="item-note">{{disease.sn}}</span>
             </ion-item>
-            <ion-item class="item-divider">媒体信息</ion-item>
+            <ion-item>
+                检查人<span class="item-note">{{disease.checkUserName}}</span>
+            </ion-item>
+            <ion-item>
+                检查日期
+                <span class="item-note">{{disease.checkDay | date:"yyyy-MM-dd hh:mm"}}</span>
+            </ion-item>
+            <ion-item>
+                上传日期
+                <span class="item-note">{{disease.createAt | date:"yyyy-MM-dd hh:mm"}}</span>
+            </ion-item>
+            <ion-item>
+                线路
+                <span class="item-note">{{disease.roadName}}</span>
+            </ion-item>
+            <ion-item>
+                桥梁
+                <span class="item-note">{{disease.bridgeName}}</span>
+            </ion-item>
+            <ion-item class="item-divider">媒体信息 ({{medias.length}})</ion-item>
             <ion-slide-box class='welcome'>
-                <ion-slide ng-repeat="item in medias">
+                <ion-slide ng-repeat="media in medias | orderBy: name">
                     <div class="padding text-center">
-                        <img ng-src="{{item.result}}" style="width:100%">
+                        <img ng-src="{{apiUrl}}{{media.path}}" style="width:80%">
+                        <br>{{media.name}} {{media.path}}
                     </div>
                 </ion-slide>
             </ion-slide-box>

@@ -39,9 +39,12 @@
             <ion-item ng-repeat="disease in diseases"
                       href="#/disease/{{disease.id}}">
                 {{disease.content}}
+                <span class="item-note" ng-if="disease.mediaCount > 0">
+                    <i class="icon ion-images"></i> {{disease.mediaCount}}
+                </span>
                 <p style="padding-top:5px">
                     {{disease.sn}}
-                    <span class="item-note">{{disease.checkUserName}} @ {{disease.checkDay}}</span>
+                    <span class="item-note">{{disease.checkUserName}} @ {{disease.checkDay | date:"yyyy-MM-dd hh:mm"}}</span>
                 </p>
                 <ion-option-button class="button-balanced" ng-click="maintain(maintain)">
                     <i class='icon ion-wrench padding'></i>修改
