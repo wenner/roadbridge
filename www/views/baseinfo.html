@@ -11,17 +11,23 @@
         </div>
     </ion-header-bar>
     <ion-content>
+
         <div ng-if="action=='create'">
-            <div class="padding">{{createMessage}}</div>
+            <div class="padding" ng-show="createMessage">
+                {{createMessage}}
+                <br><button class="button button-positive" ng-click="checkCreated()">重试</button>
+            </div>
             <ion-list>
                 <ion-item ng-repeat="item in createItems" class='item-icon-right'>
                     {{$index+1}}. {{item.tableName}}
-                    <span class="item-note">{{item.error.join("")}}</span>
+                    <span class="item-note">{{item.error.join("")}}{{item.status}}</span>
                     <i class="icon "
                        ng-class="{true:'ion-checkmark-circled balanced' , false:'ion-close-circled assertive'}[item.complete]"></i>
                 </ion-item>
             </ion-list>
         </div>
+
+
         <div ng-if="action=='update'">
             <ion-item class='item-divider' style="padding-top:5px;padding-bottom:5px">
                 <div class="row">
@@ -32,6 +38,10 @@
                     <div class="col item-icon-right" style="width:50px;max-width:50px"></div>
                 </div>
             </ion-item >
+            <div class="padding" ng-show="updateMessage">
+                {{updateMessage}}
+                <br><button class="button button-positive" ng-click="checkUpdated()">重试</button>
+            </div>
             <ion-list>
                 <ion-item ng-repeat="item in updateItems" style="padding-top:5px;padding-bottom:5px">
                     <div class="row">

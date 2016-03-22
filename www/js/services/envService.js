@@ -2,14 +2,15 @@
 angular.module('bridge.services')
     .factory('EnvService', function ($log, StorageService , defaultSetting , defaultConfig) {
         var configKey = 'config' ,
-            s = StorageService.remove(configKey) ,
             configs = StorageService.get(configKey) || defaultConfig ,
             settingKey = 'settings' ,
             settings = StorageService.get(settingKey) || defaultSetting ,
-            apiUrl;
+            apiUrl = StorageService.get("apiUrl");
         return {
             api: apiUrl ,
             getApi: function(){
+                if (apiUrl) return;
+
                 var apiType = StorageService.get("apiType" , true);
                 if (!apiType) apiType = configs.apiType;
                 if (ionic.Platform.isWebView() || ionic.Platform.isIOS()){
@@ -17,7 +18,13 @@ angular.module('bridge.services')
                 }
                 this.apiType = apiType;
                 apiUrl = configs.apiUrls[apiType];
+                StorageService.set("apiUrl" , apiUrl);
                 this.api = apiUrl;
+            } ,
+            changeApiUrl: function(url){
+                apiUrl = url;
+                this.api = url;
+                StorageService.set("apiUrl" , url , true);
             } ,
             changeApiType: function(type){
                 StorageService.set("apiType" , type , true);

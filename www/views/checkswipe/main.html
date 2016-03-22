@@ -1,51 +1,32 @@
 <ion-view view-title="病害检查">
     <ion-header-bar class="bar-positive">
         <button class="button button-icon  ion-ios-close-outline pull-left"
-                ng-clic1k='goback()' ui-sref=tab.disease></button>
+                ui-sref=tab.disease></button>
         <h1 class="title">
-            <div ng-show="!current.isEmpty()">
+            <span ng-show="!current.isEmpty()">
                 {{current.project.display}} / {{current.road.display}} / {{current.bridge.display}}
-            </div>
-            <div ng-if="current.isEmpty()">请选择检测基础信息</div>
+            </span>
+            <span ng-if="current.isEmpty()">请选择检测基础信息</span>
         </h1>
-        <div class="buttons" side="right">
+        <div class="buttons" data-side="right">
             <button class='button button-icon ion-ios-loop'
                     ng-click="reSelectInfo()">重新选择</button>
             <button class='button button-icon button-clear ion-ios-more'
                     ng-click="showMainPopoverMenu($event)"></button>
-
-            <!--
-            <button class='button button-badge button-icon ion-ios-clock-outline'
-                    style="padding-left:0"
-                    ng-hide="historys.length==0" ng-click="showHistoryModal()">
-                <span class="badge badge-assertive">{{historys.length}}1</span>
-            </button>
-            -->
         </div>
     </ion-header-bar>
     <ion-content scroll="false" class="has-header">
         <div class="picker-container"
              ng-if="!current.isEmpty()">
-
-            <!--桥梁部件信息-->
-            <!--
-            <div class="row inforow" style='background-color:#e8f4ff'>
-                <div class="col col-20">线路信息: {{current.road.display}}</div>
-                <div class="col">桥梁信息: {{current.bridge.display}}</div>
-                <div class="col col-20">部位: {{current.bujianGroup.value}} <span class="badge badge-assertive">0</span></div>
-                <div class="col col-10 text-center" style="font-weight:bold;color:red" ng-click="reSelectInfo()">重新选择</div>
-            </div>
-            -->
-
             <!--桥梁部件号选择-->
             <div class="hpicker-container hpicker-container-borderbottom">
                 <div class="hpicker-row">
                     <div class="hpicker-header">{{current.bujianGroup.value}}:</div>
                     <div ng-if="bujianSns"
                          hswipepicker
-                         pickerdata="bujianSns"
-                         momentumRatio="10"
-                         changecol = "changeCol(bujianSns)"
+                         data-pickerdata="bujianSns"
+                         data-momentumRatio="10"
+                         data-changecol = "changeCol(bujianSns)"
                          ng-class= "{'activated':bujianSns.isActivsted}"
                          class="hpicker-items">
                     </div>
@@ -58,9 +39,9 @@
                     <div class="hpicker-header">桥梁部件:</div>
                     <div ng-if="bujians"
                          hswipepicker
-                         pickerdata="bujians"
-                         momentumRatio="10"
-                         changecol = "changeCol(bujians)"
+                         data-pickerdata="bujians"
+                         data-momentumRatio="10"
+                         data-changecol = "changeCol(bujians)"
                          ng-class= "{'activated':bujians.isActivsted}"
                          class="hpicker-items">
                     </div>
@@ -83,13 +64,13 @@
                 <div ng-repeat="col in pickerColumns"
                      ng-show = "!col.hidden"
                      class="picker-column text-{{col.align || 'center'}}"
-                     style="{{col.width && col.width !=0 ? 'width:'+col.width+'px' : 'flex:1;-webkit-flex:1'}}">
+                     style="{{(col.width && col.width !=0) ? 'width:'+col.width+'px' : 'flex:1;-webkit-flex:1'}}">
                     <div class="picker-column-header">{{col.name}}</div>
                     <div ng-if="col"
                          swipepicker
-                         momentumRatio="10"
-                         pickerdata="col"
-                         changecol = "changeCol(col)"
+                         data-momentumRatio="10"
+                         data-pickerdata="col"
+                         data-changecol = "changeCol(col)"
                          ng-class= "{'activated':col.isActivsted}"
                          class="picker-column-items {{col.activated}}">
                     </div>
@@ -105,19 +86,6 @@
             <div ng-if="forMedia"
                  ng-include="'views/checkswipe/media.html'"
                  class="flex-column flex1" ></div>
-
-            <!--
-            <div style="border-top:#ccc solid 1px;">
-                <div style="line-height:36px;padding:0;text-align:center" class="row">
-                    <div class="col">病害采集</div>
-                    <div class="col">桥梁卡片</div>
-                    <div class="col">检测报告</div>
-                    <div class="col">维修记录</div>
-                    <div class="col">历史检测记录</div>
-                    <div class="col">桥梁评价</div>
-                </div>
-            </div>
-            -->
         </div>
     </ion-content>
 
@@ -126,20 +94,13 @@
                 ng-click="previewBeforeSave()">保存</button>
         <h1 class="title">
         </h1>
-        <div class="buttons pull-right" side="right">
+        <div class="buttons pull-right" data-side="right">
             <button class='button button-icon ion-ios-camera'
                     ng-if="!forMedia"
                     ng-click="showMediaMenu($event)">拍照</button>
             <button class='button button-icon ion-close-round'
                     ng-if="forMedia"
                     ng-click="hideMediaMenu()">取消拍照</button>
-            <!--
-            <button class='button button-badge button-icon ion-ios-clock-outline'
-                    style="padding-left:0"
-                    ng-hide="historys.length==0" ng-click="showHistoryModal()">
-                <span class="badge badge-assertive">{{historys.length}}1</span>
-            </button>
-            -->
         </div>
     </ion-footer-bar>
 </ion-view>

@@ -202,19 +202,16 @@ angular.module('bridge.services')
         var result = [
             //{name:"xxx" , value:"xxx" , nextstep:"xxx"}
         ];
-        var medias1 = [
-            {path:"aaa" , type:"image"} ,
-            {path:"bbb" , type:"audio"} ,
-            {path:"ccc" , type:"video"}
-        ];
         var medias = [];
         var jsdb = SwipeBaseData;
-
         var db = DataBaseService.db;
-
         return {
             current: current,
             medias: medias ,
+            clearMedias: function(){
+                medias.splice(0 , medias.length);
+                //medias = _.remove(medias , function(){return true});
+            } ,
             fieldItemDatas: {
                 range: {},
                 select: {}
@@ -416,7 +413,7 @@ angular.module('bridge.services')
                             return defer.promise;
                         }
                         resetColumns[cols.length - 1] = {
-                            name: "评价",
+                            name: "标度",
                             code: "diseaseEvaluate",
                             hidden: false
                         };
@@ -900,8 +897,9 @@ angular.module('bridge.services')
                 ];
                 return DataBaseService.run(sql);
             } ,
-
+            //通过条件查询disease和LocalDisease中的检查记录
             getDiseases: function () {
+                //sql模板
                 var template = [
                     "select d.* , m.mediaCount from Disease d " ,
                     "left join (select diseaseId , count(*) as mediaCount from DiseaseMedia group by diseaseId) m on m.diseaseId = d.id" ,

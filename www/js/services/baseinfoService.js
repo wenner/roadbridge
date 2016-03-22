@@ -9,6 +9,8 @@ angular.module('bridge.services')
             isCreated: false,
             isUpdated: false,
             updateList: [],
+
+            //检查创建信息
             checkCreated: function () {
                 var me = this;
                 var defer = $q.defer();
@@ -31,8 +33,8 @@ angular.module('bridge.services')
             createDataBase: function () {
                 var me = this;
                 var defer = $q.defer();
-                var sqlPath = EnvService.api.replace("/api/", "/docs/") + "db.txt";
-                $http.get(sqlPath)
+                var sqlPath = EnvService.api+"docs/db.txt";
+                $http.get(sqlPath , {timeout:10000})
                     .success(function (d) {
                         var items = me.parseSql(d);
                         db.transaction(function (tx) {
@@ -53,7 +55,7 @@ angular.module('bridge.services')
                         defer.resolve(items);
                     })
                     .error(function(e){
-                        defer.reject(e.message || e);
+                        defer.reject("获取脚本失败!");
                     });
                 return defer.promise;
             },
@@ -87,6 +89,7 @@ angular.module('bridge.services')
                 });
                 return items;
             } ,
+            //获取当前sqllite的表
             getTables: function(){
                 var defer = $q.defer();
                 var sql = "select * from sqlite_master where type='table'";
@@ -107,6 +110,8 @@ angular.module('bridge.services')
                 });
                 return defer.promise;
             } ,
+
+            //检查update
             checkUpdated: function () {
                 var me = this,
                     defer = $q.defer(),
@@ -144,7 +149,7 @@ angular.module('bridge.services')
                         isChanged: isChanged ,
                         items: os
                     });
-                } , function(){
+                } , function(e){
                     defer.reject();
                 });
                 return defer.promise;
@@ -168,7 +173,8 @@ angular.module('bridge.services')
             } ,
             getRemoteVersion: function(){
                 return $http.get(
-                    EnvService.api + "baseinfo/version"
+                    EnvService.api + "baseinfo/version" ,
+                    {timeout:10000}
                 );
             } ,
             updateTable: function(table){

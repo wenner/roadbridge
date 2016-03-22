@@ -8,6 +8,7 @@ angular.module('bridge').controller(
         _.extend($scope , {
             action: "create" ,
             checkCreated: function(){
+                $scope.createMessage = null;
                 $scope.action = "create";
                 $ionicLoading.show();
                 srv.checkCreated()
@@ -36,15 +37,21 @@ angular.module('bridge').controller(
                     $scope.createMessage = "不能获取初始化脚本,请联系管理员!"+e;
                 });
             } ,
+            //检查数据是否更新
             checkUpdated: function(){
                 $ionicLoading.show();
+                $scope.updateMessage = null;
                 $scope.action = "update";
                 srv.checkUpdated().then(function(data){
                     $scope.updateItems = data.items;
                     $ionicLoading.hide();
                     if (data.isChanged) $scope.updateDataBase(data.items);
+                }).catch(function(){
+                    $ionicLoading.hide();
+                    $scope.updateMessage = "获取服务器数据版本信息失败!";
                 });
             } ,
+
             updateDataBase: function(items){
                 _.each(items , function(item){
                     if (item.isChanged){

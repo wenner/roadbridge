@@ -27,10 +27,15 @@ angular.module('bridge').controller(
 
         _.extend($scope, {
             current: srv.current,
+            //病害列表
             diseases: [],
+            //病害列表
             directions: [],
+            //媒体列表
             medias: srv.medias ,
+            //预览信息
             preview: {} ,
+            //基础信息
             info: {
                 road: 1,
                 bridge: 1,
@@ -64,12 +69,15 @@ angular.module('bridge').controller(
                     $scope.info.weather = '晴';
                 });
             },
+            //显示弹出菜单
             showMainPopoverMenu: function (event) {
                 $scope.mainPopoverMenu.show(event);
-            },
-            goback: function () {
+            } ,
+            //返回上页
+            goBack: function () {
                 history.back();
             },
+            //初始化
             initInfo: function () {
                 srv.getRoadById($scope.info.road).then(function (road) {
                     $scope.info.roadRecord = road;
@@ -91,6 +99,7 @@ angular.module('bridge').controller(
                     {id: 2, name: "2015-10"}
                 ];
             },
+            //显示基础信息窗口
             showInfoModal: function () {
                 if (!$scope.infoModal) {
                     $ionicModal.fromTemplateUrl("views/checkswipe/infoModal.html", {
@@ -104,9 +113,11 @@ angular.module('bridge').controller(
                     $scope.infoModal.show();
                 }
             },
+            //重新选择,显示信息选择窗口
             reSelectInfo: function () {
                 $scope.infoModal.show();
             },
+            //road onchange事件
             changeRoad: function () {
                 delete $scope.info.bridge;
                 delete $scope.info.direction;
@@ -123,6 +134,7 @@ angular.module('bridge').controller(
                  }
                  */
             },
+            //bridge change 事件
             changeBridge: function () {
                 srv.getBridgeById($scope.info.bridge).then(function (bridge) {
                     $scope.info.bridgeRecord = bridge;
@@ -148,6 +160,7 @@ angular.module('bridge').controller(
                  }
                  */
             },
+            //确认基础信息后进行界面初始化
             onInfoSelect: function () {
                 //设置基础信息
                 $scope.current.setInfo($scope.info);
@@ -234,6 +247,7 @@ angular.module('bridge').controller(
                     var bujianSn = $scope.current.bujianSn.value;
                     var bujianId = $scope.current.bujian.value;
 
+                    //设置部件的badge
                     var snGroups = _.groupBy(items, "bujianSn");
                     _.each($scope.bujianSns.items, function (item, i) {
                         item.badge = 0;
@@ -242,6 +256,7 @@ angular.module('bridge').controller(
                             item.badge = group.length;
                         }
                     });
+                    //设置孔,联的badge
                     var bjGroups = _.groupBy(_.filter(items, "bujianSn", bujianSn), "bujianId");
                     _.each($scope.bujians.items, function (item, i) {
                         item.badge = 0;
@@ -251,6 +266,7 @@ angular.module('bridge').controller(
                         }
                     });
 
+                    //获取当前选中部件的记录
                     $scope.diseases = _.filter(items, "bujianSn", $scope.current.bujianSn.value);
 
 
@@ -289,6 +305,7 @@ angular.module('bridge').controller(
 
             hideMediaMenu: function () {
                 $scope.forMedia = false;
+                srv.clearMedias();
             },
             addMedia: function (media) {
                 //$scope.$apply(function () {
@@ -360,7 +377,12 @@ angular.module('bridge').controller(
             } ,
             //查看病害信息
             previewDisease: function(disease){
-                console.log(disease);
+                $scope.preview = {
+                    beforeSave: false ,
+                    content: disease.content ,
+                    medias: []
+                };
+                $scope.previewModal.show();
             } ,
             //保存
             save: function () {
@@ -370,7 +392,8 @@ angular.module('bridge').controller(
                     .then(function () {
                         console.log("save ok");
                         $scope.forMedia = false;
-                        $scope.medias = [];
+                        srv.clearMedias();
+                        //$scope.medias = [];
                         //$cordovaToast.show('保存成功!');
                         $scope.getDiseases();
                         setTimeout(function () {

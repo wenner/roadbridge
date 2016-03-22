@@ -18,7 +18,7 @@ angular.module('bridge').controller(
         };
 
         $scope.changeApiUrl = function(){
-            EnvService.api = $scope.setting.apiUrl;
+            EnvService.changeApiUrl($scope.setting.apiUrl);
         };
 
         DataBaseService.single("select count(*) as count from LocalDisease")
