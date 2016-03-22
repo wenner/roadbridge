@@ -14,7 +14,7 @@ angular.module("bridge.config", [])
             //internet: "http://bridge.090730.com/api/",
             //internet: "http://192.168.0.107/BridgeWebApi/api/" ,
             //internet: "http://192.168.43.179/BridgeWebApi/api/"
-            internet: "http://qljcpad.tjxrs.cn/api/"
+            internet: "http://60.29.110.104:8093/api/"
         }
     })
     .constant('defaultSetting', {
