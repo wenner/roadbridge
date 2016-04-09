@@ -195,10 +195,10 @@ angular.module('bridge.services')
     .factory(
     'CheckSwipeService',
     function ($log, $q, $timeout, UserService, StorageService, $util,
-              SwipeBaseData, CheckCurrent,
+              SwipeBaseData, CheckCurrent, checkSwipeCustomDataService ,
               DataBaseService) {
-
         var current = new CheckCurrent();
+        var cdSrv = checkSwipeCustomDataService;
         var result = [
             //{name:"xxx" , value:"xxx" , nextstep:"xxx"}
         ];
@@ -208,6 +208,9 @@ angular.module('bridge.services')
         return {
             current: current,
             medias: medias ,
+            //其他需要的值
+            //bujianSns: null ,
+
             clearMedias: function(){
                 medias.splice(0 , medias.length);
                 //medias = _.remove(medias , function(){return true});
@@ -303,6 +306,7 @@ angular.module('bridge.services')
                         switch (bujianType) {
                             case "kong":
                                 items = me.getKongs();
+                                console.log(items);
                                 break;
                             case "lian":
                                 items = me.getLians();
@@ -400,6 +404,7 @@ angular.module('bridge.services')
                     };
                 });
                 var bujian = current.bujian.record;
+
                 var bujianId = current.bujian.value;
                 //写入buweiId
                 current.set('buwei', bujian.buweiId);
@@ -432,6 +437,8 @@ angular.module('bridge.services')
                         var fns = {};
                         _.each(currentFields, function (n, i) {
                             n.hidden = false;
+                            n.value = null;
+                            if (!n.items) n.items = [];
                             switch (n.code) {
                                 case "formal":
                                     fns[i] = function (field) {
@@ -464,60 +471,24 @@ angular.module('bridge.services')
                         });
                     });
                 return defer.promise;
-                /*
-                 var currentFields = _.map(
-                 _.filter(jsdb.diseaseFields, {bujianId: bujianId, position: "before"}),
-                 function (n) {
-                 n.items = [];
-                 n.value = null;
-                 return n;
-                 }
-                 );
-                 if (currentFields.length == 0) return resetColumns;
-                 resetColumns[cols.length - 1] = {
-                 name: "评价",
-                 code: "diseaseEvaluate",
-                 hidden: false
-                 };
-                 //加入病害类型,定性描述
-                 currentFields = currentFields.concat([
-                 {name: "病害类型", code: "diseaseCategory", width: 120, items: [], value: null},
-                 {name: "定性描述", code: "diseaseQualitative", width: 120, items: [], value: null}
-                 //{name:"评价" , code:"diseaseEvaluate"}
-                 ]);
-                 currentFields = this.getFieldItemDataByType(currentFields);
-                 var fn = this["get" + bujian.code + "ColumnsByBujian"];
-                 if (fn) {
-                 currentFields = fn.call(this, currentFields);
-                 }
-                 var changes = {};
-                 _.each(currentFields, function (n, i) {
-                 switch (n.code) {
-                 case "formal":
-                 n.items = _.map(_.filter(jsdb.goujians, "bujianId", current.bujian.value), function (n) {
-                 return _.extend(n, {name: n.name, value: n.id});
-                 });
-                 break;
-                 }
-                 changes[i] = n;
-                 n.hidden = false;
-                 });
-                 changes = _.extend(resetColumns, changes);
-
-                 return changes;
-                 */
-            },
-            getSSmainColumnsByBujian: function (columns) {
-                return columns;
             },
             //根据部件号获取列changes
             getColumnsByBujianSn: function (cols) {
                 var defer = $q.defer();
                 if (!cols) return defer.promise;
                 if (!current.bujianSn.record || !current.bujian.record) return defer.promise;
+                var changes = cdSrv.getCustomData(current , cols , this);
+                if (changes){
+                    defer.resolve(changes);
+                }
+                /*
                 var bujian = current.bujian.record;
                 var bujianSn = current.bujianSn.record;
-                var changes = {};
+                if (cdSrv[current.bujian.record.code]){
+                    var changes = cdSrv[current.bujian.record.code](current , cols);
+                    defer.resolve(changes);
+                }
+
                 switch (bujian.code) {
                     case "SSmain":
                         //梁号 , 孔中梁数遍历
@@ -550,6 +521,7 @@ angular.module('bridge.services')
                         break;
                 }
                 defer.resolve(changes);
+                */
                 return defer.promise;
             },
 
@@ -577,6 +549,7 @@ angular.module('bridge.services')
                                     return changeItem;
                                 })
                         }();
+
                         break;
                     case "diseaseCategory":
                         var bujian = current.bujian.record,
@@ -718,7 +691,7 @@ angular.module('bridge.services')
                 //fieldItemDatas
                 _.each(fields, function (n) {
                     var type = n.type;
-                    if (!type) return;
+                    if (!type || !this.fieldItemDatas[type]) return;
                     var items = [];
                     var description = n.description;
                     if (this.fieldItemDatas[type][description]) {

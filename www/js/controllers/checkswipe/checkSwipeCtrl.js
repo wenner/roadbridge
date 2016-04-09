@@ -170,6 +170,7 @@ angular.module('bridge').controller(
                     $scope.bujianSns = {
                         name: "部件号", code: "bujianSn", items: items
                     };
+                    srv.bujianSns = items;
                 });
                 //获取部件类型
                 srv.getBujians().then(function (items) {
