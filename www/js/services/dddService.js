@@ -15,7 +15,7 @@ angular.module('bridge.services')
                         var items = $util.db2json(rs);
                         defer.resolve(items);
                     } , function(tx , error){
-                        console.log(error.message);
+                        console.log("query error:"+error.message);
                         defer.reject(error.message);
                     });
                 });

@@ -1,0 +1,18 @@
+<ion-modal-view class="previewmodal">
+    <ion-header-bar class="bar-royal">
+        <h1 class="title">添加手动描述信息</h1>
+    </ion-header-bar>
+    <ion-content>
+        <div class="padding">
+            <textarea placeholder="请输入描述信息"
+                    style="width:100%;min-height:100px;border:#eee solid 2px"
+            ></textarea>
+        </div>
+    </ion-content>
+    <ion-footer-bar class="bar-royal">
+        <button class="button button-icon  ion-ios-close-outline pull-left"
+                ng-click="headerModal.hide()">关闭</button>
+        <button class='button button-icon ion-checkmark-round pull-right'
+                ng-click="headerModal.hide()">保存描述信息</button>
+    </ion-footer-bar>
+</ion-modal-view>

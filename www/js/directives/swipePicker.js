@@ -26,10 +26,12 @@ angular.module('bridge')
 
                     //加一个timeout , 有几个列总是无法正确定位
                     setTimeout(function(){
+                        transition(col.items , 0);
+
                         $scope.calcSize();
                         $scope.setValue(pickerdata.value || null , 0 , false);
-                        trans.form = maxTranslate;
-                        trans.duration = 300;
+                        //trans.form = maxTranslate;
+                        //trans.duration = 300;
                     } , 0);
 
                     //transform(col.wrapper , 'translate3d(0,' + maxTranslate + 'px,0)');

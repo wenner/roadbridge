@@ -30,8 +30,8 @@
             </label>
             <label class='item item-input item-select'>
                 <span class="input-label">选择桥梁</span>
-                <select ng-model="info.bridge"
-                        ng-options='x.id as x.name for x in bridges | filter:{"roadId":info.road}'
+                <select ng-model="info.bridge" style1="width:80%;max-width:80%"
+                        ng-options='x.id as ("桥"+x.alias+":桩号"+x.stakeNo+" "+x.name) for x in bridges | filter:{"roadId":info.road}'
                         ng-change="changeBridge()"
                         required>
                 </select>

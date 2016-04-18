@@ -150,6 +150,7 @@ angular.module('bridge.services')
                             success: function(response){
                                 var rs = response.response;
                                 delete rs.$id;
+                                rs.ix = media.ix;
                                 newMedias.push(rs);
                                 upload(medias);
                             } ,
@@ -164,8 +165,8 @@ angular.module('bridge.services')
             } ,
             //保存
             saveDisease: function(data){
-                console.log("save to server")
-                console.log(data)
+                console.log("save to server");
+                //console.log(data)
                 return $http.post(
                     EnvService.api + "disease",
                     data

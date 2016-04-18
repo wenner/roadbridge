@@ -37,8 +37,8 @@ angular.module('bridge').controller(
             preview: {} ,
             //基础信息
             info: {
-                road: 1,
-                bridge: 1,
+                road: 2,
+                bridge: 3,
                 project: 1,
                 direction: "L",
                 //暂时注释掉,因为异步并且值为中文,则不会选中select option , 在下面赋值的时候给info赋值
@@ -148,46 +148,54 @@ angular.module('bridge').controller(
                         $scope.info.direction = "S";
                     }
                 });
-                /*
-                 if (bridge) {
-                 $scope.info.bridgeRecord = bridge;
-                 }
-                 if (bridge.wayType == "double") {
-                 $scope.info.hasDirection = bridge.wayType == "double";
-                 $scope.directions = srv.getDirections($scope.info.roadRecord, $scope.info.bridgeRecord);
-                 } else {
-                 $scope.info.direction = "S";
-                 }
-                 */
             },
             //确认基础信息后进行界面初始化
             onInfoSelect: function () {
+                //需要初始化
+                srv.resetCurrent();
+                $scope.pickerColumns = srv.getPickerColumns();
+
                 //设置基础信息
                 $scope.current.setInfo($scope.info);
-                //获取部件号(孔/联)
-                //var bujianSns = srv.getBujianSns();
-                srv.getBujianSns().then(function (items) {
-                    $scope.bujianSns = {
-                        name: "部件号", code: "bujianSn", items: items
-                    };
-                    srv.bujianSns = items;
-                });
-                //获取部件类型
-                srv.getBujians().then(function (items) {
-                    items = _.map(items, function (n) {
-                        return _.extend(n, {value: n.id});
+                //获取部件号(孔/联) , 先获取bujiansn , 再获取bujian , 不然Change哪里可能会出现问题
+                srv.getBujianSns()
+                    .then(function (items) {
+                        $scope.bujianSns = {
+                            name: "部件号", code: "bujianSn", items: items
+                        };
+                        srv.bujianSns = items;
+                    })
+                    //获取部件类型
+                    .then(srv.getBujians)
+                    .then(function (items) {
+                        items = _.map(items, function (n) {
+                            return _.extend(n, {value: n.id});
+                        });
+                        $scope.bujians = {
+                            name: "部件", code: "bujian", items: items
+                        };
                     });
-                    $scope.bujians = {
-                        name: "部件", code: "bujian", items: items
-                    };
-                });
                 $scope.infoModal.hide();
 
-                if (!$scope.pickerColumns) {
-                    $scope.pickerColumns = srv.getPickerColumns();
-                }
+
             },
 
+            //点击表头
+            onHeaderClick: function(col){
+                if (!$scope.headerModal) {
+                    $ionicModal.fromTemplateUrl("views/checkswipe/headerModal.html", {
+                        scope: $scope,
+                        backdropClickToClose: false
+                    }).then(function (modal) {
+                        $scope.headerModal = modal;
+                        $scope.headerModal.show();
+                    });
+                } else {
+                    $scope.headerModal.show();
+                }
+            } ,
+
+            //选中某一个item
             changeCol: function (coldata) {
                 var promise;
                 var code = coldata.code;
@@ -239,7 +247,9 @@ angular.module('bridge').controller(
             },
             changeColumnsByPick: function (code) {
                 return srv.getColumnsByPick($scope.pickerColumns, code)
-                    .then($scope.applyChanges);
+                    .then(function(changes){
+                        if (changes) $scope.applyChanges(changes);
+                    });
             },
 
             //获取病害记录

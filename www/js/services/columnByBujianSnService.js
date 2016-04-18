@@ -1,6 +1,6 @@
 'use strict';
 angular.module('bridge.services')
-.factory('checkSwipeCustomDataService', function (
+.factory('columnByBujianSnService', function (
         $q, $http, $log, $util ,
         EnvService , DataBaseService
 ){
@@ -8,7 +8,7 @@ angular.module('bridge.services')
     return {
         current: null ,
         cols: null ,
-        getCustomData: function(c , cs , s){
+        getChanges: function(c , cs , s){
             srv = s;
             current = c;
             cols = cs;
@@ -25,6 +25,10 @@ angular.module('bridge.services')
         }
     };
 
+    function getColIndex(colCode){
+        return _.findIndex(cols, "code", colCode);
+    }
+
     function getList(items , field , options){
         options = options || {};
         var itemPrefix = options.itemPrefix || "" ,
@@ -34,10 +38,11 @@ angular.module('bridge.services')
             field = field || options.field;
         if (!field) return;
         items = _.map(items, function (n) {
-            n.name = itemPrefix +n.name+itemSuffix;
-            return n;
+            var item =_.isObject(n) ? n : {name: n , value:n};
+            item.name = itemPrefix +item.name+itemSuffix;
+            return item;
         });
-        var index = _.findIndex(cols, "code", field);
+        var index = getColIndex(field);
         changes[index] = {};
         changes[index].items = itemsPrefix.concat(items).concat(itemsSuffix);
     }
@@ -66,16 +71,32 @@ angular.module('bridge.services')
         getList(items , "dun");
     }
 
+    function getFeng(options){
+        var items = [
+            {name: (bujianSn.value - 1) + "#" ,value: bujianSn.value - 1},
+            {name: bujianSn.value + "#" , value: bujianSn.value}
+        ];
+        getList(items , "dun" , options);    }
+
     //主要承重
     function getSSMain(){
         //梁号 , 孔中梁数遍历
         getLiang({
-            itemsPrefix: [{name: "整梁",value: "整梁"}]
+            itemsPrefix: [{name: "整体",value: "整体"}]
         });
         //距离墩 , 孔号-1 , 孔好
-        getDun({
-            itemPrefix: "距"
-        });
+        var dun = parseInt(bujianSn.value || "0");
+        var positions =[
+            "距"+(dun-1)+"#"+(dun == 1 ? "台" : "墩")+"侧" ,
+            "距"+dun+"#"+(bujianSn.isLast==1 ? "台" : "墩")+"侧" ,
+            "跨中" , "1/4跨" , "3/4跨" ,
+            (dun-1)+"#"+(dun == 1 ? "台" : "墩")+"支点处" ,
+            dun+"#"+(bujianSn.isLast==1 ? "台" : "墩")+"支点处" ,
+            "悬臂端"
+        ];
+        getList(positions , "dun");
+
+
     }
 
     //一般承重
@@ -88,7 +109,7 @@ angular.module('bridge.services')
     function getSSBearing(){
         getDun();
         getLiang();
-        var zhizuoIndex = _.findIndex(cols, "code", "zhizuo");
+        var zhizuoIndex = getColIndex("zhizuo");
         changes[zhizuoIndex] = {};
         changes[zhizuoIndex].items = _.map(_.range(1, 10), function (n) {
             return {name: n+"#" , value: n};
@@ -108,11 +129,17 @@ angular.module('bridge.services')
     //桥墩
     function getISPier(){
         getDun();
-        var liangIndex = _.findIndex(cols, "code", "liang");
+        var liangIndex = getColIndex("liang");
         changes[liangIndex] = {};
         changes[liangIndex].items = _.map(_.range(1, 10), function (n) {
             return {name: n+"#" , value: n};
         });
+        var kong = parseInt(bujianSn.value || "0");
+        var positions =[
+            "外侧" , "内测" , "底部" , "外侧悬臂端处" , "内侧悬臂端处" , "跨中处" ,
+            (kong+1)+"#孔侧" , kong+"#孔侧"
+        ];
+        getList(positions , "position");
     }
 
     //桥台
@@ -135,18 +162,22 @@ angular.module('bridge.services')
 
     //桥面铺装
     function getBDPaving(){
+        getFeng();
     }
 
     //伸缩缝装置
     function getBDJoint(){
+        getFeng();
     }
 
     //人行道
     function getBDSidewalk(){
+        getFeng();
     }
 
     //栏杆护栏
     function getBDRail(){
+        getFeng();
     }
 
     //桥下排水系统
