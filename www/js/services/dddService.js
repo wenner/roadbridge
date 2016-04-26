@@ -61,6 +61,15 @@ angular.module('bridge.services')
                     });
                 });
                 return defer.promise;
+            } ,
+            executeInTransaction: function(tx , sql , params){
+                var defer = $q.defer();
+                    tx.executeSql(sql , params || [] , function(tx , rs){
+                        defer.resolve(rs);
+                    } , function(tx , error){
+                        defer.reject(error.message);
+                    });
+                    return defer.promise;
             }
         };
     });

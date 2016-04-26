@@ -152,8 +152,11 @@ angular.module('bridge').controller(
             //确认基础信息后进行界面初始化
             onInfoSelect: function () {
                 //需要初始化
+                $scope.bujianSns = null;
+                $scope.bujians = null;
+                $scope.pickerColumns = srv.getPickerColumns();                
                 srv.resetCurrent();
-                $scope.pickerColumns = srv.getPickerColumns();
+
 
                 //设置基础信息
                 $scope.current.setInfo($scope.info);
@@ -176,8 +179,6 @@ angular.module('bridge').controller(
                         };
                     });
                 $scope.infoModal.hide();
-
-
             },
 
             //点击表头

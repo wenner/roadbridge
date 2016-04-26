@@ -93,27 +93,26 @@ angular.module('bridge.services')
         //通过定性描述获取标度
         function getEvaluateByQualitative(){
             var qualitativeId = current.diseaseQualitative.value;
+            if (qualitativeId == 0){
+                return {
+                    items:[
+                        {name:1 , value:0}
+                    ]
+                };
+            }
             var diseaseQualitativeRecord = current.diseaseQualitative.record ,
-                evaluateCount =_.random(3 , 5);
-            evaluateCount = diseaseQualitativeRecord ? (diseaseQualitativeRecord.evaluateCount || evaluateCount) : evaluateCount;
-            return {
-                items: _.map(_.range(1 , evaluateCount+1), function (n) {
-                    return {name: n, value: n , text: n , qId:qualitativeId};
-                })
-            };
+                evaluateGroup = diseaseQualitativeRecord ? diseaseQualitativeRecord.evaluateGroup : "";
 
             var sql = [
-                "select * from DiseaseEvaluate" ,
-                "where id in ( " ,
-                "   select evaluateId from qualitativeEvaluateRelation where qualitativeId = ?" ,
-                ")"
+                "select id , sn from DiseaseEvaluate where groupId = ? order by sn"
             ].join(" ");
             return DataBaseService
-                .query(sql, [qualitativeId])
+                .query(sql, [evaluateGroup])
                 .then(function (items) {
+                    console.log(items)
                     var changeItem = {};
                     changeItem.items = _.map(items, function (n) {
-                        return _.extend(n, {name: n.sn, value: n.id , text: n.name});
+                        return _.extend(n, {name: n.sn, value: n.id});
                     });
                     return changeItem;
                 });

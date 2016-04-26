@@ -200,7 +200,7 @@ angular.module('bridge.services')
 
 
 angular.module('bridge.services')
-    .factory(
+.factory(
     'CheckSwipeService',
     function ($log, $q, $timeout, UserService, StorageService, $util,
               SwipeBaseData, CheckCurrent,
