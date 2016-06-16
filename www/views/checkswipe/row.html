@@ -1,8 +1,0 @@
-<div class="hpicker-items-wrapper">
-    <div class="hpicker-item hpicker-badge" ng-repeat="item in pickerdata.items"
-         ng-class = "{true:'picker-selected'}[pickerdata.value == item.value]"
-         ng-click="selectItem(item)">
-            {{item.name}}
-            <span class="badge badge-assertive" ng-if="item.badge">{{item.badge}}</span>
-    </div>
-</div>
