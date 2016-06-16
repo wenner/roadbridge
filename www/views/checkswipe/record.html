@@ -36,8 +36,8 @@
                     <div class="mycol" style="flex:1;-webkit-flex:1">
                         {{disease.content}}
                     </div>
-                    <div class="mycol text-center" style="width:80px">{{disease.evaluateId}}</div>
-                    <div class="mycol text-center" style="width:80px">{{disease.mediaCount}}</div>
+                    <div class="mycol text-center" style="width:80px">{{disease.evaluateSn}}</div>
+                    <div class="mycol text-center" style="width:80px">{{disease.mediaCount || 0}}</div>
                 </div>
                 <ion-option-button class="button-balanced" ng-click="editDisease(disease)">
                     <i class='icon ion-wrench padding'></i>修改
@@ -49,3 +49,5 @@
         </ion-list>
 
     </ion-scroll>
+    
+

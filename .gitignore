@@ -6,3 +6,6 @@ platforms/
 /.idea
 
 /plugins
+/.vscode
+/*.apk
+/*.ipa

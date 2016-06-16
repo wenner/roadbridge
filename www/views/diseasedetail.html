@@ -33,6 +33,10 @@
                 桥梁
                 <span class="item-note">{{disease.bridgeName}}</span>
             </ion-item>
+            <ion-item>
+                量化描述
+                <span class="item-note">{{disease.description}}</span>
+            </ion-item>
             <ion-item class="item-divider">媒体信息 ({{medias.length}})</ion-item>
             <ion-slide-box class='welcome'>
                 <ion-slide ng-repeat="media in medias | orderBy: name">

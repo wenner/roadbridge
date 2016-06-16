@@ -34,7 +34,8 @@ angular.module('bridge.services')
                 isBase: true,
                 getDisplay: function (current, code) {
                     var record = current.road.record;
-                    return record.sn + " " + record.name;
+                    return record.name;
+                    //return record.sn + " " + record.name;
                 }
             },
             //桥梁
@@ -66,8 +67,15 @@ angular.module('bridge.services')
                 }
 
             },
-            //项目
-            project: {isBase: true, mapping: "projectId"},
+            //任务
+            task: {
+                isBase: true, 
+                mapping: "taskId" , 
+                getDisplay: function(current , code){
+                    var record = current.task.record;
+                    return record.Name;                    
+                }
+            },
             //方向
             direction: {isBase: true},
             //部位
@@ -140,8 +148,8 @@ angular.module('bridge.services')
             description: {}
         };
 
-        Current.prototype.reset = function(){
-            _.each(this.initValue, function (n, key) {
+        Current.prototype.reset = function(vs){
+            _.each(vs || this.initValue, function (n, key) {
                 n.code = key;
                 if (!n.mapping) n.mapping = key;
             });
@@ -185,6 +193,9 @@ angular.module('bridge.services')
                         case "bridge":
                             item.record = info.bridgeRecord;
                             break;
+                        case "task":
+                            item.record = info.taskRecord;
+                            break;
                     }
                     item.value = n;
                     item.display = n;
@@ -207,6 +218,7 @@ angular.module('bridge.services')
               columnByBujianService ,
               columnByBujianSnService ,
               columnByPickService ,
+              columnUtilService ,
               checkSwipeContentService ,
               DataBaseService) {
         var current = new CheckCurrent();
@@ -224,8 +236,8 @@ angular.module('bridge.services')
             medias: medias ,
             //其他需要的值
             //bujianSns: null ,
-            resetCurrent: function(){
-                this.current.reset();
+            resetCurrent: function(vs){
+                this.current.reset(vs);
             } ,
             clearMedias: function(){
                 medias.splice(0 , medias.length);
@@ -233,7 +245,9 @@ angular.module('bridge.services')
             } ,
             baseSql: {
                 road: "select * from road order by ix",
-                bridge: "select * from bridge order by ix",
+                task: "select * from W_A_Disease_CheckTaskInfo where ProjectID = ? order by time desc" ,
+                bridge: "select * from bridge where id in (select BridgeID from W_C_Task_Bridge where TaskID = ?) order by ix" ,
+                //bridge: "select * from bridge order by ix",
                 buwei: "select bujianGroup from buwei group by bujianGroup"
             },
 
@@ -250,9 +264,17 @@ angular.module('bridge.services')
             getRoadById: function (id) {
                 return DataBaseService.single("select * from road where id = " + id + " limit 1");
             },
+            //通过线路获取任务
+            getTasksByRoad: function(road){                
+                return this.getBaseInfo("task" , [road]);
+            } ,            
+            //通过ID获取任务
+            getTaskById: function(id){
+                return DataBaseService.single("select * from W_A_Disease_CheckTaskInfo where TaskInfoID = '" + id + "' limit 1");                
+            } ,
             //获取桥梁列表
-            getBridges: function () {
-                return this.getBaseInfo("bridge");
+            getBridgesByTask: function (task) {
+                return this.getBaseInfo("bridge" , [task]);
             },
             //通过ID获取桥梁
             getBridgeById: function (id) {
@@ -346,6 +368,30 @@ angular.module('bridge.services')
                 var params = [current.bujianGroup.value];
                 return DataBaseService.query(sql, params);
             },
+            //获取对应的标度
+            getDiseaseEvaluates: function(){
+                var defer = $q.defer();
+                var qualitativeId = current.diseaseQualitative.value;
+                if (qualitativeId == 0) return defer.promise;
+                var diseaseQualitativeRecord = current.diseaseQualitative.record ,
+                    evaluateGroup = diseaseQualitativeRecord ? diseaseQualitativeRecord.evaluateGroup : "";
+                $q.all({
+                    evaluates: DataBaseService.query("select * from DiseaseEvaluate where groupId = ? order by sn", [evaluateGroup]) ,
+                    groups: DataBaseService.query("select * from DiseaseEvaluateGroup where replace('x"+evaluateGroup+"', 'x'||id, '') != 'x"+evaluateGroup+"' and replace(id , '-' , '') = id order by id;") ,
+                    self: DataBaseService.query("select * from DiseaseEvaluateGroup where id = ?", [evaluateGroup]) ,                
+                }).then(function(rs){
+                    defer.resolve(rs);
+                });
+                return  defer.promise;                
+
+                /*
+                CHARINDEX(id , '10.1.1-1') > 0
+                var sql = [
+                    "select * from DiseaseEvaluate where groupId = ? order by sn"
+                ].join(" ");
+                return DataBaseService.query(sql, [evaluateGroup]);
+                */
+            } ,
             //获取初始化列
             getPickerColumns: function () {
                 var min = 1 , max=18;
@@ -379,7 +425,10 @@ angular.module('bridge.services')
             getColumnsByBujianSn: function (cols) {
                 var defer = $q.defer();
                 if (!cols) return defer.promise;
-                if (!current.bujianSn.record || !current.bujian.record) return defer.promise;
+                if (!current.bujianSn.record || !current.bujian.record) {
+                    defer.resolve();
+                    return defer.promise;
+                }
                 var changes = bujianSnSrv.getChanges(current , cols , this);
                 if (changes){
                     defer.resolve(changes);
@@ -471,7 +520,7 @@ angular.module('bridge.services')
                     var insertSqls = [];
                     //insert into LocalDisease
                     var diseaseSqlFields = [
-                        "projectId","sourceId","status","sn",
+                        "taskId","sourceId","status","sn",
                         "checkUser","checkUserName","checkDay","weather",
                         "createAt", 'isRemote' , 'isModified' , 'isDisease' ,
                         "roadId","bridgeId","direction","buweiId","bujianSn","bujianId",
@@ -502,6 +551,9 @@ angular.module('bridge.services')
                     });
                     DataBaseService.run(insertSqls)
                         .then(function(){
+							current.reset({
+								description: {}
+							});
                             defer.resolve();
                         } , function(errors){
                             defer.reject(errors.toString());
@@ -520,20 +572,100 @@ angular.module('bridge.services')
                 return DataBaseService.run(sql);
             } ,
 
+            //获取修改后字段
+            getEditFields: function(disease){
+                  
+                    var bujianId = disease.bujianId,
+                        goujianId = disease.formal ,
+                        categoryId = disease.categoryId ,
+                        qualitativeId = disease.qualitativeId;
+                    return getColumnsByBujian()
+                        .then(getColumnsByBujianAndCategory)
+                        .then(getColumnsByBujianAndCategoryAndQualitative)
+                        .then(function (items) {
+                            _.map(items , function(n){
+                                n.items = [];
+                                n.value = null;
+                            });
+                            items = _.groupBy(items , 'goujianId');
+                            var currentFields = items[goujianId] || items[0];
+                            currentFields = columnUtilService.getFieldItemDataByType(currentFields);
+                            return currentFields;
+                        });
+
+
+                //通过部件 , 构件 , 病害类别 , 定性描述获取后面的列
+                //只通过部件获取
+                function getColumnsByBujian(){
+                    var params = [bujianId , 0 , 0];
+                    return getQueryResult(params , []);
+                }
+                //通过部件 , 病害类别 获取
+                function getColumnsByBujianAndCategory(items){
+                    var params = [bujianId , categoryId , 0];
+                    return getQueryResult(params , items);
+                }
+                //通过部件 , 病害类别 , 定性描述 获取
+                function getColumnsByBujianAndCategoryAndQualitative(items){
+                    var params = [bujianId ,categoryId ,qualitativeId];
+                    return getQueryResult(params , items);
+                }
+                function getQueryResult(params , items){
+                    var defer = $q.defer();
+                    var sql = [
+                        "select * from DiseaseField" ,
+                        "where position = 'after' and uStatus = 'able' and " ,
+                        "bujianId  = ? and categoryId = ? and qualitativeId = ?" ,
+                        "order by ix "
+                    ].join(" ");
+                    return DataBaseService
+                        .query(sql, params)
+                        .then(function(rs){
+                            if (rs.length > 0) items = rs;
+                            return items;
+                        });
+                }
+            } ,  
+            
+            //获取qualitativeId对应的标度
+            getEvaluatesByQualitative: function(disease){
+                var qualitativeId = disease.qualitativeId;
+                if (qualitativeId == 0){
+                    return {
+                        items:[
+                            {name:1 , value:0}
+                        ]
+                    };
+                }
+                var sql = [
+                    "select e.id , e.sn from DiseaseEvaluate e " , 
+                    "left join DiseaseQualitative q on q.evaluateGroup = e.groupId " ,
+                    "where q.id = ? order by e.sn"
+                ].join(" ");
+                return DataBaseService
+                    .query(sql, [qualitativeId])
+                    .then(function (items) {
+                        return _.map(items, function (n) {
+                            return _.extend(n, {name: n.sn, value: n.id});
+                        });
+                    }); 
+            } ,
+
             //通过条件查询disease和LocalDisease中的检查记录
             getDiseases: function () {
                 //sql模板
                 var template = [
-                    "select d.* , m.mediaCount from Disease d " ,
+                    "select d.* , e.sn as evaluateSn , m.mediaCount from Disease d " ,
+                    "left join diseaseEvaluate e on e.id = d.evaluateId " ,
                     "left join (select diseaseId , count(*) as mediaCount from DiseaseMedia group by diseaseId) m on m.diseaseId = d.id" ,
-                    "where d.projectId = {{projectId}} " ,
+                    "where d.taskId = '{{taskId}}' " ,
                     "and d.roadId = {{roadId}} " ,
                     "and d.bridgeId = {{bridgeId}} " ,
                     "and d.direction = '{{direction}}'"
                 ].join(" ");
                 template = _.template(template);
                 var sql = template({
-                    projectId: current.project.value ,
+                    taskId: current.task.value ,
                     roadId: current.road.value ,
                     bridgeId: current.bridge.value ,
                     direction: current.direction.value ,
@@ -542,6 +674,7 @@ angular.module('bridge.services')
                 });
                 sql += " union "+ sql.replace(/Disease/g , "LocalDisease");
                 sql += " order by checkDay desc";
+                //console.log(sql);
                 return DataBaseService.query(sql);
             }
 

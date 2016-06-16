@@ -10,9 +10,12 @@ angular.module('bridge.services')
                 return getTemplateByBujian()
                     .then(getTemplateByBujianAndCategory)
                     .then(getTemplateByBujianAndGoujianAndCategory)
+                    .then(getTemplateByBujianAndCategoryAndQualitative)
+                    .then(getTemplateByBujianAndGoujianAndCategoryAndQualitative)
                     .then(function(item){
                         var template = item.template;
                         if (!template) return "";
+                        //这里需要引入一个js引擎
                         template = _.template(template);
                         return template(current);
                     } , function(){
@@ -28,6 +31,7 @@ angular.module('bridge.services')
             var params = [
                 current.bujian.value ,
                 0 ,
+                0 ,
                 0
             ];
             return getQueryResult(params , []);
@@ -37,7 +41,8 @@ angular.module('bridge.services')
             var params = [
                 current.bujian.value ,
                 0 ,
-                current.diseaseCategory.value || 0
+                current.diseaseCategory.value || 0 ,
+                0
             ];
             return getQueryResult(params , item);
         }
@@ -46,7 +51,26 @@ angular.module('bridge.services')
             return getQueryResult([
                 current.bujian.value ,
                 current.formal.value ,
-                current.diseaseCategory.value
+                current.diseaseCategory.value ,
+                0
+            ] , item);
+        }
+        //通过部件 , 病害类别 , 定性描述 获取
+        function getTemplateByBujianAndCategoryAndQualitative(item){
+            return getQueryResult([
+                current.bujian.value ,
+                0 ,
+                current.diseaseCategory.value , 
+                current.diseaseQualitative.value
+            ] , item);
+        }
+        //通过部件 , 构件 , 病害类别 , 定性描述 获取
+        function getTemplateByBujianAndGoujianAndCategoryAndQualitative(item){
+            return getQueryResult([
+                current.bujian.value ,
+                current.formal.value ,
+                current.diseaseCategory.value , 
+                current.diseaseQualitative.value
             ] , item);
         }
         //bujianId = ? and goujianId = ? and categoryId = ?"
@@ -55,7 +79,7 @@ angular.module('bridge.services')
             var sql = [
                 "select * from DiseaseTemplate" ,
                 "where isDefault = 1 and " ,
-                "bujianId  = ? and goujianId = ? and categoryId = ?"
+                "bujianId  = ? and goujianId = ? and categoryId = ? and qualitativeId = ?"
             ].join(" ");
             DataBaseService
                 .single(sql, params)

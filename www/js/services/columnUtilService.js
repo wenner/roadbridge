@@ -53,12 +53,14 @@ angular.module('bridge.services')
             };
             var numbers = [];
             var step = getStep(desc.step, desc.min);
-            for (var i = desc.min; i <= desc.max; i = (i * 10000000000000 + step * 10000000000000) / 10000000000000) {
+            for (var i = desc.min; i <= desc.max;) {
+                i = (i * 1000000000000000000 + step * 1000000000000000000) / 1000000000000000000;
+                //再次处理小数
                 step = getStep(desc.step, i);
                 numbers.push(i);
             }
             items = _.map(numbers, function (n) {
-                return {name: n, value: n};
+                return {name: n+(field.suffix || ""), value: n};
             });
             this.fieldItemDatas.range[description] = items;
             return items;

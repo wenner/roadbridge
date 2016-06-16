@@ -65,6 +65,9 @@ angular.module('bridge', [
                     }
                 };
             }
+            
+            navigator.splashscreen.hide();
+            
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
             /*有错误

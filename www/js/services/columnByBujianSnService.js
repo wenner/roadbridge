@@ -95,8 +95,6 @@ angular.module('bridge.services')
             "悬臂端"
         ];
         getList(positions , "dun");
-
-
     }
 
     //一般承重
@@ -136,7 +134,7 @@ angular.module('bridge.services')
         });
         var kong = parseInt(bujianSn.value || "0");
         var positions =[
-            "外侧" , "内测" , "底部" , "外侧悬臂端处" , "内侧悬臂端处" , "跨中处" ,
+            "外侧" , "内侧" , "底部" , "外侧悬臂根处" , "内侧悬臂根处" , "跨中处" ,
             (kong+1)+"#孔侧" , kong+"#孔侧"
         ];
         getList(positions , "position");
@@ -190,6 +188,10 @@ angular.module('bridge.services')
 
     //桥上排水系统
     function getISDrain(){
+    }
+    
+    //限高标志
+    function getISLogo(){
     }
 
 });

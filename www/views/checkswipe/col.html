@@ -1,5 +1,7 @@
-<div class="picker-column-items-wrapper">
+<div class="picker-column-items-wrapper" ng-switch="pickerdata.type">    
+    <div class="picker-text" ng-switch-when="text">{{pickerdata.value}}</div>
     <div ng-repeat="item in pickerdata.items"
+         ng-switch-default
          class="picker-item"
          ng-class = "{true:'picker-selected'}[pickerdata.value == item.value]"
          ng-click="selectItem(item)">

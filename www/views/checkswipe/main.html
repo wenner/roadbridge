@@ -4,7 +4,7 @@
                 ui-sref=tab.disease></button>
         <h1 class="title">
             <span ng-show="!current.isEmpty()">
-                {{current.project.display}} / {{current.road.display}} / {{current.bridge.display}}
+                {{current.road.display}} / {{current.task.display}} / {{current.bridge.display}}
             </span>
             <span ng-if="current.isEmpty()">请选择检测基础信息</span>
         </h1>
@@ -63,17 +63,21 @@
             <div class="picker-columns" style="height:218px">
                 <div ng-repeat="col in pickerColumns"
                      ng-show = "!col.hidden"
-                     class="picker-column text-{{col.align || 'center'}}"
+                     ng-class="{'picker-column-locked': col.isLocked}"
+                     class="picker-column text-{{col.align || 'center'}} "
                      style="{{(col.width && col.width !=0) ? 'width:'+col.width+'px' : 'flex:1;-webkit-flex:1'}}">
-                    <div class="picker-column-header"
-                        ng-click="onHeaderClick(col)">{{col.name}}</div>
+                    <div class="picker-column-header picker-column-header-{{col.type || 'swipe'}}"
+                        ng-click="onHeaderClick(col)">    
+                            <i class="icon ion-{{col.isLocked ? 'locked' : 'unlocked'}}" ng-show="col.allowLock == '1'"></i>
+                            {{col.name}}
+                    </div>
                     <div ng-if="col"
                          swipepicker
                          data-momentumRatio="10"
                          data-pickerdata="col"
                          data-changecol = "changeCol(col)"
                          ng-class= "{'activated':col.isActivsted}"
-                         class="picker-column-items {{col.activated}}">
+                         class="picker-column-items picker-column-{{col.type || 'swipe'}}">
                     </div>
                 </div>
                 <div class="picker-highlight"></div>

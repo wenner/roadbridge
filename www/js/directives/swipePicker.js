@@ -11,6 +11,7 @@ angular.module('bridge')
             controller: function ($scope, $element , $ionicSlideBoxDelegate) {
                 var scope = $scope , elem = $element;
                 $scope.pickerdata.trans = {};
+                $scope.allowSwipe = $scope.pickerdata.type != "text" && !$scope.pickerdata.isLocked;
                 var pickerdata = $scope.pickerdata ,
                     trans = $scope.pickerdata.trans ,
                     container = elem[0];
@@ -23,19 +24,27 @@ angular.module('bridge')
                 var col = $scope.col;
 
                 $scope.$watch("pickerdata.items", function() {
-
-                    //加一个timeout , 有几个列总是无法正确定位
-                    setTimeout(function(){
-                        transition(col.items , 0);
-
-                        $scope.calcSize();
-                        $scope.setValue(pickerdata.value || null , 0 , false);
-                        //trans.form = maxTranslate;
-                        //trans.duration = 300;
-                    } , 0);
-
-                    //transform(col.wrapper , 'translate3d(0,' + maxTranslate + 'px,0)');
-                    //transition(col.wrapper , 0);
+                    $scope.allowSwipe = $scope.pickerdata.type != "text" && !$scope.pickerdata.isLocked;
+                   
+                    if ($scope.allowSwipe){
+                        //加一个timeout , 有几个列总是无法正确定位
+                        setTimeout(function(){
+                            transition(col.items , 0);
+                            $scope.calcSize();
+                            $scope.setValue(pickerdata.value || null , 0 , false);
+                            //trans.form = maxTranslate;
+                            //trans.duration = 300;
+                        } , 0);
+                   }else{
+                        transition(col.wrapper , 0);
+                        transform(col.wrapper , 'translate3d(0,0,0)');
+                   }
+                   //transform(col.wrapper , 'translate3d(0,' + maxTranslate + 'px,0)');
+                   //transition(col.wrapper , 0);
+                });
+                
+                $scope.$watch("pickerdata.isLocked" , function(){
+                    $scope.allowSwipe = $scope.pickerdata.type != "text" && !$scope.pickerdata.isLocked;
                 });
 
                 var transform = function (el , transform) {
@@ -199,7 +208,7 @@ angular.module('bridge')
                 */
                 angular.extend($scope , {
                     setValue: function (newValue, mytransition, valueCallbacks) {
-                        if (!scope.pickerdata.items || scope.pickerdata.items.length == 0) return;
+                        if (scope.disableSwipe()) return;
                         if (typeof transition === 'undefined') transition = '';
                         var newActiveIndex = _.findIndex(pickerdata.items , function(n){
                             return n.value == newValue;
@@ -214,14 +223,12 @@ angular.module('bridge')
                         // Update items
                         updateItems(newActiveIndex, newTranslate, transition, true);
                     } ,
-
-
                     calcSize: function () {
                         if (col.container.offsetHeight){
                             scope.pickerdata.colHeight = col.container.offsetHeight;
                         }else{
                         }
-                        if (!scope.pickerdata.items || scope.pickerdata.items.length == 0) return;
+                        if (scope.disableSwipe()) return;
                         if (col.attrs.rotateEffect) {
                             //col.container.removeClass('picker-items-col-absolute');
                             //if (!col.width) col.container.css({width:''});
@@ -251,8 +258,14 @@ angular.module('bridge')
                          }
                          */
                     } ,
+                    disableSwipe: function(){
+                        return !scope.pickerdata.items || scope.pickerdata.items.length == 0 || !scope.allowSwipe;
+                    } ,
+                    handlerTouch: function(e){
+                       alert(1111) 
+                    } ,
                     handleDragStart: function(e) {
-                        if (!scope.pickerdata.items || scope.pickerdata.items.length == 0) return;
+                        if (scope.disableSwipe()) return;
                         //$ionicSlideBoxDelegate.enableSlide(false);
                         if (isMoved || isTouched) return;
                         e.gesture.preventDefault();
@@ -266,9 +279,10 @@ angular.module('bridge')
 
                         scope.$apply(function(){
                             $scope.pickerdata.isActivsted = true;
-                        });                    } ,
+                        });                    
+                    } ,
                     handleDrag: function(e){
-                        if (!scope.pickerdata.items || scope.pickerdata.items.length == 0) return;
+                        if (scope.disableSwipe()) return;
 
                         //$ionicSlideBoxDelegate.enableSlide(false);
                         if (!isTouched) return;
@@ -320,7 +334,7 @@ angular.module('bridge')
                         prevTranslate = currentTranslate;
                     } ,
                     handleDragEnd: function(e) {
-                        if (!scope.pickerdata.items || scope.pickerdata.items.length == 0) return;
+                        if (scope.disableSwipe()) return;
 
                         if (!isTouched || !isMoved) {
                             isTouched = isMoved = false;
@@ -392,6 +406,7 @@ angular.module('bridge')
             },
             link: function (scope, elem, attrs) {
                 scope.col.attrs = attrs;
+                $ionicGesture.on('touch', scope.handleTouch , elem);
                 $ionicGesture.on('dragstart', scope.handleDragStart , elem);
                 $ionicGesture.on('drag', scope.handleDrag , elem);
                 $ionicGesture.on('dragend', scope.handleDragEnd , elem);

@@ -15,14 +15,15 @@
                 <span class="input-label">检测项目</span>
                 <select ng-model="info.road"
                         ng-options='x.id as x.sn+" - "+x.name for x in roads'
-                        ng-change="changeRoad()"
+                        ng-change="onRoadChange()"
                         required>
                 </select>
             </label>
             <label class='item item-input item-select'>
                 <span class="input-label">检测任务</span>
-                <select ng-model="info.project"
-                        ng-options='x.id as x.name for x in projects'
+                <select ng-model="info.task"
+                        ng-options='x.TaskInfoID as x.Name for x in tasks'
+                        ng-change="onTaskChange()"
                         required>
                 </select>
             </label>
@@ -30,7 +31,7 @@
                 <span class="input-label">选择桥梁</span>
                 <select ng-model="info.bridge" style1="width:80%;max-width:80%"
                         ng-options='x.id as ("桥"+x.alias+":桩号"+x.stakeNo+" "+x.name) for x in bridges | filter:{"roadId":info.road}'
-                        ng-change="changeBridge()"
+                        ng-change="onBridgeChange()"
                         required>
                 </select>
             </label>

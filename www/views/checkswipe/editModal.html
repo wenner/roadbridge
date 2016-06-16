@@ -1,0 +1,37 @@
+<ion-modal-view>
+    <form name="editform">
+    <ion-header-bar class="bar-positive">
+        <h1 class="title">修改病害信息</h1>
+        <button class="button button-icon icon ion-ios-checkmark-outline"
+                ng-click="saveEditDisease()"
+                ng-disabled=editform.$invalid>保存信息
+        </button>
+    </ion-header-bar>
+    <ion-content>
+        <div style="padding:10px">原病害信息: {{editValues.content}}</div>
+        <ion-list>
+            <label class='item item-input' 
+                ng-class="{'item-select' : field.type != 'text'}"
+                ng-repeat="field in editFields">
+                <span class="input-label">{{field.name}}</span>
+                <div ng-if="field.type=='text'" style='width:100%'>
+                    <textarea ng-model="editValues[field.code]" style='background:#ffffcc;width:100%;padding:5px;height:60px'></textarea>
+                </div>
+                <div ng-if="field.type != 'text'">
+                    <select ng-model="editValues[field.code]"
+                            ng-options='x.value as x.name for x in field.items'
+                            required>
+                    </select>
+                </div>
+            </label>
+            <label class='item item-input item-select'>
+                <span class="input-label">标度</span>
+                <select ng-model="editValues.evaluateId"
+                        ng-options='x.id as x.sn for x in editEvaluates'
+                        required>
+                </select>
+            </label>
+        </ion-list>
+    </ion-content>
+    </form>
+</ion-modal-view>

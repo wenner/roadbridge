@@ -1,9 +1,9 @@
 angular.module('bridge').controller(
     'CheckSwipeCtrl',
     function ($scope, $rootScope, $q, $stateParams, $ionicLoading, $ionicModal,
-              $timeout, $state, $location, $log, $ionicPopup, $ionicPopover ,
-              CheckSwipeService,  $ionicScrollDelegate ,
-              EnvService , MediaService , UserService) {
+        $timeout, $state, $location, $log, $ionicPopup, $ionicPopover,
+        CheckSwipeService, $ionicScrollDelegate,
+        EnvService, MediaService, UserService) {
         //services
         var srv = CheckSwipeService;
 
@@ -16,9 +16,9 @@ angular.module('bridge').controller(
 
 
         //save , preview modal
-        $ionicModal.fromTemplateUrl("views/checkswipe/previewModal.html" , {
-            scope: $scope ,
-            animation:"mh-slide" ,
+        $ionicModal.fromTemplateUrl("views/checkswipe/previewModal.html", {
+            scope: $scope,
+            animation: "mh-slide",
             backdropClickToClose: false
         }).then(function (modal) {
             $scope.previewModal = modal;
@@ -32,15 +32,18 @@ angular.module('bridge').controller(
             //病害列表
             directions: [],
             //媒体列表
-            medias: srv.medias ,
+            medias: srv.medias,
             //预览信息
-            preview: {} ,
+            preview: {},
+
+            currentColumn: {},
+
             //基础信息
             info: {
-                road: 2,
-                bridge: 3,
-                project: 1,
-                direction: "L",
+                road: "",
+                bridge: "",
+                task: "",
+                direction: "",
                 //暂时注释掉,因为异步并且值为中文,则不会选中select option , 在下面赋值的时候给info赋值
                 //bujianGroup: "桥下检测",
                 //weather: "晴",
@@ -53,10 +56,6 @@ angular.module('bridge').controller(
                 //road
                 srv.getRoads().then(function (items) {
                     $scope.roads = items;
-                });
-                //bridges
-                srv.getBridges().then(function (items) {
-                    $scope.bridges = items;
                 });
                 //buweis
                 srv.getBuweis().then(function (items) {
@@ -72,13 +71,14 @@ angular.module('bridge').controller(
             //显示弹出菜单
             showMainPopoverMenu: function (event) {
                 $scope.mainPopoverMenu.show(event);
-            } ,
+            },
             //返回上页
             goBack: function () {
                 history.back();
             },
             //初始化
             initInfo: function () {
+                /*
                 srv.getRoadById($scope.info.road).then(function (road) {
                     $scope.info.roadRecord = road;
                 });
@@ -94,10 +94,7 @@ angular.module('bridge').controller(
                         $scope.info.direction = "S";
                     }
                 });
-                $scope.projects = [
-                    {id: 1, name: "2015-09"},
-                    {id: 2, name: "2015-10"}
-                ];
+                */
             },
             //显示基础信息窗口
             showInfoModal: function () {
@@ -110,7 +107,7 @@ angular.module('bridge').controller(
                         $scope.infoModal.show();
                     });
                 } else {
-                    $scope.infoModal.show();
+                    $scope.infoModal.show(); y
                 }
             },
             //重新选择,显示信息选择窗口
@@ -118,30 +115,57 @@ angular.module('bridge').controller(
                 $scope.infoModal.show();
             },
             //road onchange事件
-            changeRoad: function () {
+            onRoadChange: function () {
+                delete $scope.info.task;
+                $scope.tasks = [];
                 delete $scope.info.bridge;
+                $scope.bridges = [];
                 delete $scope.info.direction;
                 delete $scope.info.bridgeRecord;
                 delete $scope.info.hasDirection;
+                if (!$scope.info.road) return;
                 srv.getRoadById($scope.info.road).then(function (road) {
                     $scope.info.roadRecord = road;
                 });
-                /*
-                 var road = srv.getRoadById($scope.info.road);
-                 console.log(road)
-                 if (road) {
-                 $scope.info.roadRecord = road;
-                 }
-                 */
+                //tasks
+                srv.getTasksByRoad($scope.info.road).then(function (items) {
+                    $scope.tasks = items;
+                    if (items.length > 0) {
+                        $scope.info.task = items[0].TaskInfoID;
+                        $scope.onTaskChange();
+                    }
+                });
+            },
+            //task change事件
+            onTaskChange: function () {
+                delete $scope.info.bridge;
+                $scope.bridges = [];
+                delete $scope.info.direction;
+                delete $scope.info.bridgeRecord;
+                delete $scope.info.hasDirection;
+                if (!$scope.info.task) return;
+                srv.getTaskById($scope.info.task).then(function (task) {
+                    $scope.info.taskRecord = task;
+                });
+                //bridges
+                srv.getBridgesByTask($scope.info.task).then(function (items) {
+                    $scope.bridges = items;
+                    if (items.length > 0) {
+                        $scope.info.bridge = items[0].id;
+                        $scope.onBridgeChange();
+                    }
+                });
             },
             //bridge change 事件
-            changeBridge: function () {
+            onBridgeChange: function () {
+                if (!$scope.info.bridge) return;
                 srv.getBridgeById($scope.info.bridge).then(function (bridge) {
                     $scope.info.bridgeRecord = bridge;
                     if (bridge.wayType == "double") {
                         $scope.info.hasDirection = bridge.wayType == "double";
                         srv.getDirections($scope.info.roadRecord, $scope.info.bridgeRecord).then(function (items) {
                             $scope.directions = items;
+                            if (items.length > 0) $scope.info.direction = items[0].direction;
                         });
                         //$scope.directions = srv.getDirections($scope.info.roadRecord, $scope.info.bridgeRecord);
                     } else {
@@ -154,7 +178,7 @@ angular.module('bridge').controller(
                 //需要初始化
                 $scope.bujianSns = null;
                 $scope.bujians = null;
-                $scope.pickerColumns = srv.getPickerColumns();                
+                $scope.pickerColumns = srv.getPickerColumns();
                 srv.resetCurrent();
 
 
@@ -172,7 +196,7 @@ angular.module('bridge').controller(
                     .then(srv.getBujians)
                     .then(function (items) {
                         items = _.map(items, function (n) {
-                            return _.extend(n, {value: n.id});
+                            return _.extend(n, { value: n.id });
                         });
                         $scope.bujians = {
                             name: "部件", code: "bujian", items: items
@@ -182,7 +206,52 @@ angular.module('bridge').controller(
             },
 
             //点击表头
-            onHeaderClick: function(col){
+            onHeaderClick: function (col) {
+                //标度
+                if (col.code == "diseaseEvaluate") {
+                    $scope.onDiseaseEvaluateHeaderClick();
+                    return;
+                }
+                //锁定
+                if (col.allowLock == "1") {
+                    $scope.onHeaderLockClick(col);
+                    return;
+                }
+                //类型
+                var type = col.type;
+                if (!type) return;
+                $scope.currentColumn = col;
+                var method = "on" + _.capitalize(type) + "HeaderClick";
+                if ($scope[method]) {
+                    $scope[method](col);
+                }
+            },
+            onDiseaseEvaluateHeaderClick: function () {
+                $scope.diseaseEvaluates = [];
+                srv.getDiseaseEvaluates()
+                    .then(function (rs) {
+                        $scope.diseaseEvaluates = rs.evaluates;
+                        $scope.diseaseEvaluateGroups = rs.groups.concat(rs.self);
+                    });
+                if (!$scope.dieaseEvaluateModal) {
+                    $ionicModal.fromTemplateUrl("views/checkswipe/diseaseEvaluateModal.html", {
+                        scope: $scope
+                    }).then(function (modal) {
+                        $scope.dieaseEvaluateModal = modal;
+                        $scope.dieaseEvaluateModal.show();
+                    });
+                } else {
+                    $scope.dieaseEvaluateModal.show();
+                }
+            },
+            onHeaderLockClick: function (col) {
+                col.isLocked = !col.isLocked;
+                if (col.code && $scope.current[col.code]) {
+                    $scope.current[col.code].value = col.isLocked ? "" : col.value;
+                }
+                $scope.getContent();
+            },
+            onTextHeaderClick: function (col) {
                 if (!$scope.headerModal) {
                     $ionicModal.fromTemplateUrl("views/checkswipe/headerModal.html", {
                         scope: $scope,
@@ -194,7 +263,18 @@ angular.module('bridge').controller(
                 } else {
                     $scope.headerModal.show();
                 }
-            } ,
+            },
+
+            saveHeaderContent: function () {
+                var code = $scope.currentColumn.code,
+                    value = $scope.currentColumn.value;
+                $scope.current.set(code, {
+                    value: value
+                });
+                $scope.currentColumn = {};
+                $scope.headerModal.hide();
+                $scope.getContent();
+            },
 
             //选中某一个item
             changeCol: function (coldata) {
@@ -220,12 +300,27 @@ angular.module('bridge').controller(
                         promise = $scope.changeColumnsByPick(code);
                         break;
                 }
-                promise.then(srv.getContent)
+
+                promise.then($scope.getContent());
+            },
+            getContent: function () {
+                srv.getContent()
                     .then(function (content) {
                         $scope.current.content.value = content;
                     })
             },
+
+            /**  */
             applyChanges: function (changes) {
+                if (changes) {
+                    _.each(changes, function (n) {
+                        if (n.code && $scope.current[n.code] && $scope.current[n.code].value) {
+                            $scope.current[n.code].value = "";
+                        }
+                        if (!n.type) n.type = "swipe";
+                    });
+                }
+
                 if (!$scope.$$phase) {
                     $scope.$apply(function () {
                         _.each(changes, function (n, index) {
@@ -237,6 +332,8 @@ angular.module('bridge').controller(
                         _.extend($scope.pickerColumns[index], n);
                     });
                 }
+
+
             },
             changeColumnsByBujian: function () {
                 return srv.getColumnsByBujian($scope.pickerColumns)
@@ -248,7 +345,8 @@ angular.module('bridge').controller(
             },
             changeColumnsByPick: function (code) {
                 return srv.getColumnsByPick($scope.pickerColumns, code)
-                    .then(function(changes){
+                    .then(function (changes) {
+                        //console.log(code , changes);
                         if (changes) $scope.applyChanges(changes);
                     });
             },
@@ -294,10 +392,10 @@ angular.module('bridge').controller(
 
                 var hideSheet = $ionicActionSheet.show({
                     buttons: [
-                        {text: '<i class="icon ion-ios-camera"></i>拍摄照片', code: "camera"},
-                        {text: '<i class="icon ion-ios-albums"></i>从相册获取照片', code: "album"},
-                        {text: '<i class="icon ion-ios-videocam"></i>拍摄视频', code: "video"},
-                        {text: '<i class="icon ion-ios-recording"></i>录音', code: "audio"}
+                        { text: '<i class="icon ion-ios-camera"></i>拍摄照片', code: "camera" },
+                        { text: '<i class="icon ion-ios-albums"></i>从相册获取照片', code: "album" },
+                        { text: '<i class="icon ion-ios-videocam"></i>拍摄视频', code: "video" },
+                        { text: '<i class="icon ion-ios-recording"></i>录音', code: "audio" }
                     ],
                     //destructiveText: '删除',
                     //titleText: '添加媒体信息',
@@ -321,81 +419,81 @@ angular.module('bridge').controller(
             },
             addMedia: function (media) {
                 //$scope.$apply(function () {
-                    $scope.medias.push(media);
+                $scope.medias.push(media);
                 //});
             },
             //拍照
             captureImage: function () {
-                MediaService.captureImage().then(function(files){
+                MediaService.captureImage().then(function (files) {
                     var file = files[0];
-                    var media = {path: file.fullPath,type: "image"};
+                    var media = { path: file.fullPath, type: "image" };
                     $scope.addMedia(media);
                     //var media = {path: file,type: "image"};
                     //$scope.addMedia(media);
-                } , function(err){
+                }, function (err) {
                     console.log(err)
                 });
             },
             //从相册获取照片
             captureAlbum: function () {
-                MediaService.captureAlbum().then(function(file){
-                    var media = {path: file,type: "image"};
+                MediaService.captureAlbum().then(function (file) {
+                    var media = { path: file, type: "image" };
                     $scope.addMedia(media);
                 });
             },
             //录音
             captureAudio: function () {
-                MediaService.captureAudio().then(function(files){
+                MediaService.captureAudio().then(function (files) {
                     var file = files[0];
-                    var media = {path: file.fullPath,type: "audio"};
+                    var media = { path: file.fullPath, type: "audio" };
                     $scope.addMedia(media);
                 });
             },
             //摄像
             captureVideo: function () {
-                MediaService.captureVideo().then(function(files){
+                MediaService.captureVideo().then(function (files) {
                     var file = files[0];
-                    var media = {path: file.fullPath,type: "video"};
+                    var media = { path: file.fullPath, type: "video" };
                     $scope.addMedia(media);
                 });
             },
             //全屏查看图片,视频
-            showMediaView: function(index){
+            showMediaView: function (index) {
                 $scope.activeSlide = index;
                 $ionicModal.fromTemplateUrl("views/checkswipe/mediaView.html", {
                     scope: $scope,
                     animation: 'slide-in-up'
-                }).then(function(modal) {
+                }).then(function (modal) {
                     $scope.modal = modal;
                     $scope.modal.show();
                 });
-            } ,
+            },
             //关闭全屏查看
-            closeMediaView: function(){
+            closeMediaView: function () {
                 $scope.modal.hide();
                 $scope.modal.remove();
-            } ,
+            },
             //预览
-            previewBeforeSave: function(){
+            previewBeforeSave: function () {
                 $scope.preview = {
-                    beforeSave: true ,
-                    content: $scope.current.content.value ,
+                    beforeSave: true,
+                    content: $scope.current.content.value,
                     medias: $scope.medias
                 };
                 $scope.previewModal.show();
-            } ,
-            hidePreview: function(){
+            },
+            hidePreview: function () {
                 $scope.previewModal.hide();
-            } ,
+            },
             //查看病害信息
-            previewDisease: function(disease){
+            previewDisease: function (disease) {
                 $scope.preview = {
-                    beforeSave: false ,
-                    content: disease.content ,
+                    beforeSave: false,
+                    content: disease.content,
                     medias: []
                 };
                 $scope.previewModal.show();
-            } ,
+            },
             //保存
             save: function () {
                 $scope.hidePreview();
@@ -415,6 +513,42 @@ angular.module('bridge').controller(
                     }, function (msg) {
                         alert(msg)
                     });
+            },
+
+            //修改
+            editDisease: function (disease) {
+                $scope.editValues = disease;
+                //获取标度
+                srv.getEvaluatesByQualitative(disease)
+                    .then(function (items) {
+                        $scope.editEvaluates = items;
+                    });
+                //获取字段
+                srv.getEditFields(disease)
+                    .then(function (items) {
+                        $scope.editFields = items;
+                    })
+
+                if (!$scope.editModal) {
+                    $ionicModal.fromTemplateUrl("views/checkswipe/editModal.html", {
+                        scope: $scope
+                    }).then(function (modal) {
+                        $scope.editModal = modal;
+                        $scope.editModal.show();
+                    });
+                } else {
+                    $scope.editModal.show();
+                }
+
+            },
+            //保存修改信息
+            saveEditDisease: function () {
+                console.log(this.editValues);
+                //生成content
+
+                //保存
+
+
             },
 
             //删除

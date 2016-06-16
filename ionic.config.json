@@ -8,11 +8,11 @@
   "proxies": [
     {
       "path": "/api/",
-      "proxyUrl": "http://localhost/BridgeWebApi/api/"
+      "proxyUrl": "http://localhost:809/api/"
     },
     {
       "path": "/docs/",
-      "proxyUrl": "http://localhost/BridgeWebApi/docs/"
+      "proxyUrl": "http://localhost:809/docs/"
     }
   ]
 }
