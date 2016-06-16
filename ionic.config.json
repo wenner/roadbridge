@@ -1,7 +1,7 @@
 {
   "name": "BridgeDisease",
   "app_id":"0b49593f",
-  "api_key":"e87f4ec1d102a1ff8189c55f15fb9d2cdf3109522ecf5e99"
+  "api_key":"e87f4ec1d102a1ff8189c55f15fb9d2cdf3109522ecf5e99" ,
   "typescript": true,
   "v2": true
 }
