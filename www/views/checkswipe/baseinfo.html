@@ -1,0 +1,75 @@
+<form name="infoform">
+    <ion-header-bar class="bar-positive">
+        <button class="button button-icon button-positive1 button-clear ion-ios-close-outline pull-left" 
+            ui-sref="tab.disease"></button>
+        <h1 class="title">请选择检测基础信息</h1>
+        <button class="button button-icon icon ion-ios-checkmark-outline" 
+            ng-click="onInfoSelect()" 
+            ng-disabled=infoform.$invalid>确定
+        </button>
+    </ion-header-bar>
+    <ion-content>
+        <ion-list>
+            <label class='item item-input item-select'>
+                <span class="input-label">检测项目</span>
+                <select ng-model="info.road"
+                        ng-options='x.id as x.sn+" - "+x.name for x in roads'
+                        ng-change="onRoadChange()"
+                        required>
+                </select>
+            </label>
+            <label class='item item-input item-select'>
+                <span class="input-label">检测任务</span>
+                <select ng-model="info.task"
+                        ng-options='x.TaskInfoID as x.Name for x in tasks'
+                        ng-change="onTaskChange()"
+                        required>
+                </select>
+            </label>
+            <label class='item item-input item-select'>
+                <span class="input-label">选择桥梁</span>
+                <select ng-model="info.bridge" style1="width:80%;max-width:80%"
+                        ng-options='x.id as ("桥"+x.alias+":桩号"+x.stakeNo+" "+x.name) for x in bridges | filter:{"roadId":info.road}'
+                        ng-change="onBridgeChange()"
+                        required>
+                </select>
+            </label>
+            <label class='item item-input item-select' ng-if="info.hasDirection">
+                <span class="input-label">行驶方向</span>
+                <select ng-model="info.direction"
+                        ng-options='x.direction as x.text for x in directions'
+                        required>
+                </select>
+            </label>
+            <label class='item item-input item-select'>
+                <span class="input-label">检测部位</span>
+                <select ng-model="info.bujianGroup"
+                        ng-options='x.bujianGroup as x.bujianGroup for x in buweis'
+                        required>
+                </select>
+            </label>
+            <label class='item item-input item-select'>
+                <span class="input-label">今日天气</span>
+                <select ng-model="info.weather"
+                        ng-options='x for x in weathers'>
+                </select>
+            </label>
+            <label class='item item-input'>
+                <span class="input-label">检测单位</span>
+                <input type='text' ng-model="info.checkDept"
+                       placeholder="请填写检测单位" required>
+            </label>
+            <label class='item item-input'>
+                <span class="input-label">检测人</span>
+                <input type='text' ng-model="info.checkUserName"
+                       placeholder="请填写检测人" required>
+            </label>
+            <label class='item item-input'>
+                <span class="input-label">检测日期</span>
+                <input type='date' ng-model="info.checkDay"
+                       placeholder="请填写检测日期" required>
+            </label>
+
+        </ion-list>
+    </ion-content>
+</form>

@@ -2,7 +2,8 @@ angular.module('bridge')
     .controller(
     'TabCtrl',
     function ($scope, $rootScope, $state, $log, $timeout, $ionicLoading ,
-              $ionicPopover) {
+              $ionicPopover ,
+              CheckSwipeService) {
         // .fromTemplateUrl() method
         $ionicPopover.fromTemplateUrl('views/addcheckmenu.html', {
             scope: $scope
@@ -13,6 +14,13 @@ angular.module('bridge')
         angular.extend($scope , {
             showPopover: function(event){
                 $scope.popover.show(event);
+            } ,
+            goCheckSwipe: function(){
+                var url = "checkswipe.disease";
+                if (CheckSwipeService.current.isEmpty()){
+                    url = "checkswipe.baseinfo";
+                }
+                $state.go(url);
             }
         });
     });

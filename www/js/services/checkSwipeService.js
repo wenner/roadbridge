@@ -210,6 +210,8 @@ angular.module('bridge.services')
     });
 
 
+
+
 angular.module('bridge.services')
 .factory(
     'CheckSwipeService',
@@ -225,6 +227,7 @@ angular.module('bridge.services')
         var bujianSrv = columnByBujianService;
         var bujianSnSrv = columnByBujianSnService;
         var pickSrv = columnByPickService;
+        var diseases = [];
         var result = [
             //{name:"xxx" , value:"xxx" , nextstep:"xxx"}
         ];
@@ -233,6 +236,7 @@ angular.module('bridge.services')
         var db = DataBaseService.db;
         return {
             current: current,
+            diseases: diseases ,
             medias: medias ,
             //其他需要的值
             //bujianSns: null ,
@@ -255,7 +259,6 @@ angular.module('bridge.services')
                 var sql = this.baseSql[table] || table;
                 return DataBaseService.query(sql, params || []);
             },
-
             //获取路线列表
             getRoads: function () {
                 return this.getBaseInfo("road");
@@ -300,17 +303,54 @@ angular.module('bridge.services')
                 defer.resolve(directions);
                 return defer.promise;
             },
-
             //获取天气
             getWeathers: function () {
                 var defer = $q.defer();
                 defer.resolve(jsdb.weathers);
                 return defer.promise;
             },
+            /** 插入病害数据 */
+            insertTaskDisease: function(rs){
+                var max = 500 , 
+                    sqls = [] ,
+                    ids = _.map(rs , function(n){return  n.id});               
+                var getInsertSql = function(items){
+                    var fields = [
+                        "id" ,"taskId" ,"sourceId" ,"status" ,"sn" ,"checkUser" ,"checkUserName" ,"checkDay" ,
+                        "weather" ,"createAt" ,"createBy" ,"modifyAt" ,"modifyBy" ,
+                        "isRemote" ,"isModified" ,"isDisease" ,"roadId" ,"bridgeId" ,"direction" ,"buweiId" ,
+                        "bujianSn" ,"bujianId" ,"categoryId" ,"qualitativeId" ,"evaluateId" ,"content" ,"goujianId" ,
+                        "formal" ,"liang" ,"dun" ,"zhizuo" ,"distance" ,"position" ,"length" ,"width" ,"height" ,
+                        "quantity" ,"extquantity" ,"description"
+                    ] , 
+                    values=[] ,
+                    insertSql= "";
+                    _.each(items , function(item){
+                        var value = [];
+                        _.each(fields , function(field){
+                            value.push("'"+(item[field] || "")+"'");
+                        });
+                        values.push(value);
+                    });
+                    insertSql = "select " + values.join(" union  select ");
+                    //将fields加到前面 , 形成 insert into fields select a , b , c union select a , b , c
+                    insertSql = "insert into Disease (" + fields.join(" , ") + ") " + insertSql;
+                    return insertSql;
+                }
+                sqls.push("delete from disease where id in ("+ids.toString()+");");
+                for (var i = 0; i < rs.length;) {
+                    var items = _.slice(rs, i, i + max);
+                    sqls.push(getInsertSql(items));
+                    i = i + max;
+                }
+                return DataBaseService.run(sqls)
+            } ,
+
             //获取部位列表
             getBuweis: function () {
                 return this.getBaseInfo("buwei");
             },
+            
             //获取孔,联号
             getBujianSns: function () {
                 var me = this;

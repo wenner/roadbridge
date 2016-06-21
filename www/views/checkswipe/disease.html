@@ -1,0 +1,95 @@
+<ion-view view-title="病害检查记录">
+    <ion-header-bar class="bar-positive">
+        <button class="button button-icon  ion-ios-close-outline pull-left"  ng-click="goBack()"></button>
+        <h1 class="title">
+            <span ng-show="!current.isEmpty()">
+                {{current.road.display}} / {{current.task.display}} / {{current.bridge.display}}
+            </span>
+        </h1>
+        <div class="buttons" data-side="right">
+            <button class='button button-icon button-clear ion-ios-more' ng-click="showMainPopoverMenu($event)"></button>
+        </div>
+    </ion-header-bar>
+    <ion-content scroll="false" class="has-header">
+        <div class="picker-container" ng-if="!current.isEmpty()">
+            <!--桥梁部件号选择-->
+            <div class="hpicker-container hpicker-container-borderbottom">
+                <div class="hpicker-row">
+                    <div class="hpicker-header">{{current.bujianGroup.value}}:</div>
+                    <div ng-if="bujianSns" hswipepicker data-pickerdata="bujianSns" data-momentumRatio="10" data-changecol="changeCol(bujianSns)"
+                        ng-class="{'activated':bujianSns.isActivsted}" class="hpicker-items">
+                    </div>
+                    <div class="hpicker-highlight"></div>
+                </div>
+            </div>
+            <!--部件选择-->
+            <div class="hpicker-container hpicker-container-borderbottom">
+                <div class="hpicker-row">
+                    <div class="hpicker-header">桥梁部件:</div>
+                    <div ng-if="bujians" hswipepicker data-pickerdata="bujians" data-momentumRatio="10" data-changecol="changeCol(bujians)" ng-class="{'activated':bujians.isActivsted}"
+                        class="hpicker-items">
+                    </div>
+                    <div class="hpicker-highlight"></div>
+                </div>
+            </div>
+            <!--历史记录-->
+            <!--
+                <div class="row inforow border-top" style="background-color:#ffffcc;border-bottom:0">
+                    <div class="col text-center">桥梁检测记录</div>
+                    <div class="col col-10 text-center" style="color:blue;border:0">
+                        <a class="button icon ion-ios-paper button-clear button-positive"
+                        style="font-weight:bold"> 备注</a>
+                    </div>
+                </div>
+            -->
+
+            <div class="border-top1 border-bottom" style="background-color:#e8f4ff">
+                <div class="myrow">
+                    <div class="mycol" style="width:220px;padding-left:15px">病害编号</div>
+                    <div class="mycol" style="flex:1;-webkit-flex:1">病害描述</div>
+                    <div class="mycol text-center" style="width:80px">标度</div>
+                    <div class="mycol text-center" style="width:80px">照片</div>
+                </div>
+            </div>
+            <ion-scroll delegate-handle="diseaselist" zooming="false" direction="y" style="border-top:#ccc solid 1px;flex:1;-webkit-flex:1;">
+                <ion-list class="myrecord">
+
+                    <ion-item ng-repeat="disease in diseases" ng-click="previewDisease(disease)">
+                        <div class="myrow">
+                            <div class="mycol" style="width:220px;padding-left:15px">{{disease.sn}}</div>
+                            <div class="mycol" style="flex:1;-webkit-flex:1;    white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
+                                {{disease.content}}
+                            </div>
+                            <div class="mycol text-center" style="width:80px">{{disease.evaluateSn}}</div>
+                            <div class="mycol text-center" style="width:80px">{{disease.mediaCount || 0}}</div>
+                        </div>
+                        <ion-option-button class="button-balanced" ng-click="editDisease(disease)">
+                            <i class='icon ion-wrench padding'></i>修改
+                        </ion-option-button>
+                        <ion-option-button class="button-assertive" ng-click="deleteDisease(disease)">
+                            <i class='icon ion-delete padding'></i>删除
+                        </ion-option-button>
+                    </ion-item>
+                </ion-list>
+
+            </ion-scroll>
+        </div>
+    </ion-content>
+
+    <ion-footer-bar class="bar-positive">
+        <button class="button button-icon  ion-plus pull-left" ui-sref="checkswipe.add" ng-click1="addDisease()">添加检查记录</button>
+        <h1 class="title">
+        </h1>
+        <div class="buttons pull-right" data-side="right">
+            <button class='button button-icon ion-ios-loop' ui-sref="checkswipe.baseinfo" ng-click1="reSelectInfo()">重新选择</button>
+        </div>
+    </ion-footer-bar>
+</ion-view>
+<!--
+<button class="button-float button-float-left button button-positive icon ion-checkmark-round"
+		style="border-radius:10%;"
+        ng-click="save()">保存</button>
+
+<button class="button-float button-float-right button button-energized icon ion-ios-camera ion-ios-more1 "
+        ng-click="showMediaMenu($event)"></button>
+-->

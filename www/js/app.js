@@ -216,11 +216,27 @@ angular.module('bridge', [
                     }
                 }
             })
+            //checkswipe
+            .state('checkswipe', {
+                url: "",
+                abstract: true,
+                templateUrl: "views/checkswipe/root.html"
+            })
             //滑动版检查
-            .state("checkswipe" , {
-                url: "/checkswipe" ,
-                templateUrl: 'views/checkswipe/main.html' ,
-                controller: "CheckSwipeCtrl"
+            .state("checkswipe.baseinfo" , {
+                url:"/checkswipe/baseinfo" , 
+                templateUrl:"views/checkswipe/baseinfo.html" ,
+                controller: "CheckSwipeBaseinfoCtrl"
+            })
+            .state("checkswipe.disease" , {
+                url: "/checkswipe/disease" ,
+                templateUrl: 'views/checkswipe/disease.html' ,                
+                controller: "CheckSwipeDiseaseCtrl"
+            })
+            .state("checkswipe.add" , {
+                url: "/checkswipe/add" ,
+                templateUrl: 'views/checkswipe/add.html' ,
+                controller: "CheckSwipeAddCtrl"
             })
         $urlRouterProvider.otherwise('/welcome');
     });
