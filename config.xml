@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.tjxrs.bridge" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="cn.tjxrs.bridgedisease" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>桥梁检测</name>
   <description>道桥检测系统</description>
   <author email="wenner.cn@gmail.com" href="http://www.tjxrs.com/">天津容数</author>
   <content src="index.html"/>
-  <access origin="*"/>
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
   <preference name="orientation" value="landscape"/>
   <preference name="detect-data-types" value="false"/>
   <preference name="webviewbounce" value="false"/>

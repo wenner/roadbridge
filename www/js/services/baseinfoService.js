@@ -65,6 +65,8 @@ angular.module('bridge.services')
                         defer.resolve(items);
                     })
                     .error(function (e) {
+						alert(e.message);
+
                         defer.reject("获取脚本失败!");
                     });
                 return defer.promise;

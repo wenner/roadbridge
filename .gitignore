@@ -9,3 +9,4 @@ platforms/
 /.vscode
 /*.apk
 /*.ipa
+/node_modules7

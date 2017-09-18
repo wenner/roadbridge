@@ -142,7 +142,6 @@ angular.module('bridge').controller(
             }
         });
 
-        console.log(45555)
        // $scope.$on('$ionicView.beforeEnter', function () {
             if ($scope.current.isEmpty()) {
                 $state.go("checkswipe.baseinfo");

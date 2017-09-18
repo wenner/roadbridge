@@ -7,6 +7,17 @@ angular.module('bridge').controller(
         //services
         var srv = CheckSwipeService;
 
+
+        //save , preview modal
+        $ionicModal.fromTemplateUrl("views/checkswipe/previewModal.html", {
+            scope: $scope,
+            animation: "mh-slide",
+            backdropClickToClose: false
+        }).then(function (modal) {
+            $scope.previewModal = modal;
+        });
+
+
         _.extend($scope, {
             current: srv.current,
 
@@ -257,13 +268,16 @@ angular.module('bridge').controller(
                         console.log("save ok");
                         $scope.forMedia = false;
                         srv.clearMedias();
+                        history.back();
                         //$scope.medias = [];
                         //$cordovaToast.show('保存成功!');
+                        /*
                         $scope.getDiseases();
                         setTimeout(function () {
                             $ionicScrollDelegate.$getByHandle('diseaselist')
                                 .scrollBottom();
                         }, 500)
+                        */
                     }, function (msg) {
                         alert(msg)
                     });

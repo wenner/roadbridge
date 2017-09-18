@@ -157,6 +157,7 @@ angular.module('bridge.services')
         };
 
         Current.prototype.isEmpty = function () {
+            //console.log(!(this.road.value && this.bridge.value))
             return !(this.road.value && this.bridge.value);
         };
 
